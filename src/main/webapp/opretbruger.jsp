@@ -10,15 +10,14 @@
             Opret Bruger
     </jsp:attribute>
     <jsp:body>
-        ${requestScope.msg}
         <form action="opretbruger" method="post">
             <label for="email">Email:</label>
             <input type="text" id="email" name="email" placeholder="123@123.dk"/>
             <label for="navn">Navn:</label>
             <input type="text" id="navn" name="navn"/>
             <br>
-            <label for="kodeord">Kodeord: </label>
-            <input type="password" id="kodeord" name="kodeord" placeholder="Kodeord"/>
+            <label for="password">Kodeord: </label>
+            <input type="password" id="password" name="password" placeholder="Kodeord"/>
             <label for="gentagkodeord">Gentag Kodeord: </label>
             <input type="password" id="gentagkodeord" name="gentagkodeord" placeholder="Kodeord"/>
             <br>
