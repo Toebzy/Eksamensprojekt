@@ -32,6 +32,9 @@
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 1</a>
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 2</a>
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 3</a>
+                    <c:if test="${sessionScope.user == 1 }">
+                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/admin.jsp">Admin</a>
+                    </c:if>
                     <c:if test="${sessionScope.user == null }">
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
                     </c:if>
@@ -54,16 +57,23 @@
     <hr/>
     <div class="row mt-4">
         <div class="col">
-            Nørgaardsvej 30<br/>
-            2800 Lyngby
+            <img src="${pageContext.request.contextPath}/images/fog.png" width="60px;" class="img-fluid"/><br/>
+            Johannes Fog A/S<br/>
+            Firskovvej 20<br/>
+            2800 Lyngby<br/>
+            CVR-nr. 12345678
         </div>
         <div class="col">
             <jsp:invoke fragment="footer"/><br/>
-            <p>&copy; 2022 Cphbusiness</p>
+            <p>&copy; 2023 Johannes Fog A/S</p>
+            <br/> Mail: kontakt@fog.dk<br/>
+            Telefon: 12 34 56 78</p>
         </div>
         <div class="col">
-            Datamatikeruddannelsen<br/>
-            2. semester efterår 2022
+            Åbningstider:<br/>
+            Mandag-Fredag: 10-17:30<br/>
+            Lørdag: 10-14:00<br/>
+            Søndag: Lukket
         </div>
     </div>
 

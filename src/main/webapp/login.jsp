@@ -15,15 +15,17 @@
 
     <jsp:body>
 
-        <h3>You can log in here</h3>
+        <h3>Du kan logge ind her</h3>
 
         <form action="login" method="post">
-            <label for="username">Username: </label>
-            <input type="text" id="username" name="username"/>
-            <label for="password">Password: </label>
-            <input type="password" id="password" name="password"/>
+            <label for="email">Email: </label>
+            <input type="text" id="email" name="email"/>
+            <label for="kodeord">Kodeord: </label>
+            <input type="kodeord" id="kodeord" name="kodeord"/>
             <input type="submit"  value="Log in"/>
         </form>
+        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/opretbruger.jsp">Opret Bruger</a>
+
 
     </jsp:body>
 </t:pagetemplate>
