@@ -5,23 +5,21 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Welcome to the frontpage
+         <h1 style="text-align: center">Velkommen til Fog <h1/>
     </jsp:attribute>
 
     <jsp:attribute name="footer">
-        Welcome to the frontpage
+        Velkommen til Fog
     </jsp:attribute>
 
     <jsp:body>
-
-        <p>Startcode for 2nd semester </p>
 
         <c:if test="${sessionScope.user != null}">
             <p>You are logged in with the role of "${sessionScope.user.role}".</p>
         </c:if>
 
         <c:if test="${sessionScope.user == null}">
-            <p>You are not logged in yet. You can do it here: <a
+            <p style="text-align: center">Du er ikke logget ind endnu, du kan logge ind her eller oprette en ny bruger: <a
                     href="login.jsp">Login</a></p>
         </c:if>
 
