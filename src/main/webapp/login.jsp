@@ -24,7 +24,9 @@
             <input type="password" id="password" name="password"/>
             <input type="submit"  value="Log in"/>
         </form>
-        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/opretbruger.jsp">Opret Bruger</a>
+        <form method="POST" action="opretbruger.jsp">
+            <input type="submit" value="Opret Bruger"/>
+        </form>
 
 
     </jsp:body>
