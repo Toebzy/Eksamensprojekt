@@ -18,9 +18,9 @@ class UserMapperTest
 {
     // TODO: Change mysql login credentials if needed below
 
-    private final static String USER = "root";
-    private final static String PASSWORD = "root";
-    private final static String URL = "jdbc:mysql://localhost:3306/startcode_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
+    private final static String USER = "dev";
+    private final static String PASSWORD = "3r!DE32*/fDe";
+    private final static String URL = "jdbc:mysql://64.226.113.12:3306/carport?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
 
     private static ConnectionPool connectionPool;
 
@@ -34,10 +34,10 @@ class UserMapperTest
             try (Statement stmt = testConnection.createStatement())
             {
                 // Create test database - if not exist
-                stmt.execute("CREATE DATABASE  IF NOT EXISTS startcode_test;");
+                stmt.execute("CREATE DATABASE  IF NOT EXISTS carport_test;");
 
                 // TODO: Create user table. Add your own tables here
-                stmt.execute("CREATE TABLE IF NOT EXISTS startcode_test.user LIKE startcode.user;");
+                stmt.execute("CREATE TABLE IF NOT EXISTS carport_test.user LIKE carport.user;");
             }
         }
         catch (SQLException throwables)
@@ -58,8 +58,8 @@ class UserMapperTest
                 stmt.execute("delete from user");
 
                 // TODO: Insert a few users - insert rows into your own tables here
-                stmt.execute("insert into user (username, password, role) " +
-                        "values ('user','1234','user'),('admin','1234','admin'), ('ben','1234','user')");
+                stmt.execute("insert into user (email, password, balance, zipcode, adress, name, phonenumber, role) " +
+                        "values ('user','1234','100','4200','hejhej','morten','112','0')");
             }
         }
         catch (SQLException throwables)
