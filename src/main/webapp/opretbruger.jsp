@@ -20,6 +20,8 @@
             <input type="password" id="password" name="password" placeholder="Kodeord"/>
             <label for="gentagkodeord">Gentag Kodeord: </label>
             <input type="password" id="gentagkodeord" name="gentagkodeord" placeholder="Kodeord"/>
+            <label for="adress">Adresse</label>
+            <input type="password" id="adress" name="adress"/>
             <br>
 
             <input type="submit" value="Opret Bruger"/>
