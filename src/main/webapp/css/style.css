@@ -10,6 +10,9 @@ th, td {
     border: 1px solid silver;
     padding:15px;
 }
+.navbar-custom a{
+    color: white !important;
+}
 
 
 

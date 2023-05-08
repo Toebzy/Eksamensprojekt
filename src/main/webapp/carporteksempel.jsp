@@ -5,11 +5,11 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         <h1 style="text-align: center"></h1>
+         <h1 style="text-align: center"> </h1>
     </jsp:attribute>
 
     <jsp:attribute name="footer">
-        Bestil carport
+        Carport eksempel
     </jsp:attribute>
 
     <jsp:body>
