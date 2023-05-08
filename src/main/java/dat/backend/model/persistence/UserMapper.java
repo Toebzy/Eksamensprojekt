@@ -75,14 +75,42 @@ class UserMapper
         }
         return user;
     }
-    public static boolean checkUser(String email, ConnectionPool connectionPool) throws DatabaseException
+    public static boolean checkEmail(String email, ConnectionPool connectionPool) throws DatabaseException
     {
+
         String sql = "SELECT * FROM carport.user WHERE email = ?";
+
         try (Connection connection = connectionPool.getConnection())
         {
             try (PreparedStatement ps = connection.prepareStatement(sql))
             {
                 ps.setString(1, email);
+                ResultSet rs = ps.executeQuery();
+                System.out.println(ps);
+                if (rs.next())
+                {
+                    System.out.println("true");
+                    return true;
+                } else
+                {
+                    System.out.println("false");
+                    return false;
+                }
+            }
+        } catch (SQLException ex)
+        {
+            throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
+        }
+    }
+    public static boolean checkZip(String zipcode, ConnectionPool connectionPool) throws DatabaseException
+    {
+        String sql = "SELECT * FROM carport.user WHERE zipcode = ?";
+
+        try (Connection connection = connectionPool.getConnection())
+        {
+            try (PreparedStatement ps = connection.prepareStatement(sql))
+            {
+                ps.setString(1, zipcode);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next())
                 {

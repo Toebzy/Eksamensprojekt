@@ -1,5 +1,6 @@
 package dat.backend.control;
 
+import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.UserFacade;
@@ -22,31 +23,42 @@ public class OpretBrugerServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String gentagkodeord = request.getParameter("gentagkodeord");
+        String zipcode = request.getParameter("zipcode");
         try {
-            if(UserFacade.checkUser(email, connectionPool))
+            if(UserFacade.checkEmail(email, connectionPool))
             {
+                System.out.println("Email already exists");
                 request.setAttribute("msg", "Denne mail findes allerede i vores system");
                 request.getRequestDispatcher("opretbruger.jsp").forward(request,response);
             }
-            if(!email.contains("@") || !email.contains("."))
+            else if(!email.contains("@") || !email.contains("."))
             {
+                System.out.println("Wrong email");
                 request.setAttribute("msg", "Ugyldig email");
                 request.getRequestDispatcher("opretbruger.jsp").forward(request,response);
             }
-            if(!password.equals(gentagkodeord))
+            else if(!password.equals(gentagkodeord))
             {
+                System.out.println("password doesnt match");
                 request.setAttribute("msg", "De to kodeord matcher ikke");
                 request.getRequestDispatcher("opretbruger.jsp").forward(request,response);
             }
-            if(email.contains("@") && email.contains(".") && password.equals(gentagkodeord))
-            {
-                UserFacade.createUser(request.getParameter("email"),request.getParameter("password"),request.getParameter("zipcode"),request.getParameter("address"),request.getParameter("name"),request.getParameter("phonenumber"), connectionPool);
+            else if(zipcode.length()!=4 || !UserFacade.checkZip(zipcode, connectionPool)){
+                System.out.println("Zipcode doesnt exist");
+                request.setAttribute("msg", "Vi leverer desværre ikke til dette postnummer");
+                request.getRequestDispatcher("opretbruger.jsp").forward(request,response);
+            }
 
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+            else if(email.contains("@") && email.contains(".") && password.equals(gentagkodeord) && UserFacade.checkZip(zipcode, connectionPool))
+            {
+                System.out.println("User created successfully");
+                UserFacade.createUser(request.getParameter("email"),request.getParameter("password"),request.getParameter("zipcode"),request.getParameter("address"),request.getParameter("name"),request.getParameter("phonenumber"), connectionPool);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+
             }
         } catch (DatabaseException e) {
             e.printStackTrace();
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
-
     }
 }

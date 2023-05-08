@@ -15,7 +15,11 @@ public class UserFacade
         return UserMapper.createUser(email, password, zipcode, address, name, phonenumber, connectionPool);
     }
 
-    public static boolean checkUser(String email, ConnectionPool connectionPool) throws DatabaseException {
-        return UserMapper.checkUser(email, connectionPool);
+    public static boolean checkEmail(String email, ConnectionPool connectionPool) throws DatabaseException {
+        return UserMapper.checkEmail(email, connectionPool);
+    }
+
+    public static boolean checkZip(String zipcode, ConnectionPool connectionPool)  throws DatabaseException{
+        return UserMapper.checkZip(zipcode,connectionPool);
     }
 }
