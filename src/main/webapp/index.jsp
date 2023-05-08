@@ -26,5 +26,4 @@
         </c:if>
 
     </jsp:body>
-
 </t:pagetemplate>

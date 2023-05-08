@@ -28,6 +28,5 @@
             <input type="submit" value="Opret Bruger"/>
         </form>
 
-
     </jsp:body>
 </t:pagetemplate>

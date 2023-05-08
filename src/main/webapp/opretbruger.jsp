@@ -5,6 +5,7 @@
 <t:pagetemplate>
     <jsp:attribute name="header">
              Opret Bruger
+        <h6> Udfyld venligst din information her for at lave en bruger </h6>
     </jsp:attribute>
     <jsp:attribute name="footer">
             Opret Bruger
@@ -12,18 +13,23 @@
     <jsp:body>
         <form action="opretbruger" method="post">
             <label for="email">Email:</label>
-            <input type="text" id="email" name="email" placeholder="123@123.dk"/>
-            <label for="navn">Navn:</label>
-            <input type="text" id="navn" name="navn"/>
+            <input type="text" id="email" name="email" placeholder="123@123.dk" required/>
+            <label for="name">Navn:</label>
+            <input type="text" id="name" name="name" required/>
             <br>
-            <label for="password">Kodeord: </label>
-            <input type="password" id="password" name="password" placeholder="Kodeord"/>
-            <label for="gentagkodeord">Gentag Kodeord: </label>
-            <input type="password" id="gentagkodeord" name="gentagkodeord" placeholder="Kodeord"/>
-            <label for="adress">Adresse</label>
-            <input type="password" id="adress" name="adress"/>
+            <label for="password">Kodeord:</label>
+            <input type="password" id="password" name="password" placeholder="Kodeord" required/>
+            <label for="gentagkodeord">Gentag Kodeord:</label>
+            <input type="password" id="gentagkodeord" name="gentagkodeord" placeholder="Kodeord" required/>
             <br>
-
+            <label for="address">Adresse:</label>
+            <input type="text" id="address" name="address" required/>
+            <label for="zipcode">Postnummer:</label>
+            <input type="number" id="zipcode" name="zipcode" placeholder="4200 el. 2700" required/>
+            <br>
+            <label for="phonenumber">Telefonnummer:</label>
+            <input type="number" id="phonenumber" name="phonenumber" required/>
+            <br>
             <input type="submit" value="Opret Bruger"/>
         </form>
     </jsp:body>
