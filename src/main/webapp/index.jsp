@@ -5,7 +5,7 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         <h1 style="text-align: center"> Velkommen til Fog </h1>
+         Velkommen til Fog
     </jsp:attribute>
 
     <jsp:attribute name="footer">
