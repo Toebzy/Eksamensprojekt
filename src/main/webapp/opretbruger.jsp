@@ -31,7 +31,7 @@
             <input type="number" id="phonenumber" name="phonenumber" required/>
             <br>
             <input type="submit" value="Opret Bruger"/>
-            ${requestScope.msg}
+           <p class="error"> ${requestScope.msg}</p>
         </form>
     </jsp:body>
 </t:pagetemplate>
