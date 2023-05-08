@@ -18,7 +18,7 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #003E7A">
+    <nav class="navbar navbar-expand-lg navbar-custom" style="background-color: #003E7A">
         <div class="container">
             <a class="navbar-brand" href="index.jsp">
                 <img  src="${pageContext.request.contextPath}/images/fog.png" width="100px;" class="img-fluid"/>
