@@ -25,12 +25,13 @@
             <label for="address">Adresse:</label>
             <input type="text" id="address" name="address" required/>
             <label for="zipcode">Postnummer:</label>
-            <input type="number" id="zipcode" name="zipcode" placeholder="4200 el. 2700" required/>
+            <input type="number" id="zipcode" name="zipcode" placeholder="2700 el. 4200"  required/>
             <br>
             <label for="phonenumber">Telefonnummer:</label>
             <input type="number" id="phonenumber" name="phonenumber" required/>
             <br>
             <input type="submit" value="Opret Bruger"/>
+            ${requestScope.msg}
         </form>
     </jsp:body>
 </t:pagetemplate>

@@ -27,7 +27,11 @@ class UserMapper
                 if (rs.next())
                 {
                     String role = rs.getString("role");
-                    user = new User(username, password, role);
+                    String zipcode = rs.getString("zipcode");
+                    String address = rs.getString("address");
+                    String name = rs.getString("name");
+                    String phonenumber = rs.getString("phonenumber");
+                    user = new User(username, password, role, zipcode, address, name, phonenumber);
                 } else
                 {
                     throw new DatabaseException("Wrong email or password");
@@ -44,7 +48,7 @@ class UserMapper
     {
         Logger.getLogger("web").log(Level.INFO, "");
         User user;
-        String sql = "insert into carport.user (email, password, zipcode, adress, name, phonenumber) values (?,?,?,?,?,?)";
+        String sql = "insert into carport.user (email, password, zipcode, address, name, phonenumber) values (?,?,?,?,?,?)";
         try (Connection connection = connectionPool.getConnection())
         {
             try (PreparedStatement ps = connection.prepareStatement(sql))
@@ -58,7 +62,7 @@ class UserMapper
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected == 1)
                 {
-                    user = new User(email, password, "0");
+                    user = new User(email, password, "0", zipcode, address, name, phonenumber);
                 } else
                 {
                     throw new DatabaseException("The user with email = " + email + " could not be inserted into the database");
@@ -70,6 +74,28 @@ class UserMapper
             throw new DatabaseException(ex, "Could not insert user into database");
         }
         return user;
+    }
+    public static boolean checkUser(String email, ConnectionPool connectionPool) throws DatabaseException
+    {
+        String sql = "SELECT * FROM carport.user WHERE email = ?";
+        try (Connection connection = connectionPool.getConnection())
+        {
+            try (PreparedStatement ps = connection.prepareStatement(sql))
+            {
+                ps.setString(1, email);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next())
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            }
+        } catch (SQLException ex)
+        {
+            throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
+        }
     }
 
 

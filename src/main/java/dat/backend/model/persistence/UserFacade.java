@@ -14,4 +14,8 @@ public class UserFacade
     {
         return UserMapper.createUser(email, password, zipcode, address, name, phonenumber, connectionPool);
     }
+
+    public static boolean checkUser(String email, ConnectionPool connectionPool) throws DatabaseException {
+        return UserMapper.checkUser(email, connectionPool);
+    }
 }

@@ -17,9 +17,8 @@
         <img src="images/carportfrontpage.png" width="450" class="img-fluid">
         </div>
         <c:if test="${sessionScope.user != null}">
-            <p>You are logged in with the role of "${sessionScope.user.role}".</p>
+            <p>Hej ${sessionScope.user.name} velkommen til Fog.</p>
         </c:if>
-
         <c:if test="${sessionScope.user == null}">
             <p style="text-align: center">Du er ikke logget ind endnu, du kan logge ind eller oprette en ny bruger her: <a
                     href="login.jsp">Login</a></p>
