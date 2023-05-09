@@ -37,6 +37,7 @@ class BeregnerTest
         assertEquals(list.get(3).getLength(), beregner.trykImpBrædt200Beregner(1000).get(3).getLength());
         assertEquals(list.get(4).getLength(), beregner.trykImpBrædt200Beregner(1000).get(4).getLength());
         assertEquals(list.get(5).getLength(), beregner.trykImpBrædt200Beregner(1000).get(5).getLength());
+        assertEquals(6, beregner.trykImpBrædt200Beregner(1000).size());
     }
 
     @Test
@@ -44,8 +45,13 @@ class BeregnerTest
     {
         list.add(new Materiale(2, 360));
         list.add(new Materiale(2, 360));
+        list.add(new Materiale(2, 360));
+        list.add(new Materiale(2, 360));
         assertEquals(list.get(0).getLength(), beregner.trykImpBrædt200Beregner(540).get(0).getLength());
         assertEquals(list.get(1).getLength(), beregner.trykImpBrædt200Beregner(540).get(1).getLength());
+        assertEquals(list.get(2).getLength(), beregner.trykImpBrædt200Beregner(540).get(2).getLength());
+        assertEquals(list.get(3).getLength(), beregner.trykImpBrædt200Beregner(540).get(3).getLength());
+        assertEquals(4, beregner.trykImpBrædt200Beregner(540).size());
     }
 
     @Test
@@ -63,6 +69,7 @@ class BeregnerTest
         assertEquals(list.get(3).getMvariant(), beregner.trykImpBrædt100Beregner(800, 800).get(3).getMvariant());
         assertEquals(list.get(4).getMvariant(), beregner.trykImpBrædt100Beregner(800, 800).get(4).getMvariant());
         assertEquals(list.get(5).getMvariant(), beregner.trykImpBrædt100Beregner(800, 800).get(5).getMvariant());
+        assertEquals(6, beregner.trykImpBrædt100Beregner(800, 800).size());
     }
 
     @Test
@@ -92,5 +99,6 @@ class BeregnerTest
         assertEquals(list.get(9).getMvariant(),beregner.plastmoBeregner(600, 800).get(9).getMvariant());
         assertEquals(list.get(10).getMvariant(),beregner.plastmoBeregner(600, 800).get(10).getMvariant());
         assertEquals(list.get(11).getMvariant(),beregner.plastmoBeregner(600, 800).get(11).getMvariant());
+        assertEquals(12, beregner.plastmoBeregner(600, 800).size());
     }
 }
