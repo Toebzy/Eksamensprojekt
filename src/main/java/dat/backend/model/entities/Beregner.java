@@ -18,7 +18,7 @@ public class Beregner
                 Materiale materiale = new Materiale(2, 540);
                 materialeList.add(materiale);
             }
-            overskydende = bredde/540 - brædder540;
+            overskydende = bredde - (brædder540*540);
             if(overskydende > 360)
             {
                 for(int i = 0; i < 4; i++)
@@ -27,7 +27,7 @@ public class Beregner
                     materialeList.add(materiale);
                 }
             }
-            if(overskydende < 360)
+            if(overskydende < 360 && overskydende > 0)
             {
                 materialeList.add(new Materiale(1, 360));
                 materialeList.add(new Materiale(1, 360));
@@ -61,7 +61,7 @@ public class Beregner
                 Materiale materiale = new Materiale(27, 540);
                 materialeList.add(materiale);
             }
-            overskydende = bredde/540 - brædder540;
+            overskydende = bredde - brædder540*540;
             if(overskydende > 360)
             {
                 for(int i = 0; i < 2; i++)
@@ -96,7 +96,7 @@ public class Beregner
                 Materiale materiale = new Materiale(27, 540);
                 materialeList.add(materiale);
             }
-            overskydende = længde/540 - brædder540;
+            overskydende = længde - brædder540*540;
             if(overskydende > 360)
             {
                 for(int i = 0; i < 4; i++)
@@ -127,4 +127,57 @@ public class Beregner
         return materialeList;
     }
 
+    public List<Materiale> plastmoBeregner(double bredde, double længde)
+    {
+        List<Materiale> materialeList = new ArrayList<>();
+        int antalPladerbredde = 1;
+        int antalplader600;
+        double overskydende;
+        if(bredde%100 == 0)
+        {
+            antalPladerbredde = (int)bredde/100;
+        }
+        else if(bredde%100 != 0)
+        {
+            antalPladerbredde = (int)(bredde/100) + 1;
+        }
+        if(længde >= 600)
+        {
+            antalplader600 = (int)længde/600;
+            for(int i = 0; i < antalplader600*antalPladerbredde; i++)
+            {
+                materialeList.add(new Materiale(29, 600));
+            }
+            overskydende = længde - antalplader600*600;
+            if(overskydende > 360)
+            {
+                for(int i = 0; i < 2*antalPladerbredde; i++)
+                {
+                    materialeList.add(new Materiale(28, 360));
+                }
+            }
+            else if(overskydende < 360 && overskydende > 0)
+            {
+                for(int i = 0; i < 1*antalPladerbredde; i++)
+                {
+                    materialeList.add(new Materiale(28, 360));
+                }
+            }
+        }
+        else if(længde < 600 && længde > 360)
+        {
+            for(int i = 0; i < 2*antalPladerbredde; i++)
+            {
+                materialeList.add(new Materiale(28, 360));
+            }
+        }
+        else if(længde < 360 && længde > 0)
+        {
+            for(int i = 0; i < 1*antalPladerbredde; i++)
+            {
+                materialeList.add(new Materiale(28, 360));
+            }
+        }
+        return materialeList;
+    }
 }
