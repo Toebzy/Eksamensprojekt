@@ -4,6 +4,8 @@ import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -125,6 +127,51 @@ class UserMapper
             throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
         }
     }
+    public static List<List> infoList(ConnectionPool connectionpool) throws DatabaseException
+    {
+        List<List> list = new ArrayList<>();
+        List<String> arrayid = new ArrayList<>();
+        List<String> arrayemail = new ArrayList<>();
+        List<String> arraypassword = new ArrayList<>();
+        List<String> arrayname = new ArrayList<>();
+        List<String> arraybalance = new ArrayList<>();
+        List<String> arrayzipcode= new ArrayList<>();
+        List<String> arrayaddress = new ArrayList<>();
+        List<String> arrayphonenumber = new ArrayList<>();
+        list.add(arrayid);
+        list.add(arrayemail);
+        list.add(arraypassword);
+        list.add(arrayname);
+        list.add(arraybalance);
+        list.add(arrayzipcode);
+        list.add(arrayaddress);
+        list.add(arrayphonenumber);
 
+        String sql1 = "SELECT iduser, email, password, name, balance, zipcode, address, phonenumber FROM carport.user";
 
+        try (Connection connection = connectionpool.getConnection())
+        {
+            try (PreparedStatement ps = connection.prepareStatement(sql1))
+            {
+
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next())
+                {
+                    arrayid.add(rs.getString("iduser"));
+                    arrayemail.add(rs.getString("email"));
+                    arraypassword.add(rs.getString("password"));
+                    arrayname.add(rs.getString("balance"));
+                    arraybalance.add(rs.getString("zipcode"));
+                    arrayzipcode.add(rs.getString("address"));
+                    arrayaddress.add(rs.getString("name"));
+                    arrayphonenumber.add(rs.getString("phonenumber"));
+                }
+            }
+        }catch (SQLException ex)
+        {
+            throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
+        }
+        return list;
+    }
 }

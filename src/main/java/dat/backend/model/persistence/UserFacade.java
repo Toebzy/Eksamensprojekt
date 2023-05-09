@@ -3,6 +3,8 @@ package dat.backend.model.persistence;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 
+import java.util.List;
+
 public class UserFacade
 {
     public static User login(String username, String password, ConnectionPool connectionPool) throws DatabaseException
@@ -21,5 +23,8 @@ public class UserFacade
 
     public static boolean checkZip(String zipcode, ConnectionPool connectionPool)  throws DatabaseException{
         return UserMapper.checkZip(zipcode,connectionPool);
+    }
+    public static List infoList(ConnectionPool connectionPool) throws DatabaseException {
+        return UserMapper.infoList(connectionPool);
     }
 }
