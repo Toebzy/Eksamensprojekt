@@ -40,7 +40,13 @@
                 <p1>Carport uden skur</p1>
             </div>
         </div>
-
+        <br>
+        <div class="picture">
+            <img src="images/carporteksempel5.JPG" width="450" class="img-fluid">
+            <div>
+                <p1>Skur indefra</p1>
+            </div>
+        </div>
 
 
     </jsp:body>
