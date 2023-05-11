@@ -49,7 +49,7 @@ public class Beregner
                             b = l;
                             c = o;
                             d = p;
-                            System.out.println(i + " " + l + " " + o + " " + p);
+
                         }
                     }
                 }
@@ -103,7 +103,6 @@ public class Beregner
                             b = l;
                             c = o;
                             d = p;
-                            System.out.println(i + " " + l + " " + o + " " + p);
                         }
                     }
                 }
@@ -263,6 +262,114 @@ public class Beregner
             {
                 materialeList.add(new Materiale(3, 300));
                 materialeList.add(new Materiale(3, 300));
+            }
+        }
+        return materialeList;
+    }
+    public List<Materiale> spærBeregner(int bredde, int længde)
+    {
+        int over600 = 1;
+        int antalrem;
+        if(længde%55 == 0)
+        {
+            antalrem = længde/55;
+        }
+        else
+        {
+            antalrem = længde/55 +1;
+        }
+        List<Materiale> materialeList = new ArrayList<>();
+        List<Integer> listbredde = new ArrayList<>();
+        int a = 0;
+        int b = 0;
+        int c = 0;
+        int d = 0;
+        int nybredde = bredde;
+        int maxbredde = 2160;
+        int total;
+        if(bredde > 600)
+        {
+            nybredde = bredde/2;
+            over600 = 2;
+        }
+        for (int i = 600; i >= 0; i -= 60)
+        {
+            if (i < 360)
+            {
+                i = 0;
+            }
+            for (int l = 600; l >= 0; l -= 60)
+            {
+                if (l < 360)
+                {
+                    l = 0;
+                }
+                for (int o = 600; o >= 0; o -= 60)
+                {
+                    if (o < 360)
+                    {
+                        o = 0;
+                    }
+                    for (int p = 600; p >= 0; p -= 60)
+                    {
+                        if (p < 360)
+                        {
+                            p = 0;
+                        }
+                        total = i + l + o + p;
+                        if (total >= nybredde && total < maxbredde)
+                        {
+                            maxbredde = total;
+                            a = i;
+                            b = l;
+                            c = o;
+                            d = p;
+                            System.out.println(i + " " + l + " " + o + " " + p);
+                        }
+                    }
+                }
+            }
+        }
+        listbredde.add(a);
+        listbredde.add(b);
+        listbredde.add(c);
+        listbredde.add(d);
+        for (Integer i : listbredde)
+        {
+            if (i == 600)
+            {
+                for(int l = 0; l < antalrem * over600; l++)
+                {
+                    materialeList.add(new Materiale(20, 600));
+                }
+            }
+            else if (i == 540)
+            {
+                for(int l = 0; l < antalrem * over600; l++)
+                {
+                    materialeList.add(new Materiale(19, 540));
+                }
+            }
+            else if (i == 480)
+            {
+                for(int l = 0; l < antalrem * over600; l++)
+                {
+                    materialeList.add(new Materiale(18, 480));
+                }
+            }
+            else if (i == 420)
+            {
+                for(int l = 0; l < antalrem * over600; l++)
+                {
+                    materialeList.add(new Materiale(17, 420));
+                }
+            }
+            else if (i == 360)
+            {
+                for(int l = 0; l < antalrem * over600; l++)
+                {
+                    materialeList.add(new Materiale(16, 360));
+                }
             }
         }
         return materialeList;
