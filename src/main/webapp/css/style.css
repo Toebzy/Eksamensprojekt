@@ -10,8 +10,23 @@ th, td {
     border: 1px solid silver;
     padding:15px;
 }
+.navbar-custom{
+    height: 60px;
+}
 .navbar-custom a{
-    color: white !important;
+    color: black !important;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+}
+.navbar-custom .nav-item{
+    padding-bottom: 15px;
+    padding-top: 18px;
+}
+.navbar-custom .nav-item:hover{
+    border-bottom: 2px solid black;
+    padding-bottom: 15px;
+    padding-top: 18px;
+    transform: translateY(1px);
 }
 h1{
     text-align: center;

@@ -15,31 +15,33 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-custom" style="background-color: #003E7A">
+    <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container">
             <a class="navbar-brand" href="index.jsp">
-                <img  src="${pageContext.request.contextPath}/images/fog.png" width="100px;" class="img-fluid"/>
+                <img src="${pageContext.request.contextPath}/images/fog.png" width="60px;" class="img-fluid"/>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/bestilcarport.jsp">Bestil Carport</a>
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/carporteksempel.jsp">Carport eksempel</a>
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/index.jsp">Forside</a>
-                    <c:if test="${sessionScope.user == null }">
-                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
-                    </c:if>
-                    <c:if test="${sessionScope.user.role == 1 }">
-                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/adminservlet">Admin</a>
-                    </c:if>
-                    <c:if test="${sessionScope.user != null }">
-                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log out</a>
-                    </c:if>
-                </div>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/bestilcarport.jsp">Bestil Carport</a>
+                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/carporteksempel.jsp">Carport eksempel</a>
             </div>
+            <div class="navbar">
+                <c:if test="${sessionScope.user == null }">
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
+                </c:if>
+                <c:if test="${sessionScope.user == null }">
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/opretbruger.jsp">Opret bruger</a>
+                </c:if>
+                <c:if test="${sessionScope.user.role == 1 }">
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/adminservlet">Admin</a>
+                </c:if>
+                <c:if test="${sessionScope.user != null }">
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log out</a>
+                </c:if>
+                </div>
         </div>
     </nav>
 </header>
