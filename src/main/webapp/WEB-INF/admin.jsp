@@ -34,10 +34,9 @@
                                 <td>${emne.zipcode}</td>
                                 <td>${emne.address}</td>
                                 <td>${emne.phonenumber}</td>
-                                <form action="changeBalance" method="post">
+                                <form action="balanceChange" method="post">
                                     <td> <input style="width: 80px; text-align:center"  type="number" id="balance" name="balance" min="0" value ="${emne.balance}"></td>
-                                    <input hidden value ="${requestScope.userid}" name ="userid">
-                                    <input hidden value = "${varStatus.index}" name = "varStatus">
+                                    <input hidden value ="${emne.userid}" name ="userid">
                                     <th style="width: 30px"> <button class ="btn"> Opdater </button></th>
                                 </form>
                             </tr>
@@ -46,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <form style="text-align: center" action="seordreliste" method="post">
+        <form style="text-align: center" action="ordreliste" method="post">
             <button class="btn">Se ordreliste</button>
         </form>
     </jsp:body>

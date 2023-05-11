@@ -51,14 +51,18 @@ h1{
     text-align: center;
 }
 .btn{
-    background-color: #033b74;
-    border: white;
+    background-color: #003d76;
+    border: none;
     color: white;
     padding: 7px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+}
+.btn:hover{
+    background-color: #0d324e;
+    color: white;
 }
 
 

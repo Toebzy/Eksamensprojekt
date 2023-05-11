@@ -37,7 +37,6 @@ class UserMapper
                     String phonenumber = rs.getString("phonenumber");
 
                     user = new User(userid, email, password, balance, zipcode, address, name, phonenumber,role);
-                    System.out.println(user);
                 } else
                 {
                     throw new DatabaseException("Wrong email or password");
@@ -156,4 +155,23 @@ class UserMapper
         }
         return userList;
     }
-}
+
+    public static void balanceChange(String balance, String userid, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "UPDATE user SET balance = ? WHERE iduser = ?";
+
+        try (Connection connection = connectionPool.getConnection())
+        {
+            try (PreparedStatement ps = connection.prepareStatement(sql))
+            {
+                System.out.println(balance);
+                System.out.println(userid);
+                ps.setString(1, balance);
+                ps.setString(2, userid);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e)
+        {
+            throw new DatabaseException(e, "Error logging in. Something went wrong with the database");
+        }
+    }
+    }
