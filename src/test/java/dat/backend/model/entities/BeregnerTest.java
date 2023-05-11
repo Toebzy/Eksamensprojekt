@@ -60,7 +60,7 @@ class BeregnerTest
     }
 
     @Test
-    void remTest()
+    void spærTest()
     {
         for (int i = 0; i < 38; i++)
         {
@@ -68,7 +68,7 @@ class BeregnerTest
         }
         for (int l = 0; l < 38; l++)
         {
-            assertEquals(list.get(l).getMvariant(), beregner.remBeregner(1000, 1000).get(l).getMvariant());
+            assertEquals(list.get(l).getMvariant(), beregner.spærBeregner(1000, 1000).get(l).getMvariant());
         }
     }
 }

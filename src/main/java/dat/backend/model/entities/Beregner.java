@@ -266,7 +266,7 @@ public class Beregner
         }
         return materialeList;
     }
-    public List<Materiale> remBeregner(int bredde, int længde)
+    public List<Materiale> spærBeregner(int bredde, int længde)
     {
         int over600 = 1;
         int antalrem;
