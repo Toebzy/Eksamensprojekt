@@ -14,10 +14,10 @@
         <div id ="tablesection" class="container">
             <div class="row">
                 <div class="col">
-                    <table class="table" style="width:60%">
+                    <table class="table" style="width:80%">
                         <thead class="thead-dark">
                         <tr>
-                            <th style="width:10px">ID</th>
+                            <th style="width:30px">ID</th>
                             <th style="width:20px">Email</th>
                             <th style="width:20px">Name</th>
                             <th style="width:20px">Zipcode</th>
