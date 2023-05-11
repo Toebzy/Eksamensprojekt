@@ -5,13 +5,13 @@
 <t:pagetemplate>
     <jsp:attribute name="header">
              Opret Bruger
-        <h6> Udfyld venligst din information her for at lave en bruger </h6>
+        <h6 style="text-align: center"> Udfyld venligst din information her for at lave en bruger </h6>
     </jsp:attribute>
     <jsp:attribute name="footer">
             Opret Bruger
     </jsp:attribute>
     <jsp:body>
-        <form action="opretbruger" method="post">
+        <form style="width: 50%; margin:auto" action="opretbruger" method="post">
             <label for="email">Email:</label>
             <input type="text" id="email" name="email" placeholder="123@123.dk" required/>
             <label for="name">Navn:</label>
@@ -30,7 +30,7 @@
             <label for="phonenumber">Telefonnummer:</label>
             <input type="number" id="phonenumber" name="phonenumber" required/>
             <br>
-            <input type="submit" value="Opret Bruger"/>
+            <input type="submit" class="btn" value="Opret Bruger"/>
            <p class="error"> ${requestScope.msg}</p>
         </form>
     </jsp:body>
