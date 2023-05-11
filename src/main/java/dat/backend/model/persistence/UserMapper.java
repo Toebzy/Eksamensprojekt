@@ -11,11 +11,11 @@ import java.util.logging.Logger;
 
 class UserMapper
 {
-    static User login(String username, String password, ConnectionPool connectionPool) throws DatabaseException
+    static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException
     {
         Logger.getLogger("web").log(Level.INFO, "");
 
-        User user = null;
+        User user;
 
         String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
 
@@ -23,17 +23,21 @@ class UserMapper
         {
             try (PreparedStatement ps = connection.prepareStatement(sql))
             {
-                ps.setString(1, username);
+                ps.setString(1, email);
                 ps.setString(2, password);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next())
                 {
+                    String userid = rs.getString("iduser");
+                    String balance = rs.getString("balance");
                     String role = rs.getString("role");
                     String zipcode = rs.getString("zipcode");
                     String address = rs.getString("address");
                     String name = rs.getString("name");
                     String phonenumber = rs.getString("phonenumber");
-                    user = new User(username, password, role, zipcode, address, name, phonenumber);
+
+                    user = new User(userid, email, password, balance, zipcode, address, name, phonenumber,role);
+                    System.out.println(user);
                 } else
                 {
                     throw new DatabaseException("Wrong email or password");
@@ -46,10 +50,9 @@ class UserMapper
         return user;
     }
 
-    static User createUser(String email, String password, String zipcode, String address, String name, String phonenumber, ConnectionPool connectionPool) throws DatabaseException
+    static void createUser(String email, String password, String zipcode, String address, String name, String phonenumber, ConnectionPool connectionPool) throws DatabaseException
     {
         Logger.getLogger("web").log(Level.INFO, "");
-        User user;
         String sql = "insert into carport.user (email, password, zipcode, address, name, phonenumber) values (?,?,?,?,?,?)";
         try (Connection connection = connectionPool.getConnection())
         {
@@ -62,10 +65,7 @@ class UserMapper
                 ps.setString(5, name);
                 ps.setString(6, phonenumber);
                 int rowsAffected = ps.executeUpdate();
-                if (rowsAffected == 1)
-                {
-                    user = new User(email, password, "0", zipcode, address, name, phonenumber);
-                } else
+                if (rowsAffected != 1)
                 {
                     throw new DatabaseException("The user with email = " + email + " could not be inserted into the database");
                 }
@@ -75,7 +75,6 @@ class UserMapper
         {
             throw new DatabaseException(ex, "Could not insert user into database");
         }
-        return user;
     }
     public static boolean checkEmail(String email, ConnectionPool connectionPool) throws DatabaseException
     {
@@ -127,51 +126,34 @@ class UserMapper
             throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
         }
     }
-    public static List<List> infoList(ConnectionPool connectionpool) throws DatabaseException
+    public static List<User> infoList(ConnectionPool connectionpool) throws DatabaseException
     {
-        List<List> list = new ArrayList<>();
-        List<String> arrayid = new ArrayList<>();
-        List<String> arrayemail = new ArrayList<>();
-        List<String> arraypassword = new ArrayList<>();
-        List<String> arrayname = new ArrayList<>();
-        List<String> arraybalance = new ArrayList<>();
-        List<String> arrayzipcode= new ArrayList<>();
-        List<String> arrayaddress = new ArrayList<>();
-        List<String> arrayphonenumber = new ArrayList<>();
-        list.add(arrayid);
-        list.add(arrayemail);
-        list.add(arraypassword);
-        list.add(arrayname);
-        list.add(arraybalance);
-        list.add(arrayzipcode);
-        list.add(arrayaddress);
-        list.add(arrayphonenumber);
-
-        String sql1 = "SELECT iduser, email, password, name, balance, zipcode, address, phonenumber FROM carport.user";
-
+        List<User> userList = new ArrayList<>();
+        String sql1 = "SELECT iduser, email, password, balance, zipcode, address, name, phonenumber, role FROM carport.user";
         try (Connection connection = connectionpool.getConnection())
         {
             try (PreparedStatement ps = connection.prepareStatement(sql1))
             {
-
                 ResultSet rs = ps.executeQuery();
-
                 while (rs.next())
                 {
-                    arrayid.add(rs.getString("iduser"));
-                    arrayemail.add(rs.getString("email"));
-                    arraypassword.add(rs.getString("password"));
-                    arrayname.add(rs.getString("balance"));
-                    arraybalance.add(rs.getString("zipcode"));
-                    arrayzipcode.add(rs.getString("address"));
-                    arrayaddress.add(rs.getString("name"));
-                    arrayphonenumber.add(rs.getString("phonenumber"));
+                    String userid=(rs.getString("iduser"));
+                    String email=(rs.getString("email"));
+                    String password=(rs.getString("password"));
+                    String name=(rs.getString("balance"));
+                    String balance=(rs.getString("zipcode"));
+                    String zipcode=(rs.getString("address"));
+                    String address=(rs.getString("name"));
+                    String phonenumber=(rs.getString("phonenumber"));
+                    String role=(rs.getString("role"));
+
+                    userList.add(new User (userid,email,password,name,balance,zipcode,address,phonenumber,role));
                 }
             }
         }catch (SQLException ex)
         {
             throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
         }
-        return list;
+        return userList;
     }
 }

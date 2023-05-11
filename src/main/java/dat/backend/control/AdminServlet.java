@@ -1,6 +1,7 @@
 package dat.backend.control;
 
 import dat.backend.model.config.ApplicationStart;
+import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.UserFacade;
@@ -23,25 +24,8 @@ public class AdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try
         {
-            List<List> infoList = UserFacade.infoList(connectionPool);
-            List<String> userid = infoList.get(0);
-            List<String> email = infoList.get(1);
-            List<String> password = infoList.get(2);
-            List<String> name = infoList.get(6);
-            List<String> balance = infoList.get(3);
-            List<String> zipcode = infoList.get(4);
-            List<String> address = infoList.get(5);
-            List<String> phonenumber = infoList.get(7);
-
-
-            request.setAttribute("userid", userid);
-            request.setAttribute("email", email);
-            request.setAttribute("password", password);
-            request.setAttribute("name", name);
-            request.setAttribute("balance", balance);
-            request.setAttribute("zipcode", zipcode);
-            request.setAttribute("address", address);
-            request.setAttribute("phonenumber", phonenumber);
+            List<User> userList = UserFacade.infoList(connectionPool);
+            request.setAttribute("userList", userList);
             request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request,response);
 
         } catch (DatabaseException e)

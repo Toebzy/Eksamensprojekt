@@ -13,13 +13,13 @@
     <jsp:body>
         <form action="bestilcarport" method="post">
             <label for="length">Længde:</label>
-            <input type="number" id="length" name="length" placeholder="Længde i meter" min="5" max="15" required/>
+            <input type="number" id="length" name="length" placeholder="Længde i cm" min="1" max="999" required/>
             <br>
             <label for="width">Bredde:</label>
-            <input type="number" id="width" name="bredde" placeholder="Bredde i meter" min="3" max="15" required/>
+            <input type="number" id="width" name="bredde" placeholder="Bredde i cm" min="1" max="999" required/>
             <br>
             <label for="heigth">Højde:</label>
-            <input type="number" id="heigth" name="højde" placeholder="Højde i meter" min="3" max="10" required/>
+            <input type="number" id="heigth" name="højde" placeholder="Højde i cm" min="1" max="999" required/>
             <br>
             <input type="checkbox" id="carportAttribute1" name="vehicle1" value="carportAttribute1">
             <label for="carportAttribute1">carportAttribute2</label>

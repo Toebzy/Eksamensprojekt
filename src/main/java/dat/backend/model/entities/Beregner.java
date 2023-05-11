@@ -180,4 +180,133 @@ public class Beregner
         }
         return materialeList;
     }
+    public List<Materiale> trykImpBrædt125Beregner(double bredde)
+    {
+        List<Materiale> materialeList = new ArrayList<>();
+        int brædder540 = 0;
+        double overskydende = 0;
+        if(bredde >= 720)
+        {
+            brædder540 = (int) bredde/540;
+            for(int i = 0; i < brædder540*2; i++)
+            {
+                Materiale materiale = new Materiale(2, 540);
+                materialeList.add(materiale);
+            }
+            overskydende = bredde - (brædder540*540);
+            if(overskydende > 360)
+            {
+                for(int i = 0; i < 2; i++)
+                {
+                    Materiale materiale = new Materiale(1, 360);
+                    materialeList.add(materiale);
+                }
+            }
+            if(overskydende < 360 && overskydende > 0)
+            {
+                materialeList.add(new Materiale(1, 360));
+                materialeList.add(new Materiale(1, 360));
+            }
+        }
+        else if(bredde < 720 && bredde > 360)
+        {
+            for(int i = 0; i < 2; i++)
+            {
+                Materiale materiale = new Materiale(1, 360);
+                materialeList.add(materiale);
+            }
+        }
+        else if(bredde <= 360)
+        {
+            materialeList.add(new Materiale(1, 360));
+            materialeList.add(new Materiale(1, 360));
+        }
+        return materialeList;
+    }
+    public List<Materiale> spærtræ195Beregner(double bredde)
+    {
+        List<Materiale> materialeList = new ArrayList<>();
+        int spærtræ600 = 0;
+        double overskydende = 0;
+        if(bredde >= 960)
+        {
+            spærtræ600 = (int) bredde/600;
+            for(int i = 0; i < spærtræ600*2; i++)
+            {
+                Materiale materiale = new Materiale(19, 600);
+                materialeList.add(materiale);
+            }
+            overskydende = bredde - (spærtræ600*600);
+            if(overskydende > 480)
+            {
+                for(int i = 0; i < 2; i++)
+                {
+                    Materiale materiale = new Materiale(17, 480);
+                    materialeList.add(materiale);
+                }
+            }
+            if(overskydende < 480 && overskydende > 0)
+            {
+                materialeList.add(new Materiale(17, 480));
+                materialeList.add(new Materiale(17, 480));
+            }
+        }
+        else if(bredde < 960 && bredde > 480)
+        {
+            for(int i = 0; i < 2; i++)
+            {
+                Materiale materiale = new Materiale(17, 480);
+                materialeList.add(materiale);
+            }
+        }
+        else if(bredde <= 480)
+        {
+            materialeList.add(new Materiale(17, 480));
+            materialeList.add(new Materiale(17, 480));
+        }
+        return materialeList;
+    }
+    public List<Materiale> trykImpStolpe300Beregner(double bredde)
+    {
+        List<Materiale> materialeList = new ArrayList<>();
+        int stolpe420 = 0;
+        double overskydende = 0;
+        if(bredde >= 420)
+        {
+            stolpe420 = (int) bredde/420;
+            for(int i = 0; i < stolpe420*2; i++)
+            {
+                Materiale materiale = new Materiale(23, 420);
+                materialeList.add(materiale);
+            }
+            overskydende = bredde - (stolpe420*420);
+            if(overskydende > 300)
+            {
+                for(int i = 0; i < 2; i++)
+                {
+                    Materiale materiale = new Materiale(21, 300);
+                    materialeList.add(materiale);
+                }
+            }
+            if(overskydende < 300 && overskydende > 0)
+            {
+                materialeList.add(new Materiale(21, 300));
+                materialeList.add(new Materiale(21, 300));
+            }
+        }
+        else if(bredde < 420 && bredde > 300)
+        {
+            for(int i = 0; i < 2; i++)
+            {
+                Materiale materiale = new Materiale(21, 300);
+                materialeList.add(materiale);
+            }
+        }
+        else if(bredde <= 300)
+        {
+            materialeList.add(new Materiale(21, 300));
+            materialeList.add(new Materiale(21, 300));
+        }
+        return materialeList;
+    }
 }

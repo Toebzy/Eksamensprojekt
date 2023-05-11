@@ -4,24 +4,46 @@ import java.util.Objects;
 
 public class User
 {
+
+    private String userid;
     private String email;
     private String password;
-    private String role;
+    private String balance;
     private String zipcode;
     private String address;
+    private String name;
+    private String phonenumber;
+    private String role;
 
 
-    public User(String username, String password,  String role, String zipcode, String address, String name, String phonenumber)
+    public User(String userid, String email, String password, String balance, String zipcode, String address, String name, String phonenumber, String role)
     {
-        this.email = username;
+        this.userid = userid;
+        this.email = email;
         this.password = password;
-        this.role = role;
+        this.balance = balance;
         this.zipcode = zipcode;
         this.address = address;
         this.name = name;
         this.phonenumber = phonenumber;
+        this.role = role;
     }
 
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getBalance() {
+        return balance;
+    }
+
+    public void setBalance(String balance) {
+        this.balance = balance;
+    }
 
     public String getEmail() {
         return email;
@@ -62,9 +84,6 @@ public class User
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
-
-    private String name;
-    private String phonenumber;
 
     public String getUsername()
     {
@@ -113,12 +132,17 @@ public class User
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "User{" +
-                "brugerNavn='" + email + '\'' +
-                ", kodeord='" + password + '\'' +
-                ", rolle='" + role + '\'' +
+                "userid='" + userid + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", balance='" + balance + '\'' +
+                ", zipcode='" + zipcode + '\'' +
+                ", address='" + address + '\'' +
+                ", name='" + name + '\'' +
+                ", phonenumber='" + phonenumber + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }
