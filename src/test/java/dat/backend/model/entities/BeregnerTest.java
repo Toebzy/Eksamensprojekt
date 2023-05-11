@@ -23,6 +23,26 @@ class BeregnerTest
         }
     }
     @Test
+    void trykImp200Test()
+    {
+        list.add(new Materiale(2, 540));
+        list.add(new Materiale(2, 540));
+        list.add(new Materiale(2, 540));
+        list.add(new Materiale(2, 540));
+        list.add(new Materiale(2, 540));
+        list.add(new Materiale(2, 540));
+        list.add(new Materiale(2, 540));
+        list.add(new Materiale(2, 540));
+        assertEquals(list.get(0).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(0).getMvariant());
+        assertEquals(list.get(1).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(1).getMvariant());
+        assertEquals(list.get(2).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(2).getMvariant());
+        assertEquals(list.get(3).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(3).getMvariant());
+        assertEquals(list.get(4).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(4).getMvariant());
+        assertEquals(list.get(5).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(5).getMvariant());
+        assertEquals(list.get(6).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(6).getMvariant());
+        assertEquals(list.get(7).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(7).getMvariant());
+    }
+    @Test
     void trykImp125Test()
     {
         list.add(new Materiale(7, 540));
