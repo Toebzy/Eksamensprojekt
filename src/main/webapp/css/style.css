@@ -12,6 +12,10 @@ th, td {
 }
 .navbar-custom{
     height: 60px;
+    padding: 0px;
+}
+.navbar-brand{
+    padding: 0px;
 }
 .navbar-custom a{
     color: black !important;
@@ -27,6 +31,11 @@ th, td {
     padding-bottom: 15px;
     padding-top: 18px;
     transform: translateY(1px);
+}
+.bluebar{
+    height: 30px;
+    width: 100%;
+    background-color: #003d76;
 }
 h1{
     text-align: center;

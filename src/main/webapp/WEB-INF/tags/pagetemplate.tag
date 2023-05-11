@@ -18,7 +18,7 @@
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container">
             <a class="navbar-brand" href="index.jsp">
-                <img src="${pageContext.request.contextPath}/images/fog.png" width="60px;" class="img-fluid"/>
+                <img src="${pageContext.request.contextPath}/images/fog.png" width="62px;" class="img-fluid"/>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,6 +45,7 @@
         </div>
     </nav>
 </header>
+<div class="bluebar"></div>
 <div id="body" class="container mt-4" style="min-height: 400px;">
     <h1><jsp:invoke fragment="header"/></h1>
     <jsp:doBody/>
