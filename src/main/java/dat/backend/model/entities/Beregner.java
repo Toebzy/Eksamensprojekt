@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Beregner
 {
-    public List<Materiale> trykImpBrædt200Beregner(double bredde)
     public List<Materiale> trykImpBrædt125Beregner(int bredde, int længde)
     {
         List<Materiale> materialeList = new ArrayList<>();
