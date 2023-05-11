@@ -46,7 +46,7 @@ h1{
 {
     color: red;
 }
-.picture
+.col
 {
     text-align: center;
 }
@@ -64,6 +64,9 @@ h1{
     background-color: #0d324e;
     color: white;
 }
-
+.image img{
+    width: 500px; height: 337px;
+    object-fit: cover;
+}
 
 
