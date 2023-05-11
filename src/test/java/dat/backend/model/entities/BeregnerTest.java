@@ -58,4 +58,17 @@ class BeregnerTest
         assertEquals(list.get(4).getMvariant(), beregner.trykImpBrædt125Beregner(1000, 1000).get(4).getMvariant());
         assertEquals(list.get(5).getMvariant(), beregner.trykImpBrædt125Beregner(1000, 1000).get(5).getMvariant());
     }
+
+    @Test
+    void remTest()
+    {
+        for (int i = 0; i < 38; i++)
+        {
+            list.add(new Materiale(19, 540));
+        }
+        for (int l = 0; l < 38; l++)
+        {
+            assertEquals(list.get(l).getMvariant(), beregner.remBeregner(1000, 1000).get(l).getMvariant());
+        }
+    }
 }
