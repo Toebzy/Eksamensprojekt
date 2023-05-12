@@ -71,4 +71,33 @@ class BeregnerTest
             assertEquals(list.get(l).getMvariant(), beregner.spærBeregner(1000, 1000).get(l).getMvariant());
         }
     }
+    @Test
+    void remTest()
+    {
+        assertEquals(16, beregner.remBeregner(360).get(0).getMvariant());
+        assertEquals(4, beregner.remBeregner(740).size());
+    }
+    @Test
+    void stolperTest()
+    {
+        assertEquals(22, beregner.stolperBeregner(780).get(0).getMvariant());
+        assertEquals(6, beregner.stolperBeregner(780).size());
+    }
+    @Test
+    void tagpladerTest()
+    {
+        assertEquals(30, beregner.tagpladerBeregner(600, 780).get(0).getMvariant());
+        assertEquals(30, beregner.tagpladerBeregner(600, 780).get(1).getMvariant());
+        assertEquals(30, beregner.tagpladerBeregner(600, 780).get(2).getMvariant());
+        assertEquals(30, beregner.tagpladerBeregner(600, 780).get(3).getMvariant());
+        assertEquals(30, beregner.tagpladerBeregner(600, 780).get(4).getMvariant());
+        assertEquals(30, beregner.tagpladerBeregner(600, 780).get(5).getMvariant());
+        assertEquals(29, beregner.tagpladerBeregner(600, 780).get(6).getMvariant());
+        assertEquals(29, beregner.tagpladerBeregner(600, 780).get(7).getMvariant());
+        assertEquals(29, beregner.tagpladerBeregner(600, 780).get(8).getMvariant());
+        assertEquals(29, beregner.tagpladerBeregner(600, 780).get(9).getMvariant());
+        assertEquals(29, beregner.tagpladerBeregner(600, 780).get(10).getMvariant());
+        assertEquals(29, beregner.tagpladerBeregner(600, 780).get(11).getMvariant());
+        assertEquals(12, beregner.tagpladerBeregner(600, 780).size());
+    }
 }
