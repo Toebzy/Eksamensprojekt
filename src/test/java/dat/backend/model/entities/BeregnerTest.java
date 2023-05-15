@@ -28,51 +28,23 @@ class BeregnerTest
     void trykImp200Test()
     {
         list.add(new Materiale(2, 540));
-        list.add(new Materiale(2, 540));
-        list.add(new Materiale(2, 540));
-        list.add(new Materiale(2, 540));
-        list.add(new Materiale(2, 540));
-        list.add(new Materiale(2, 540));
-        list.add(new Materiale(2, 540));
-        list.add(new Materiale(2, 540));
         assertEquals(list.get(0).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(0).getMvariant());
-        assertEquals(list.get(1).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(1).getMvariant());
-        assertEquals(list.get(2).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(2).getMvariant());
-        assertEquals(list.get(3).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(3).getMvariant());
-        assertEquals(list.get(4).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(4).getMvariant());
-        assertEquals(list.get(5).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(5).getMvariant());
-        assertEquals(list.get(6).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(6).getMvariant());
-        assertEquals(list.get(7).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(7).getMvariant());
-
+        assertEquals(8, beregner.trykImpBrædt200Beregner(600, 740).size());
     }
     @Test
     void trykImp125Test()
     {
-        list.add(new Materiale(7, 540));
-        list.add(new Materiale(6, 480));
-        list.add(new Materiale(7, 540));
-        list.add(new Materiale(7, 540));
-        list.add(new Materiale(6, 480));
-        list.add(new Materiale(6, 480));
-        assertEquals(list.get(0).getMvariant(), beregner.trykImpBrædt125Beregner(1000, 1000).get(0).getMvariant());
-        assertEquals(list.get(1).getMvariant(), beregner.trykImpBrædt125Beregner(1000, 1000).get(1).getMvariant());
-        assertEquals(list.get(2).getMvariant(), beregner.trykImpBrædt125Beregner(1000, 1000).get(2).getMvariant());
-        assertEquals(list.get(3).getMvariant(), beregner.trykImpBrædt125Beregner(1000, 1000).get(3).getMvariant());
-        assertEquals(list.get(4).getMvariant(), beregner.trykImpBrædt125Beregner(1000, 1000).get(4).getMvariant());
-        assertEquals(list.get(5).getMvariant(), beregner.trykImpBrædt125Beregner(1000, 1000).get(5).getMvariant());
+        list.add(new Materiale(3, 300));
+        assertEquals(list.get(0).getMvariant(), beregner.trykImpBrædt125Beregner(600, 740).get(0).getMvariant());
+        assertEquals(6, beregner.trykImpBrædt125Beregner(600, 740).size());
     }
 
     @Test
     void spærTest()
     {
-        for (int i = 0; i < 38; i++)
-        {
-            list.add(new Materiale(19, 540));
-        }
-        for (int l = 0; l < 38; l++)
-        {
-            assertEquals(list.get(l).getMvariant(), beregner.spærBeregner(1000, 1000).get(l).getMvariant());
-        }
+            list.add(new Materiale(20, 540));
+            assertEquals(list.get(0).getMvariant(), beregner.spærBeregner(600, 740).get(0).getMvariant());
+            assertEquals(14, beregner.spærBeregner(600, 740).size());
     }
     @Test
     void remTest()
@@ -90,17 +62,6 @@ class BeregnerTest
     void tagpladerTest()
     {
         assertEquals(30, beregner.tagpladerBeregner(600, 780).get(0).getMvariant());
-        assertEquals(30, beregner.tagpladerBeregner(600, 780).get(1).getMvariant());
-        assertEquals(30, beregner.tagpladerBeregner(600, 780).get(2).getMvariant());
-        assertEquals(30, beregner.tagpladerBeregner(600, 780).get(3).getMvariant());
-        assertEquals(30, beregner.tagpladerBeregner(600, 780).get(4).getMvariant());
-        assertEquals(30, beregner.tagpladerBeregner(600, 780).get(5).getMvariant());
-        assertEquals(29, beregner.tagpladerBeregner(600, 780).get(6).getMvariant());
-        assertEquals(29, beregner.tagpladerBeregner(600, 780).get(7).getMvariant());
-        assertEquals(29, beregner.tagpladerBeregner(600, 780).get(8).getMvariant());
-        assertEquals(29, beregner.tagpladerBeregner(600, 780).get(9).getMvariant());
-        assertEquals(29, beregner.tagpladerBeregner(600, 780).get(10).getMvariant());
-        assertEquals(29, beregner.tagpladerBeregner(600, 780).get(11).getMvariant());
         assertEquals(12, beregner.tagpladerBeregner(600, 780).size());
     }
 

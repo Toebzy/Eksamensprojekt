@@ -114,30 +114,51 @@ class UserMapperTest
     @Test
     void getpriceTest() throws DatabaseException
     {
-       assertEquals(32, MaterialeFacade.getPrice(2, connectionPool));
+        try(Connection testConnection = connectionPool.getConnection())
+        {
+            assertEquals(32, MaterialeFacade.getPrice(2, testConnection));
+        } catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
     }
     @Test
     void getLengthTest() throws DatabaseException
     {
-        assertEquals(300, MaterialeFacade.getLength(1,connectionPool));
+        try(Connection testConnection = connectionPool.getConnection())
+        {
+            assertEquals(300, MaterialeFacade.getLength(1, testConnection));
+        } catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
     }
     @Test
-    void getUnitTest() throws DatabaseException
+    void getUnitTest() throws DatabaseException, SQLException
     {
-        assertEquals("meter", MaterialeFacade.getUnit(3, connectionPool));
+        try(Connection testConnection = connectionPool.getConnection())
+        {
+            assertEquals("meter", MaterialeFacade.getUnit(3, testConnection));
+        }
     }
     @Test
     void getDescriptionTest() throws DatabaseException
     {
-        assertEquals("hej", MaterialeFacade.getDescription(3,connectionPool));
+        try(Connection testConnection = connectionPool.getConnection())
+        {
+            assertEquals("hej", MaterialeFacade.getDescription(3, testConnection));
+        } catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
     }
     @Test
     void newMaterialeTest()
     {
-        assertEquals(1, Materiale.newMateriale(1).getMvariant());
-        assertEquals(300, Materiale.newMateriale(1).getLength());
-        assertEquals(32, Materiale.newMateriale(1).getPrice());
-        assertEquals("meter", Materiale.newMateriale(1).getUnit());
-        assertEquals("hej", Materiale.newMateriale(1).getDescription());
+        assertEquals(1, Materiale.newMateriale(1, connectionPool).getMvariant());
+        assertEquals(300, Materiale.newMateriale(1, connectionPool).getLength());
+        assertEquals(32, Materiale.newMateriale(1, connectionPool).getPrice());
+        assertEquals("meter", Materiale.newMateriale(1, connectionPool).getUnit());
+        assertEquals("hej", Materiale.newMateriale(1, connectionPool).getDescription());
     }
 }

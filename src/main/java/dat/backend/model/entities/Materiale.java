@@ -4,9 +4,11 @@ import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.MaterialeFacade;
 
+import java.sql.Connection;
+
 public class Materiale
 {
-    private static ConnectionPool connectionPool = ApplicationStart.getConnectionPool();
+
     int mvariant;
     double length;
     double price;
@@ -52,17 +54,17 @@ public class Materiale
         return description;
     }
 
-    public static Materiale newMateriale(int mvariant)
+    public static Materiale newMateriale(int mvariant, ConnectionPool connectionPool)
     {
         Materiale materiale;
-        try
+        try (Connection connection = connectionPool.getConnection())
         {
-            int length = MaterialeFacade.getLength(mvariant, connectionPool);
-            double price = MaterialeFacade.getPrice(mvariant, connectionPool);
-            String unit = MaterialeFacade.getUnit(mvariant, connectionPool);
-            String description = MaterialeFacade.getDescription(mvariant, connectionPool);
-            materiale = new Materiale(mvariant, length, price, unit, description);
-            return materiale;
+                int length = MaterialeFacade.getLength(mvariant, connection);
+                double price = MaterialeFacade.getPrice(mvariant, connection);
+                String unit = MaterialeFacade.getUnit(mvariant, connection);
+                String description = MaterialeFacade.getDescription(mvariant, connection);
+                materiale = new Materiale(mvariant, length, price, unit, description);
+                return materiale;
         }
         catch(Exception e)
         {

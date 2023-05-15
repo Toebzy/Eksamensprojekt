@@ -10,12 +10,9 @@ import java.sql.SQLException;
 
 class MaterialeMapper
 {
-    public static Double getPrice(int mvariant, ConnectionPool connectionPool) throws DatabaseException
+    public static Double getPrice(int mvariant, Connection connection) throws DatabaseException
     {
         String sql = "SELECT mvariant.idmvariant, materials.unit, materials.priceprunit, materials.description  FROM carport.mvariant INNER JOIN materials ON mvariant.idmaterial =materials.idmaterials WHERE idmvariant = ?";
-
-        try (Connection connection = connectionPool.getConnection())
-        {
             try (PreparedStatement ps = connection.prepareStatement(sql))
             {
                 ps.setInt(1, mvariant);
@@ -32,19 +29,17 @@ class MaterialeMapper
                     System.out.println("false");
                     return null;
                 }
-            }
-        } catch (SQLException ex)
+        }
+            catch (SQLException ex)
         {
             throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
         }
     }
 
-    public static Integer getLength(int mvariant, ConnectionPool connectionPool) throws DatabaseException
+    public static Integer getLength(int mvariant, Connection connection) throws DatabaseException
     {
         String sql = "SELECT mvariant.idmvariant, materials.unit, mvariant.length, materials.priceprunit, materials.description  FROM mvariant INNER JOIN materials ON mvariant.idmaterial =materials.idmaterials WHERE idmvariant = ?;";
 
-        try (Connection connection = connectionPool.getConnection())
-        {
             try (PreparedStatement ps = connection.prepareStatement(sql))
             {
                 ps.setInt(1, mvariant);
@@ -62,18 +57,15 @@ class MaterialeMapper
                     return null;
                 }
             }
-        } catch (SQLException ex)
+         catch (SQLException ex)
         {
             throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
         }
     }
 
-    public static String getUnit(int mvariant, ConnectionPool connectionPool) throws DatabaseException
+    public static String getUnit(int mvariant, Connection connection) throws DatabaseException
     {
         String sql = "SELECT mvariant.idmvariant, materials.unit, mvariant.length, materials.priceprunit, materials.description  FROM mvariant INNER JOIN materials ON mvariant.idmaterial =materials.idmaterials WHERE idmvariant = ?;";
-
-        try (Connection connection = connectionPool.getConnection())
-        {
             try (PreparedStatement ps = connection.prepareStatement(sql))
             {
                 ps.setInt(1, mvariant);
@@ -90,18 +82,16 @@ class MaterialeMapper
                     return null;
                 }
             }
-        } catch (SQLException ex)
+         catch (SQLException ex)
         {
             throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
         }
     }
 
-    public static String getDescription(int mvariant, ConnectionPool connectionPool) throws DatabaseException
+    public static String getDescription(int mvariant, Connection connection) throws DatabaseException
     {
         String sql = "SELECT mvariant.idmvariant, materials.unit, mvariant.length, materials.priceprunit, materials.description  FROM mvariant INNER JOIN materials ON mvariant.idmaterial =materials.idmaterials WHERE idmvariant = ?;";
 
-        try (Connection connection = connectionPool.getConnection())
-        {
             try (PreparedStatement ps = connection.prepareStatement(sql))
             {
                 ps.setInt(1, mvariant);
@@ -118,7 +108,7 @@ class MaterialeMapper
                     return null;
                 }
             }
-        } catch (SQLException ex)
+         catch (SQLException ex)
         {
             throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
         }
