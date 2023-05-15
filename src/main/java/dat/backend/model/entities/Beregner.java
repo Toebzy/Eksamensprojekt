@@ -553,8 +553,13 @@ public class Beregner
         }
         return materialeList;
     }
-    public void carportBeregner(int bredde, int længde)
+    public List<List> carportBeregner(int bredde, int længde)
     {
-
+        List<List> carport = new ArrayList<>();
+        carport.add(stolperBeregner(længde));
+        carport.add(remBeregner(længde));
+        carport.add(spærBeregner(bredde, længde));
+        carport.add(tagpladerBeregner(bredde, længde));
+        return carport;
     }
 }
