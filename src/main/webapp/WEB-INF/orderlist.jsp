@@ -10,14 +10,14 @@
         Administrator
     </jsp:attribute>
     <jsp:body>
-        <p style="text-align: center;">Order List</p>
-        <form style="margin: auto; text-align: center; width: 150px; padding-bottom:20px" action="adminservlet" method="post">
-            <button class="btn" style="">Se brugerliste</button>
+        <p class="center">Order List</p>
+        <form class="adminbtn" action="adminservlet" method="post">
+            <button class="btn">Se brugerliste</button>
         </form>
         <div id ="tablesection" class="container">
             <div class="row">
                 <div class="col">
-                    <table class="table" style="width:80%">
+                    <table class="table">
                         <thead class="thead-dark">
                         <tr>
                             <th style="width:30px">OrderID</th>
@@ -29,7 +29,7 @@
                         </tr>
                         </thead>
                         <c:forEach var="emne" items="${requestScope.orderList}" varStatus="varStatus">
-                            <tr style="height:50px ">
+                            <tr>
                                 <td>${emne.idorder}</td>
                                 <td>${emne.iduser}</td>
                                 <td>${emne.status}</td>

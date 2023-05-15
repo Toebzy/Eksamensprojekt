@@ -103,5 +103,4 @@ class BeregnerTest
         assertEquals(29, beregner.tagpladerBeregner(600, 780).get(11).getMvariant());
         assertEquals(12, beregner.tagpladerBeregner(600, 780).size());
     }
-
 }

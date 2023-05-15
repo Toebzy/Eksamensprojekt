@@ -11,14 +11,14 @@
         Velkommen til Fog
     </jsp:attribute>
     <jsp:body>
-        <div style="text-align: center">
+        <div class="center">
         <img src="images/carportfrontpage.png" width="450" class="img-fluid">
         </div>
         <c:if test="${sessionScope.user != null}">
-            <p>Hej ${sessionScope.user.name} velkommen til Fog.</p>
+            <p class ="center">Hej ${sessionScope.user.name}, velkommen til Fog.</p>
         </c:if>
         <c:if test="${sessionScope.user == null}">
-            <p style="text-align: center">Du er ikke logget ind endnu, du kan logge ind eller oprette en ny bruger her: <a
+            <p class ="center">Du er ikke logget ind endnu, du kan logge ind eller oprette en ny bruger her: <a
                     href="login.jsp">Login</a></p>
         </c:if>
     </jsp:body>

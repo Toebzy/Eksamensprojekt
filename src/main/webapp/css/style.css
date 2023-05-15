@@ -60,12 +60,40 @@ h1{
     display: inline-block;
     font-size: 16px;
 }
+.adminbtn{
+    margin: auto;
+    text-align: center;
+    width: 150px;
+    padding-bottom:20px;
+}
+
+.balance{
+    text-align: center;
+    width: 80px;
+}
+
 .inputbox{
     margin:3px;
+    text-align: center;
 }
 .inputbox2{
-    margin-left: 110px;
+    text-align: center;
+    margin-left: 25%;
     margin-bottom: 10px;
+}
+.center{
+    text-align: center;
+}
+.infotext{
+    width: 50%;
+    margin:auto;
+    padding-bottom: 5px;
+}
+.submitform{
+    margin:auto;
+    padding:5px;
+    width: 420px;
+    height: 155px;
 }
 
 .btn:hover{

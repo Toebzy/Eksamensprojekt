@@ -4,7 +4,6 @@ import dat.backend.model.entities.Order;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 
-import java.sql.Connection;
 import java.util.List;
 
 public class UserFacade

@@ -10,14 +10,14 @@
         Administrator
     </jsp:attribute>
     <jsp:body>
-        <p style="text-align: center;"> User Info</p>
-            <form style="margin: auto; text-align: center; width: 150px; padding-bottom:20px" action="orderlist" method="post">
-                <button class="btn" style="">Se ordreliste</button>
+        <p class="center"> User Info</p>
+            <form class="adminbtn" action="orderlist" method="post">
+                <button class="btn">Se ordreliste</button>
             </form>
         <div id ="tablesection" class="container">
             <div class="row">
                 <div class="col">
-                    <table class="table" style="width:80%">
+                    <table class="table">
                         <thead class="thead-dark">
                         <tr>
                             <th style="width:30px">ID</th>
@@ -30,7 +30,7 @@
                         </tr>
                         </thead>
                         <c:forEach var="emne" items="${requestScope.userList}" varStatus="varStatus">
-                            <tr style="height:50px ">
+                            <tr>
                                 <td>${emne.userid}</td>
                                 <td>${emne.email}</td>
                                 <td>${emne.name}</td>
@@ -38,9 +38,9 @@
                                 <td>${emne.address}</td>
                                 <td>${emne.phonenumber}</td>
                                 <form action="balanceChange" method="post">
-                                    <td> <input style="width: 80px; text-align:center"  type="number" id="balance" name="balance" min="0" value ="${emne.balance}"></td>
+                                    <td> <input class="balance" type="number" id="balance" name="balance" min="0" value ="${emne.balance}"></td>
                                     <input hidden value ="${emne.userid}" name ="userid">
-                                    <th style="width: 30px"> <button class ="btn"> Opdater </button></th>
+                                    <th class="balance"><button class ="btn"> Opdater </button></th>
                                 </form>
                             </tr>
                         </c:forEach>
