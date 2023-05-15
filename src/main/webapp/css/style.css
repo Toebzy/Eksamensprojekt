@@ -60,6 +60,14 @@ h1{
     display: inline-block;
     font-size: 16px;
 }
+.inputbox{
+    margin:3px;
+}
+.inputbox2{
+    margin-left: 110px;
+    margin-bottom: 10px;
+}
+
 .btn:hover{
     background-color: #0d324e;
     color: white;

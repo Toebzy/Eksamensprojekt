@@ -11,23 +11,18 @@
             Opret Bruger
     </jsp:attribute>
     <jsp:body>
-        <form style="margin:auto; width: 190px" action="opretbruger" method="post">
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" placeholder="123@123.dk" required/>
-            <label for="name">Navn:</label>
-            <input type="text" id="name" name="name" placeholder="Navn" required/>
-            <label for="password">Kodeord:</label>
-            <input type="password" id="password" name="password" placeholder="Kodeord" required/>
-            <label for="gentagkodeord">Gentag Kodeord:</label>
-            <input type="password" id="gentagkodeord" name="gentagkodeord" placeholder="Kodeord" required/>
-            <label for="address">Adresse:</label>
-            <input type="text" id="address" name="address" placeholder="Addresse" required/>
-            <label for="zipcode">Postnummer:</label>
-            <input type="number" id="zipcode" name="zipcode" placeholder="2700 el. 4200" required/>
-            <label for="phonenumber">Telefonnummer:</label>
-            <input type="number" id="phonenumber" name="phonenumber" placeholder="Telefonnummer" required/>
-            <input type="submit" class="btn" style="margin-top: 10px; margin-left: 33px" value="Opret Bruger"/>
+        <form style="margin:auto; padding:5px; width: 420px; height: 155px;" action="opretbruger" method="post">
+            <input type="text" class="inputbox" id="email" name="email" placeholder="Email" required/>
+            <input type="text" class="inputbox" id="name" name="name" placeholder="Navn" required/>
+            <input type="password" class="inputbox" id="password" name="password" placeholder="Kodeord" required/>
+            <input type="password" class="inputbox" id="gentagkodeord" name="gentagkodeord" placeholder="Gentag Kodeord" required/>
+            <input type="text" class="inputbox" id="address" name="address" placeholder="Addresse" required/>
+            <input type="number" class="inputbox" id="zipcode" name="zipcode" placeholder="Postnummmer" required/>
+            <input type="number" class="inputbox2"  id="phonenumber" name="phonenumber" placeholder="Telefonnummer" required/>
+            <input type="submit" class="btn" style="margin-left:147px" value="Opret Bruger"/>
            <p class="error"> ${requestScope.msg}</p>
         </form>
+
     </jsp:body>
 </t:pagetemplate>
+

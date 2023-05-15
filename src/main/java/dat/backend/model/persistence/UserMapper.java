@@ -1,5 +1,6 @@
 package dat.backend.model.persistence;
 
+import dat.backend.model.entities.Order;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 
@@ -122,6 +123,28 @@ class UserMapper {
             throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
         }
         return userList;
+    }
+
+    static List<Order> orderList(ConnectionPool connectionpool) throws DatabaseException {
+        List<Order> orderList = new ArrayList<>();
+        String sql1 = "SELECT idorder, status, carportwidth, carportheight, carportlength, iduser FROM carport.order";
+        try (Connection connection = connectionpool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql1)) {
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    String idorder = (rs.getString("idorder"));
+                    String status = (rs.getString("status"));
+                    String carportwidth = (rs.getString("carportwidth"));
+                    String carportheight = (rs.getString("carportheight"));
+                    String carportlength = (rs.getString("carportlength"));
+                    String iduser = (rs.getString("iduser"));
+                    orderList.add(new Order(idorder, status, carportwidth, carportheight, carportlength, iduser));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
+        }
+        return orderList;
     }
 
     static void balanceChange(String balance, String userid, ConnectionPool connectionPool) throws DatabaseException {

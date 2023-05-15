@@ -1,5 +1,6 @@
 package dat.backend.model.persistence;
 
+import dat.backend.model.entities.Order;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 
@@ -23,8 +24,11 @@ public class UserFacade
     public static boolean checkZip(String zipcode, ConnectionPool connectionPool)  throws DatabaseException{
         return UserMapper.checkZip(zipcode,connectionPool);
     }
-    public static List infoList(ConnectionPool connectionPool) throws DatabaseException {
+    public static List<User> infoList(ConnectionPool connectionPool) throws DatabaseException {
         return UserMapper.infoList(connectionPool);
+    }
+    public static List<Order> orderList(ConnectionPool connectionpool) throws DatabaseException{
+        return UserMapper.orderList(connectionpool);
     }
     public static void balanceChange(String balance, String userid, ConnectionPool connectionPool) throws DatabaseException {
         UserMapper.balanceChange(balance, userid, connectionPool);
