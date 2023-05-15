@@ -8,7 +8,10 @@ import java.util.List;
 
 public class Beregner
 {
-    private static ConnectionPool connectionPool = ApplicationStart.getConnectionPool();
+    private final static String USER = "dev";
+    private final static String PASSWORD = "3r!DE32*/fDe";
+    private final static String URL = "jdbc:mysql://64.226.113.12:3306/carport?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
+    private static ConnectionPool connectionPool = new ConnectionPool(USER, PASSWORD, URL);
     public List<Materiale> trykImpBrædt200Beregner(int bredde, int længde) // I arraylisten er først indsat materialer til bredden, derefter til længden
     {
         List<Materiale> materialeList = new ArrayList<>();
@@ -67,16 +70,12 @@ public class Beregner
         {
             if (i == 540)
             {
-                materialeList.add(Materiale.newMateriale(2));
-                materialeList.add(Materiale.newMateriale(2));
-                /*materialeList.add(new Materiale(2, 540));
-                materialeList.add(new Materiale(2, 540));*/
+                materialeList.add(Materiale.newMateriale(2, connectionPool));
+                materialeList.add(Materiale.newMateriale(2, connectionPool));
             } else if (i == 360)
             {
-                materialeList.add(Materiale.newMateriale(1));
-                materialeList.add(Materiale.newMateriale(1));
-                /*materialeList.add(new Materiale(1, 360));
-                materialeList.add(new Materiale(1, 360));*/
+                materialeList.add(Materiale.newMateriale(1, connectionPool));
+                materialeList.add(Materiale.newMateriale(1, connectionPool));
             }
         }
         for (int i = 540; i >= 0; i -= 180)
@@ -124,16 +123,12 @@ public class Beregner
         {
             if (i == 540)
             {
-                materialeList.add(Materiale.newMateriale(2));
-                materialeList.add(Materiale.newMateriale(2));
-                /*materialeList.add(new Materiale(2, 540));
-                materialeList.add(new Materiale(2, 540));*/
+                materialeList.add(Materiale.newMateriale(2, connectionPool));
+                materialeList.add(Materiale.newMateriale(2, connectionPool));
             } else if (i == 360)
             {
-                materialeList.add(Materiale.newMateriale(2));
-                materialeList.add(Materiale.newMateriale(2));
-              /*  materialeList.add(new Materiale(1, 360));
-                materialeList.add(new Materiale(1, 360));*/
+                materialeList.add(Materiale.newMateriale(1, connectionPool));
+                materialeList.add(Materiale.newMateriale(1, connectionPool));
             }
         }
         return materialeList;
@@ -195,19 +190,20 @@ public class Beregner
         {
             if (i == 540)
             {
-                materialeList.add(new Materiale(7, 540));
+                materialeList.add(Materiale.newMateriale(7, connectionPool));
+
             } else if (i == 480)
             {
-                materialeList.add(new Materiale(6, 480));
+                materialeList.add(Materiale.newMateriale(6, connectionPool));
             } else if (i == 420)
             {
-                materialeList.add(new Materiale(5, 420));
+                materialeList.add(Materiale.newMateriale(5, connectionPool));
             } else if (i == 360)
             {
-                materialeList.add(new Materiale(4, 360));
+                materialeList.add(Materiale.newMateriale(4, connectionPool));
             } else if (i == 300)
             {
-                materialeList.add(new Materiale(3, 300));
+                materialeList.add(Materiale.newMateriale(3, connectionPool));
             }
         }
         for (int i = 540; i >= 0; i -= 60)
@@ -256,24 +252,24 @@ public class Beregner
         {
             if (i == 540)
             {
-                materialeList.add(new Materiale(7, 540));
-                materialeList.add(new Materiale(7, 540));
+                materialeList.add(Materiale.newMateriale(7, connectionPool));
+                materialeList.add(Materiale.newMateriale(7, connectionPool));
             } else if (i == 480)
             {
-                materialeList.add(new Materiale(6, 480));
-                materialeList.add(new Materiale(6, 480));
+                materialeList.add(Materiale.newMateriale(6, connectionPool));
+                materialeList.add(Materiale.newMateriale(6, connectionPool));
             } else if (i == 420)
             {
-                materialeList.add(new Materiale(5, 420));
-                materialeList.add(new Materiale(5, 420));
+                materialeList.add(Materiale.newMateriale(5, connectionPool));
+                materialeList.add(Materiale.newMateriale(5, connectionPool));
             } else if (i == 360)
             {
-                materialeList.add(new Materiale(4, 360));
-                materialeList.add(new Materiale(4, 360));
+                materialeList.add(Materiale.newMateriale(4, connectionPool));
+                materialeList.add(Materiale.newMateriale(4, connectionPool));
             } else if (i == 300)
             {
-                materialeList.add(new Materiale(3, 300));
-                materialeList.add(new Materiale(3, 300));
+                materialeList.add(Materiale.newMateriale(3, connectionPool));
+                materialeList.add(Materiale.newMateriale(3, connectionPool));
             }
         }
         return materialeList;
@@ -345,35 +341,35 @@ public class Beregner
             {
                 for(int l = 0; l < antalrem; l++)
                 {
-                    materialeList.add(new Materiale(20, 600));
+                    materialeList.add(Materiale.newMateriale(20, connectionPool));
                 }
             }
             else if (i == 540)
             {
                 for(int l = 0; l < antalrem; l++)
                 {
-                    materialeList.add(new Materiale(19, 540));
+                    materialeList.add(Materiale.newMateriale(19, connectionPool));
                 }
             }
             else if (i == 480)
             {
                 for(int l = 0; l < antalrem; l++)
                 {
-                    materialeList.add(new Materiale(18, 480));
+                    materialeList.add(Materiale.newMateriale(18, connectionPool));
                 }
             }
             else if (i == 420)
             {
                 for(int l = 0; l < antalrem; l++)
                 {
-                    materialeList.add(new Materiale(17, 420));
+                    materialeList.add(Materiale.newMateriale(17, connectionPool));
                 }
             }
             else if (i == 360)
             {
                 for(int l = 0; l < antalrem; l++)
                 {
-                    materialeList.add(new Materiale(16, 360));
+                    materialeList.add(Materiale.newMateriale(16, connectionPool));
                 }
             }
         }
@@ -434,28 +430,28 @@ public class Beregner
         {
             if (i == 600)
             {
-                materialeList.add(new Materiale(20, 600));
-                materialeList.add(new Materiale(20, 600));
+                materialeList.add(Materiale.newMateriale(20, connectionPool));
+                materialeList.add(Materiale.newMateriale(20, connectionPool));
             }
             else if (i == 540)
             {
-                materialeList.add(new Materiale(19, 540));
-                materialeList.add(new Materiale(19, 540));
+                materialeList.add(Materiale.newMateriale(19, connectionPool));
+                materialeList.add(Materiale.newMateriale(19, connectionPool));
             }
             else if (i == 480)
             {
-                materialeList.add(new Materiale(18, 480));
-                materialeList.add(new Materiale(18, 480));
+                materialeList.add(Materiale.newMateriale(18, connectionPool));
+                materialeList.add(Materiale.newMateriale(18, connectionPool));
             }
             else if (i == 420)
             {
-                materialeList.add(new Materiale(17, 420));
-                materialeList.add(new Materiale(17, 420));
+                materialeList.add(Materiale.newMateriale(17, connectionPool));
+                materialeList.add(Materiale.newMateriale(17, connectionPool));
             }
             else if (i == 360)
             {
-                materialeList.add(new Materiale(16, 360));
-                materialeList.add(new Materiale(16, 360));
+                materialeList.add(Materiale.newMateriale(16, connectionPool));
+                materialeList.add(Materiale.newMateriale(16, connectionPool));
             }
         }
         return materialeList;
@@ -474,7 +470,7 @@ public class Beregner
         }
         for(int i = 0; i < antalStolper *2; i++)
         {
-            materialeList.add(new Materiale(22, 300));
+            materialeList.add(Materiale.newMateriale(22, connectionPool));
         }
         return materialeList;
     }
@@ -545,20 +541,25 @@ public class Beregner
             {
                 for(int l = 0; l < pladerbredde; l++)
                 {
-                    materialeList.add(new Materiale(30, 600));
+                    materialeList.add(Materiale.newMateriale(30, connectionPool));
                 }
             } else if (i == 360)
             {
                 for(int l = 0; l < pladerbredde; l++)
                 {
-                    materialeList.add(new Materiale(29, 360));
+                    materialeList.add(Materiale.newMateriale(29, connectionPool));
                 }
             }
         }
         return materialeList;
     }
-    public void carportBeregner(int bredde, int længde)
+    public List<List> carportBeregner(int bredde, int længde)
     {
-
+        List<List> carport = new ArrayList<>();
+        carport.add(stolperBeregner(længde));
+        carport.add(remBeregner(længde));
+        carport.add(spærBeregner(bredde, længde));
+        carport.add(tagpladerBeregner(bredde, længde));
+        return carport;
     }
 }
