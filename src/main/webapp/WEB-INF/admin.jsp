@@ -10,7 +10,12 @@
         Administrator
     </jsp:attribute>
     <jsp:body>
-        <p style="text-align: center"> User Info</p>
+
+        <div>
+            <p style="text-align: center; size: 50px"> User Info</p>
+            <form style="text-align: center; width: 150px" action="ordreliste" method="post">
+                <button class="btn" style="">Se ordreliste</button>
+            </form></div>
         <div id ="tablesection" class="container">
             <div class="row">
                 <div class="col">
@@ -45,8 +50,5 @@
                 </div>
             </div>
         </div>
-        <form style="text-align: center" action="ordreliste" method="post">
-            <button class="btn">Se ordreliste</button>
-        </form>
     </jsp:body>
 </t:pagetemplate>

@@ -5,13 +5,11 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Velkommen til Fog
+        Velkommen til Fog
     </jsp:attribute>
-
     <jsp:attribute name="footer">
-        Welcome to the frontpage
+        Velkommen til Fog
     </jsp:attribute>
-
     <jsp:body>
         <div style="text-align: center">
         <img src="images/carportfrontpage.png" width="450" class="img-fluid">
@@ -23,6 +21,5 @@
             <p style="text-align: center">Du er ikke logget ind endnu, du kan logge ind eller oprette en ny bruger her: <a
                     href="login.jsp">Login</a></p>
         </c:if>
-
     </jsp:body>
 </t:pagetemplate>

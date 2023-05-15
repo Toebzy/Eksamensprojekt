@@ -16,7 +16,6 @@ public class UserFacade
     {
        UserMapper.createUser(email, password, zipcode, address, name, phonenumber, connectionPool);
     }
-
     public static boolean checkEmail(String email, ConnectionPool connectionPool) throws DatabaseException {
         return UserMapper.checkEmail(email, connectionPool);
     }
