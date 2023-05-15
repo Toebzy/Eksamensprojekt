@@ -1,5 +1,7 @@
 package dat.backend.model.entities;
 
+import dat.backend.model.exceptions.DatabaseException;
+import dat.backend.model.persistence.MaterialeFacade;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,6 +43,7 @@ class BeregnerTest
         assertEquals(list.get(5).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(5).getMvariant());
         assertEquals(list.get(6).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(6).getMvariant());
         assertEquals(list.get(7).getMvariant(), beregner.trykImpBrædt200Beregner(1000, 1000).get(7).getMvariant());
+
     }
     @Test
     void trykImp125Test()
@@ -100,4 +103,5 @@ class BeregnerTest
         assertEquals(29, beregner.tagpladerBeregner(600, 780).get(11).getMvariant());
         assertEquals(12, beregner.tagpladerBeregner(600, 780).size());
     }
+
 }
