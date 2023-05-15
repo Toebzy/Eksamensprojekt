@@ -13,40 +13,39 @@
     </jsp:attribute>
 
     <jsp:body>
-        <div class="picture">
-            <img src="images/carporteksempel1.webp" width="450" class="img-fluid">
-            <div>
-                <p1>Carport med skur</p1>
+        <div class="row">
+            <div class="col image">
+                <img src="images/carporteksempel1.webp">
+                <div>
+                    <p1>Carport med skur</p1>
+                </div>
             </div>
-        </div>
-        <br>
-        <div class="picture">
-            <img src="images/carporteksemepl2.png" width="450" class="img-fluid">
-            <div>
-                <p1>Carport med skur</p1>
+            <br>
+            <div class="col image">
+                <img src="images/carporteksemepl2.png">
+                <div>
+                    <p1>Carport med skur</p1>
+                </div>
             </div>
+            <br>
         </div>
-        <br>
-        <div class="picture">
-            <img src="images/carporteksempel3.jpg" width="450" class="img-fluid">
-            <div>
-                <p1>Carport uden skur</p1>
+        <div class="row">
+            <div class="col image">
+                <img src="images/carporteksempel4.jpeg">
+                <div>
+                    <p1>Carport uden skur</p1>
+                </div>
             </div>
-        </div>
-        <br>
-        <div class="picture">
-            <img src="images/carporteksempel4.jpeg" width="450" class="img-fluid">
-            <div>
-                <p1>Carport uden skur</p1>
+            <br>
+            <div class="col image">
+                <img src="images/carporteksempel5.JPG">
+                <div>
+                    <p1>Skur indefra</p1>
+                </div>
             </div>
+            <br>
         </div>
-        <br>
-        <div class="picture">
-            <img src="images/carporteksempel5.JPG" width="450" class="img-fluid">
-            <div>
-                <p1>Skur indefra</p1>
-            </div>
-        </div>
+
 
 
     </jsp:body>
