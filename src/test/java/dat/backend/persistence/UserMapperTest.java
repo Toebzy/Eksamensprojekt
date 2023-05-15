@@ -1,8 +1,10 @@
 package dat.backend.persistence;
 
+import dat.backend.model.entities.Materiale;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
+import dat.backend.model.persistence.MaterialeFacade;
 import dat.backend.model.persistence.UserFacade;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -107,5 +109,35 @@ class UserMapperTest
         User expectedUser = new User("jill", "1234", "", "user","","","","","");
         assertEquals(expectedUser, logInUser);
 
+    }
+
+    @Test
+    void getpriceTest() throws DatabaseException
+    {
+       assertEquals(32, MaterialeFacade.getPrice(2, connectionPool));
+    }
+    @Test
+    void getLengthTest() throws DatabaseException
+    {
+        assertEquals(300, MaterialeFacade.getLength(1,connectionPool));
+    }
+    @Test
+    void getUnitTest() throws DatabaseException
+    {
+        assertEquals("meter", MaterialeFacade.getUnit(3, connectionPool));
+    }
+    @Test
+    void getDescriptionTest() throws DatabaseException
+    {
+        assertEquals("hej", MaterialeFacade.getDescription(3,connectionPool));
+    }
+    @Test
+    void newMaterialeTest()
+    {
+        assertEquals(1, Materiale.newMateriale(1).getMvariant());
+        assertEquals(300, Materiale.newMateriale(1).getLength());
+        assertEquals(32, Materiale.newMateriale(1).getPrice());
+        assertEquals("meter", Materiale.newMateriale(1).getUnit());
+        assertEquals("hej", Materiale.newMateriale(1).getDescription());
     }
 }

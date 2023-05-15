@@ -1,10 +1,14 @@
 package dat.backend.model.entities;
 
+import dat.backend.model.config.ApplicationStart;
+import dat.backend.model.persistence.ConnectionPool;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Beregner
 {
+    private static ConnectionPool connectionPool = ApplicationStart.getConnectionPool();
     public List<Materiale> trykImpBrædt200Beregner(int bredde, int længde) // I arraylisten er først indsat materialer til bredden, derefter til længden
     {
         List<Materiale> materialeList = new ArrayList<>();
@@ -63,12 +67,16 @@ public class Beregner
         {
             if (i == 540)
             {
-                materialeList.add(new Materiale(2, 540));
-                materialeList.add(new Materiale(2, 540));
+                materialeList.add(Materiale.newMateriale(2));
+                materialeList.add(Materiale.newMateriale(2));
+                /*materialeList.add(new Materiale(2, 540));
+                materialeList.add(new Materiale(2, 540));*/
             } else if (i == 360)
             {
-                materialeList.add(new Materiale(1, 360));
-                materialeList.add(new Materiale(1, 360));
+                materialeList.add(Materiale.newMateriale(1));
+                materialeList.add(Materiale.newMateriale(1));
+                /*materialeList.add(new Materiale(1, 360));
+                materialeList.add(new Materiale(1, 360));*/
             }
         }
         for (int i = 540; i >= 0; i -= 180)
@@ -116,12 +124,16 @@ public class Beregner
         {
             if (i == 540)
             {
-                materialeList.add(new Materiale(2, 540));
-                materialeList.add(new Materiale(2, 540));
+                materialeList.add(Materiale.newMateriale(2));
+                materialeList.add(Materiale.newMateriale(2));
+                /*materialeList.add(new Materiale(2, 540));
+                materialeList.add(new Materiale(2, 540));*/
             } else if (i == 360)
             {
-                materialeList.add(new Materiale(1, 360));
-                materialeList.add(new Materiale(1, 360));
+                materialeList.add(Materiale.newMateriale(2));
+                materialeList.add(Materiale.newMateriale(2));
+              /*  materialeList.add(new Materiale(1, 360));
+                materialeList.add(new Materiale(1, 360));*/
             }
         }
         return materialeList;
