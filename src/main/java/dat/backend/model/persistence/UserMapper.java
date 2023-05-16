@@ -120,14 +120,14 @@ class UserMapper {
                 }
             }
         } catch (SQLException ex) {
-            throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
+            throw new DatabaseException(ex, "Error fetching data. Something went wrong with the database");
         }
         return userList;
     }
 
     static List<Order> orderList(ConnectionPool connectionpool) throws DatabaseException {
         List<Order> orderList = new ArrayList<>();
-        String sql1 = "SELECT idorder, status, carportwidth, carportheight, carportlength, iduser FROM carport.order";
+        String sql1 = "SELECT idorder, status, carportwidth, carportlength, iduser FROM carport.order";
         try (Connection connection = connectionpool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql1)) {
                 ResultSet rs = ps.executeQuery();
@@ -135,14 +135,13 @@ class UserMapper {
                     String idorder = (rs.getString("idorder"));
                     String status = (rs.getString("status"));
                     String carportwidth = (rs.getString("carportwidth"));
-                    String carportheight = (rs.getString("carportheight"));
                     String carportlength = (rs.getString("carportlength"));
                     String iduser = (rs.getString("iduser"));
-                    orderList.add(new Order(idorder, status, carportwidth, carportheight, carportlength, iduser));
+                    orderList.add(new Order(idorder, status, carportwidth, carportlength, iduser));
                 }
             }
         } catch (SQLException ex) {
-            throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
+            throw new DatabaseException(ex, "Error fetching data. Something went wrong with the database");
         }
         return orderList;
     }
@@ -159,7 +158,7 @@ class UserMapper {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new DatabaseException(e, "Error logging in. Something went wrong with the database");
+            throw new DatabaseException(e, "Error fetching data. Something went wrong with the database");
         }
     }
 }

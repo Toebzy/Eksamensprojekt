@@ -2,17 +2,15 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page errorPage="error.jsp" isErrorPage="false" %>
-
 <t:pagetemplate>
     <jsp:attribute name="header">
          Carport eksempel
     </jsp:attribute>
-
     <jsp:attribute name="footer">
         Carport eksempel
     </jsp:attribute>
-
     <jsp:body>
+        <br>
         <div class="row">
             <div class="col image">
                 <img src="images/carporteksempel1.webp">
@@ -45,9 +43,5 @@
             </div>
             <br>
         </div>
-
-
-
     </jsp:body>
-
 </t:pagetemplate>

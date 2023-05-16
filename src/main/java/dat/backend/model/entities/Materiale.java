@@ -1,9 +1,6 @@
 package dat.backend.model.entities;
-
-import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.MaterialeFacade;
-
 import java.sql.Connection;
 
 public class Materiale

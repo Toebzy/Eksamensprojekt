@@ -20,11 +20,11 @@
                     <table class="table">
                         <thead class="thead-dark">
                         <tr>
-                            <th>OrderID</th>
-                            <th >User ID</th>
-                            <th>Status</th>
-                            <th>Carport Width</th>
-                            <th>Carport Length</th>
+                            <th>Variant</th>
+                            <th>Længde</th>
+                            <th>Pris</th>
+                            <th>Unit</th>
+                            <th>Beskrivelse</th>
                         </tr>
                         </thead>
                         <c:forEach var="emne" items="${requestScope.orderList}" varStatus="varStatus">
@@ -32,12 +32,7 @@
                                 <td>${emne.idorder}</td>
                                 <td>${emne.iduser}</td>
                                 <td>${emne.status}</td>
-                                <td>${emne.carportwidth}cm</td>
-                                <td>${emne.carportlength}cm</td>
-                                <form action="stykliste" method="post">
-                                    <input hidden value ="${emne.iduser}" name ="userid">
-                                    <th class="balance"><button class ="btn">Stykliste</button></th>
-                                </form>
+                                <td>${emne.carportwidth}</td>
                             </tr>
                         </c:forEach>
                     </table>

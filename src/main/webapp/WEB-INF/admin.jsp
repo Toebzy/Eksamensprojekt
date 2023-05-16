@@ -20,13 +20,13 @@
                     <table class="table">
                         <thead class="thead-dark">
                         <tr>
-                            <th style="width:30px">ID</th>
-                            <th style="width:20px">Email</th>
-                            <th style="width:20px">Name</th>
-                            <th style="width:20px">Zipcode</th>
-                            <th style="width:20px">Address</th>
-                            <th style="width:20px">Phonenumber</th>
-                            <th style="width:20px">Balance</th>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Name</th>
+                            <th>Zipcode</th>
+                            <th>Address</th>
+                            <th>Phonenumber</th>
+                            <th>Balance</th>
                         </tr>
                         </thead>
                         <c:forEach var="emne" items="${requestScope.userList}" varStatus="varStatus">

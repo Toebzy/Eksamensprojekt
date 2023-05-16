@@ -90,11 +90,6 @@ public class User
         return email;
     }
 
-    public void setUsername(String email)
-    {
-        this.email = email;
-    }
-
     public String getPassword()
     {
         return password;
@@ -110,10 +105,6 @@ public class User
         return role;
     }
 
-    public void setRole(String role)
-    {
-        this.role = role;
-    }
 
     @Override
     public boolean equals(Object o)

@@ -35,6 +35,9 @@
                 <c:if test="${sessionScope.user == null }">
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/opretbruger.jsp">Opret bruger</a>
                 </c:if>
+                <c:if test="${sessionScope.user.role == 0}">
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/minside">Min Side</a>
+                </c:if>
                 <c:if test="${sessionScope.user.role == 1 }">
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/adminservlet">Admin</a>
                 </c:if>

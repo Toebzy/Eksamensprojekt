@@ -3,8 +3,7 @@ package dat.backend.model.entities;
 import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.persistence.ConnectionPool;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Beregner
 {
@@ -553,13 +552,16 @@ public class Beregner
         }
         return materialeList;
     }
-    public List<List> carportBeregner(int bredde, int længde)
+
+    public List<Materiale> carportBeregner(int bredde, int længde)
     {
-        List<List> carport = new ArrayList<>();
-        carport.add(stolperBeregner(længde));
-        carport.add(remBeregner(længde));
-        carport.add(spærBeregner(bredde, længde));
-        carport.add(tagpladerBeregner(bredde, længde));
+        List<Materiale> carport = new ArrayList<>();
+        carport.addAll(stolperBeregner(længde));
+        carport.addAll(remBeregner(længde));
+        carport.addAll(spærBeregner(bredde, længde));
+        carport.addAll(tagpladerBeregner(bredde, længde));
+
         return carport;
+
     }
 }
