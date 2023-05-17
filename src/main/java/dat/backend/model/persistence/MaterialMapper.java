@@ -1,15 +1,44 @@
 package dat.backend.model.persistence;
 
 import dat.backend.model.config.ApplicationStart;
+import dat.backend.model.entities.Material;
 import dat.backend.model.exceptions.DatabaseException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.ArrayList;
 
-class MaterialeMapper
+class MaterialMapper
 {
+
+
+static List<Material> getMaterialById(int id, ConnectionPool connectionPool) throws DatabaseException {
+        List<Material> materialList = new ArrayList<>();
+        String sql = "SELECT mvariant.idmvariant,  mvariant.length, materials.unit, materials.priceprunit, materials.description FROM carport.mvariant INNER JOIN materials ON mvariant.idmaterial =materials.idmaterials WHERE idmaterial = ?";
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, id);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    int mvariant = resultSet.getInt("idmvariant");
+                    int length = resultSet.getInt("length");
+                    double priceprunit = resultSet.getDouble("priceprunit");
+                    String unit = resultSet.getString("unit");
+                    String description = resultSet.getString("description");
+
+                    materialList.add(new Material(mvariant, length, priceprunit, unit, description));
+                }
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e, "Could not get material by id");
+        }
+
+        return materialList;
+    }
+
     public static Double getPrice(int mvariant, Connection connection) throws DatabaseException
     {
         String sql = "SELECT mvariant.idmvariant, materials.unit, materials.priceprunit, materials.description  FROM carport.mvariant INNER JOIN materials ON mvariant.idmaterial =materials.idmaterials WHERE idmvariant = ?";
@@ -17,16 +46,13 @@ class MaterialeMapper
             {
                 ps.setInt(1, mvariant);
                 ResultSet rs = ps.executeQuery();
-                System.out.println(ps);
                 if (rs.next())
                 {
-                    System.out.println("true");
                     String price = rs.getString("materials.priceprunit");
                     double intprice = Double.parseDouble(price);
                     return intprice;
                 } else
                 {
-                    System.out.println("false");
                     return null;
                 }
         }
@@ -44,16 +70,13 @@ class MaterialeMapper
             {
                 ps.setInt(1, mvariant);
                 ResultSet rs = ps.executeQuery();
-                System.out.println(ps);
                 if (rs.next())
                 {
-                    System.out.println("true");
                     String length = rs.getString("mvariant.length");
                     int intlength = Integer.parseInt(length);
                     return intlength;
                 } else
                 {
-                    System.out.println("false");
                     return null;
                 }
             }
@@ -70,15 +93,12 @@ class MaterialeMapper
             {
                 ps.setInt(1, mvariant);
                 ResultSet rs = ps.executeQuery();
-                System.out.println(ps);
                 if (rs.next())
                 {
-                    System.out.println("true");
                     String unit = rs.getString("materials.unit");
                     return unit;
                 } else
                 {
-                    System.out.println("false");
                     return null;
                 }
             }
@@ -96,15 +116,12 @@ class MaterialeMapper
             {
                 ps.setInt(1, mvariant);
                 ResultSet rs = ps.executeQuery();
-                System.out.println(ps);
                 if (rs.next())
                 {
-                    System.out.println("true");
                     String description = rs.getString("materials.description");
                     return description;
                 } else
                 {
-                    System.out.println("false");
                     return null;
                 }
             }

@@ -4,7 +4,7 @@ import dat.backend.model.entities.Materiale;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
-import dat.backend.model.persistence.MaterialeFacade;
+import dat.backend.model.persistence.MaterialFacade;
 import dat.backend.model.persistence.UserFacade;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -116,7 +116,7 @@ class UserMapperTest
     {
         try(Connection testConnection = connectionPool.getConnection())
         {
-            assertEquals(32, MaterialeFacade.getPrice(2, testConnection));
+            assertEquals(32, MaterialFacade.getPrice(2, testConnection));
         } catch (SQLException throwables)
         {
             throwables.printStackTrace();
@@ -127,7 +127,7 @@ class UserMapperTest
     {
         try(Connection testConnection = connectionPool.getConnection())
         {
-            assertEquals(300, MaterialeFacade.getLength(1, testConnection));
+            assertEquals(300, MaterialFacade.getLength(1, testConnection));
         } catch (SQLException throwables)
         {
             throwables.printStackTrace();
@@ -138,7 +138,7 @@ class UserMapperTest
     {
         try(Connection testConnection = connectionPool.getConnection())
         {
-            assertEquals("meter", MaterialeFacade.getUnit(3, testConnection));
+            assertEquals("meter", MaterialFacade.getUnit(3, testConnection));
         }
     }
     @Test
@@ -146,7 +146,7 @@ class UserMapperTest
     {
         try(Connection testConnection = connectionPool.getConnection())
         {
-            assertEquals("hej", MaterialeFacade.getDescription(3, testConnection));
+            assertEquals("hej", MaterialFacade.getDescription(3, testConnection));
         } catch (SQLException throwables)
         {
             throwables.printStackTrace();

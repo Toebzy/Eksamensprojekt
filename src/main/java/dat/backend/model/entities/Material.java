@@ -1,23 +1,18 @@
 package dat.backend.model.entities;
+
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.MaterialFacade;
+
 import java.sql.Connection;
 
-public class Materiale
-{
-
+public class Material {
     int mvariant;
-    int length;
+    double length;
     double price;
     String unit;
     String description;
 
-    Materiale(int mvariant, int length)
-    {
-        this.mvariant = mvariant;
-        this.length = length;
-    }
-    Materiale(int mvariant, int length, double price, String unit, String description)
+    public Material(int mvariant, int length, double price, String unit, String description)
     {
         this.mvariant = mvariant;
         this.length = length;
@@ -31,7 +26,7 @@ public class Materiale
         return mvariant;
     }
 
-    public int getLength()
+    public double getLength()
     {
         return length;
     }
@@ -51,17 +46,17 @@ public class Materiale
         return description;
     }
 
-    public static Materiale newMateriale(int mvariant, ConnectionPool connectionPool)
+    public static Material newMaterial(int mvariant, ConnectionPool connectionPool)
     {
-        Materiale materiale;
+        Material material;
         try (Connection connection = connectionPool.getConnection())
         {
-                int length = MaterialFacade.getLength(mvariant, connection);
-                double price = MaterialFacade.getPrice(mvariant, connection);
-                String unit = MaterialFacade.getUnit(mvariant, connection);
-                String description = MaterialFacade.getDescription(mvariant, connection);
-                materiale = new Materiale(mvariant, length, price, unit, description);
-                return materiale;
+            int length = MaterialFacade.getLength(mvariant, connection);
+            double price = MaterialFacade.getPrice(mvariant, connection);
+            String unit = MaterialFacade.getUnit(mvariant, connection);
+            String description = MaterialFacade.getDescription(mvariant, connection);
+            material = new Material(mvariant, length, price, unit, description);
+            return material;
         }
         catch(Exception e)
         {

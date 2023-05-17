@@ -16,7 +16,7 @@
             <input type="number" id="length" name="length" placeholder="Længde" min="1" max="2160" required/>
             <br>
             <label for="width">Bredde:</label>
-            <input type="number" id="width" name="bredde" placeholder="Bredde" min="1" max="600" required/>
+            <input type="number" id="width" name="width" placeholder="Bredde" min="1" max="600" required/>
             <br>
             <input type="submit" value="Bestil Carport"/>
         </form>

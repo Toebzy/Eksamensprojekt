@@ -1,7 +1,5 @@
 package dat.backend.model.entities;
 
-import dat.backend.model.exceptions.DatabaseException;
-import dat.backend.model.persistence.MaterialeFacade;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

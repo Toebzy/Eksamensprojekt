@@ -2,6 +2,7 @@ package dat.backend.control;
 
 import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.entities.Beregner;
+import dat.backend.model.entities.Calculator;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.UserFacade;
@@ -34,10 +35,15 @@ public class Login extends HttpServlet
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
-        Beregner beregner = new Beregner();
-        System.out.println("here ASJDN HJ Dha sja SJ ");
-        System.out.println(beregner.carportBeregner(1000,2000));     //TESTING CARPORT HERE
-        System.out.println("here ASJDN HJ Dha sja SJ ");
+        try {
+            Calculator calculator= new Calculator(601,600, connectionPool);
+            System.out.println(calculator);
+
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
+
+
         response.setContentType("text/html");
         HttpSession session = request.getSession();
         session.setAttribute("user", null); // invalidating user object in session scope

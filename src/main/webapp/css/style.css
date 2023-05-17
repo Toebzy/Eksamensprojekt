@@ -86,12 +86,28 @@ h1{
     padding-bottom: 5px;
     text-align: center;
 }
-.userinfo{
-    border-style: dashed;
-    width: 15%;
-    margin:auto;
-    padding-bottom: 5px;
+p{
+    margin-bottom: 0;
+    padding-left: 5px;
 }
+.profile{
+    width:76%;
+    height:430px;
+}
+.userinfo{
+    float: left !important;
+    border-collapse: collapse;
+    border: 1px solid silver;
+    margin-left:120px;
+    margin-top:31px;
+    padding-left:5px;
+    width:200px;
+}
+.userinfotext{
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+
 .submitform{
     margin:auto;
     padding:5px;
@@ -103,8 +119,8 @@ h1{
     color: white;
 }
 .image img{
+    border-radius: 8px;
     width: 500px; height: 337px;
+    padding: 10px;
     object-fit: cover;
 }
-
-

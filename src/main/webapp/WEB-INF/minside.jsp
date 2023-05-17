@@ -4,30 +4,29 @@
 <%@page errorPage="../error.jsp" isErrorPage="false" %>
 <t:pagetemplate>
     <jsp:attribute name="header">
-        Profil
+         Profil
     </jsp:attribute>
     <jsp:attribute name="footer">
         Min Side
     </jsp:attribute>
     <jsp:body>
-
+    <div class="profile">
         <div class="userinfo">
-            <div class="col">
-            <p class="center"><b>Kontaktinformation:</b></p>
-            <p class ="center"><b>Navn: </b>${sessionScope.user.name}</p>
-            <p class ="center"><b>Email: </b>${sessionScope.user.email}</p>
-            <p class ="center"><b>Telefonnummer: </b>${sessionScope.user.phonenumber}</p>
-            <p class ="center"><b>Adresse: </b>${sessionScope.user.address}</p>
-            <p class ="center"><b>Postnummer: </b>${sessionScope.user.zipcode}</p>
-            <p class ="center"><b>Saldo: </b>${sessionScope.user.balance}</p>
-            </div>
+            <p> <b>Navn: </b></p>
+            <p class="userinfotext">${sessionScope.user.name}</p>
+            <p> <b>Email: </b></p>
+            <p class="userinfotext">${sessionScope.user.email}</p>
+            <p> <b>Telefonnummer: </b></p>
+            <p class="userinfotext">${sessionScope.user.phonenumber}</p>
+            <p> <b>Adresse: </b></p>
+            <p class="userinfotext">${sessionScope.user.address}</p>
+            <p> <b>Postnummer: </b></p>
+            <p class="userinfotext">${sessionScope.user.zipcode}</p>
+            <p> <b>Saldo: </b></p>
+            <p class="userinfotext">${sessionScope.user.balance}kr</p>
         </div>
-        <br>
-
-        <h5 class="center">Dine Ordre</h5>
-        <div id ="tablesection" class="container">
-            <div class="row">
-                <div class="col">
+                <div id ="tablesection" class="center">
+                    <h5 class="center">Mine Ordre</h5>
                     <table class="table">
                         <thead class="thead-dark">
                         <tr>
@@ -52,9 +51,7 @@
                             </c:if>
                         </c:forEach>
                     </table>
-                </div>
-            </div>
-        </div>
-
+                 </div>
+    </div>
     </jsp:body>
 </t:pagetemplate>
