@@ -11,11 +11,15 @@ public class Calculator {
     private final int length;
     private final int width;
 
-    private Material pole;
+    private Material pole; //stolpe
     private int amountOfPoles;
 
-    private Material rafter;
+    private Material rafter; //spær
     private int amountOfRafters;
+
+    private List<Material> fascia; //stern
+
+    private final int[] fasciaAmount;
 
     private List<Material> roof;
     private final int[] roofAmount;
@@ -27,9 +31,14 @@ public class Calculator {
         this.length = length;
         this.width = width;
         this.pole = Material.newMaterial(22, connectionPool);
-        this.rafter = Material.newMaterial(22, connectionPool);
+        this.rafter = Material.newMaterial(20, connectionPool);
         this.amountOfPoles = calculatePoleAmount(length, width);
-        this.amountOfRafters = calculateRafterAmount(length);
+        this.amountOfRafters = calculateRafterAmount(length,width);
+
+        this.fasciaAmount=calculateFasciaAmount(length, width);
+        this.fascia=fasciaMaterial(fasciaAmount, connectionPool);
+
+
         this.roofAmount = calculateRoofAmount(length, width);
         this.roof = roofMaterial(roofAmount, connectionPool);
 
@@ -38,14 +47,75 @@ public class Calculator {
 
     }
 
-    public static int calculateRafterAmount(int length) {
-        return (int) Math.ceil(length / 105);
+    public static int calculateRafterAmount(int length, int width) {
+        return (int) ((int) Math.ceil(length / 105)*(Math.ceil(width/600)));
     }
 
     public static int calculatePoleAmount(int length, int width) {
         return (int) ((Math.ceil(length / 310)) * 2 + (Math.ceil(width / 310) * 2));
     }
 
+
+    public static int[] calculateFasciaAmount(int length, int width) {
+        int fascia360=360;
+        int fascia540=540;
+        int[] optimalFasciaCounts = new int[2];
+        int[] optimalFasciaLengthCounts = new int[2];
+        int[] optimalFasciaWidthCounts = new int[2];
+        int minWastage = Integer.MAX_VALUE;
+
+        for (int count360 = 0; count360 <= length / fascia360; count360++) {
+            for (int count540 = 0; count540 <= length / fascia540; count540++) {
+                int lengthCovered = count360 * fascia360 + count540 * fascia540;
+                int wastage = length - lengthCovered;
+
+                if (wastage >= 0 && wastage < minWastage) {
+                    minWastage = wastage;
+                    optimalFasciaLengthCounts[0] = count360;
+                    optimalFasciaLengthCounts[1] = count540;
+
+                    if (wastage > 0) {
+                        optimalFasciaLengthCounts[0]++;
+                    }
+                }
+            }
+        }
+        for (int count360 = 0; count360 <= width / fascia360; count360++) {
+            for (int count540 = 0; count540 <= width / fascia540; count540++) {
+                int widthCovered = count360 * fascia360 + count540 * fascia540;
+                int wastage = width - widthCovered;
+
+                if (wastage >= 0 && wastage < minWastage) {
+                    minWastage = wastage;
+                    optimalFasciaWidthCounts[0] = count360;
+                    optimalFasciaWidthCounts[1] = count540;
+
+                    if (wastage > 0) {
+                        optimalFasciaWidthCounts[0]++;
+                    }
+                }
+            }
+        }
+        optimalFasciaCounts[0]=optimalFasciaWidthCounts[0]+optimalFasciaLengthCounts[0];
+        optimalFasciaCounts[1]=optimalFasciaWidthCounts[1]+optimalFasciaLengthCounts[1];
+        return optimalFasciaCounts;
+    }
+
+    public static List<Material> fasciaMaterial(int[] fasciaAmount, ConnectionPool connectionPool) {
+
+        List<Material> fasciaMaterials = new ArrayList<Material>();
+        if (fasciaAmount[0] > 0 && fasciaAmount[1] > 0) {
+            fasciaMaterials.add(Material.newMaterial(1, connectionPool));
+            fasciaMaterials.add(Material.newMaterial(2, connectionPool));
+        } else if (fasciaAmount[0] > 0) {
+            fasciaMaterials.add(Material.newMaterial(1, connectionPool));
+        } else if (fasciaAmount[1] > 0) {
+            fasciaMaterials.add(Material.newMaterial(2, connectionPool));
+        } else {
+            throw new IllegalArgumentException("Invalid fascia combination.");
+        }
+        return fasciaMaterials;
+    }
 
     public static List<Material> roofMaterial(int[] roofAmount, ConnectionPool connectionPool) {
 
@@ -99,6 +169,15 @@ public class Calculator {
         map.put(pole, amountOfPoles);
         map.put(rafter, amountOfRafters);
 
+
+        if (fasciaAmount[0] > 0 && fasciaAmount[1] > 0) {
+            map.put(fascia.get(0),fasciaAmount[0]);
+            map.put(fascia.get(1),fasciaAmount[1]);
+        } else if (fasciaAmount[0] > 0) {
+            map.put(fascia.get(0),fasciaAmount[0]);
+        } else if (fasciaAmount[1] > 0) {
+            map.put(fascia.get(0), fasciaAmount[1]);
+        }
 
         if (roofAmount[0] > 0 && roofAmount[1] > 0) {
             map.put(roof.get(0),roofAmount[0]);
