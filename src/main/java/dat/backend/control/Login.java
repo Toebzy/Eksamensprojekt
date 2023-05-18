@@ -1,7 +1,6 @@
 package dat.backend.control;
 
 import dat.backend.model.config.ApplicationStart;
-import dat.backend.model.entities.Beregner;
 import dat.backend.model.entities.Calculator;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
@@ -36,7 +35,7 @@ public class Login extends HttpServlet
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
         try {
-            Calculator calculator= new Calculator(189,600, connectionPool);
+            Calculator calculator= new Calculator(1400,700, connectionPool);
             System.out.println(calculator);
 
         } catch (DatabaseException e) {

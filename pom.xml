@@ -19,6 +19,13 @@
         <junit.version>5.8.2</junit.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -81,6 +88,12 @@
             <version>1.2.3</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.abstractica-org</groupId>
+            <artifactId>JavaCSG</artifactId>
+            <!--suppress MavenModelInspection -->
+            <version>v0.1.1</version>
+        </dependency>
     </dependencies>
 
     <build>

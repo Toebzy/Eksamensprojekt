@@ -1,6 +1,5 @@
 package dat.backend.persistence;
 
-import dat.backend.model.entities.Materiale;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;

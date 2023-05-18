@@ -1,10 +1,8 @@
 package dat.backend.control;
 
 import dat.backend.model.config.ApplicationStart;
-import dat.backend.model.entities.Beregner;
 import dat.backend.model.entities.Calculator;
-import dat.backend.model.entities.Materiale;
-import dat.backend.model.entities.Order;
+
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
 
@@ -12,7 +10,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "stykliste", value = "/stykliste")
 public class StyklisteServlet extends HttpServlet {

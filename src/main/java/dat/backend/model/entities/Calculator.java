@@ -10,19 +10,18 @@ import java.util.*;
 
 public class Calculator {
     private final ConnectionPool connectionPool;
-    private final int length;
-    private final int width;
-    private Material pole; //stolpe
-    private int amountOfPoles;
-    private Material rafter; //spær
-    private int amountOfRafters;
-
-    private Material beam; //rem
-    private int amountOfBeams;//
-    private List<Material> fascia; //stern
-    private final int[] fasciaAmount;
-    private List<Material> roof;
-    private final int[] roofAmount;
+    private final int length; //Carport length
+    private final int width; //Carport width
+    private Material pole; //Pole (stolpe) material
+    private int amountOfPoles; //Pole amount
+    private Material rafter; //Rafter (spær) material
+    private int amountOfRafters; //Rafter amount
+    private Material beam; //Beam (rem) material
+    private int amountOfBeams;//Beam amount
+    private List<Material> fascia; //Fascia (stern) material
+    private final int[] fasciaAmount; //Fascia amount
+    private List<Material> roof; //Roof (tagplade) material
+    private final int[] roofAmount; //Roof amount
     private float totalPrice;
 
     public Calculator(int length, int width, ConnectionPool connectionPool) throws DatabaseException {
@@ -49,12 +48,13 @@ public class Calculator {
         this.totalPrice = getTotalPrice();
     }
     public static int calculateRafterAmount(int length, int width) {
-        int i;
-        if((Math.ceil(width/600))>0){
-            i= (int) Math.ceil(width/600);
-        }
-        else i=1;
-        return (int) Math.ceil(length / 64.5)*i;
+        // Checking how many 600 cm long rafters are needed for the width of the carport
+        int i = (int) Math.ceil(width / 600.0);
+
+        //Checking how many rafters are needed for the length of the carport, by dividing it by the max amount of space between
+        //rafters (60), and the width of a rafter (4.5). Then multiplying it with the amount needed for the width, using Math.max to ensure
+        //that the result cannot be 0
+        return (int) Math.ceil(length / 64.5) * Math.max(i, 1);
     }
     public static int calculatePoleAmount(int length, int width) {
         int maxDistance = 310;
