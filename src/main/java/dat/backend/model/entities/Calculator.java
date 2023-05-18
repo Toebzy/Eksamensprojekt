@@ -12,55 +12,62 @@ public class Calculator {
     private final ConnectionPool connectionPool;
     private final int length;
     private final int width;
-
     private Material pole; //stolpe
     private int amountOfPoles;
-
     private Material rafter; //spær
     private int amountOfRafters;
 
+    private Material beam; //rem
+    private int amountOfBeams;//
     private List<Material> fascia; //stern
-
     private final int[] fasciaAmount;
-
     private List<Material> roof;
     private final int[] roofAmount;
-
     private float totalPrice;
 
     public Calculator(int length, int width, ConnectionPool connectionPool) throws DatabaseException {
         this.connectionPool = connectionPool;
+
         this.length = length;
         this.width = width;
+
         this.pole = Material.newMaterial(22, connectionPool);
-        this.rafter = Material.newMaterial(20, connectionPool);
         this.amountOfPoles = calculatePoleAmount(length, width);
+
+        this.rafter = Material.newMaterial(20, connectionPool);
         this.amountOfRafters = calculateRafterAmount(length,width);
 
-        this.fasciaAmount=calculateFasciaAmount(length, width, connectionPool);
-        this.fascia=fasciaMaterial(fasciaAmount, connectionPool);
+        this.beam = Material.newMaterial(20, connectionPool);
+        this.amountOfBeams = calculateBeamAmount(length);
 
+        this.fasciaAmount = calculateFasciaAmount(length, width, connectionPool);
+        this.fascia = fasciaMaterial(fasciaAmount, connectionPool);
 
         this.roofAmount = calculateRoofAmount(length, width, connectionPool);
         this.roof = roofMaterial(roofAmount, connectionPool);
 
         this.totalPrice = getTotalPrice();
     }
-
     public static int calculateRafterAmount(int length, int width) {
         int i;
         if((Math.ceil(width/600))>0){
             i= (int) Math.ceil(width/600);
         }
         else i=1;
-        return ((int) Math.ceil(length / 64.5)*i);
+        return (int) Math.ceil(length / 64.5)*i;
     }
-
     public static int calculatePoleAmount(int length, int width) {
         int maxDistance = 310;
-        return (int) ((Math.ceil(length / maxDistance)) * 2 + (Math.ceil(width / maxDistance) * 2));
+        double poleAmount = (Math.ceil(length / maxDistance)) * 2 + (Math.ceil(width / maxDistance) * 2);
+        if(poleAmount<4){
+            poleAmount=4.0;
+        }
+        return (int) poleAmount;
     }
+    public static int calculateBeamAmount(int length){
 
+        return (int) Math.ceil(length / 600.0) * 2;
+    }
     public static int[] calculateAmount(int id, int width, ConnectionPool connectionPool) throws DatabaseException {
         List<Material> material= MaterialFacade.getMaterialById(id, connectionPool);
         int length1 = (int) material.get(0).getLength();
@@ -87,8 +94,6 @@ public class Calculator {
         }
         return optimalCounts;
     }
-
-
     public static int[] calculateFasciaAmount(int length, int width, ConnectionPool connectionPool) throws DatabaseException{
 
         int[] optimalFasciaLengthCounts = calculateAmount(1 ,length,  connectionPool);
@@ -151,6 +156,7 @@ public class Calculator {
         Map<Material, Integer> map = new LinkedHashMap<>();
         map.put(pole, amountOfPoles);
         map.put(rafter, amountOfRafters);
+        map.put(beam, amountOfBeams);
 
         if (fasciaAmount[0] > 0 && fasciaAmount[1] > 0) {
             map.put(fascia.get(0),fasciaAmount[0]);
