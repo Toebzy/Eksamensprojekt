@@ -11,12 +11,13 @@
             Bestil Carport
     </jsp:attribute>
     <jsp:body>
-        <form class="infotext" action="stykliste" method="post">
+        <form class="infotext" action="bestilcarportservlet" method="post">
             <label for="length">Længde:</label>
             <input type="number" id="length" name="length" placeholder="Længde" min="1" max="2160" required/>
             <br>
             <label for="width">Bredde:</label>
             <input type="number" id="width" name="width" placeholder="Bredde" min="1" max="600" required/>
+            <input type="hidden" id="userid" name="userid" value="${sessionScope.user.userid}"/>
             <br>
             <input type="submit" value="Bestil Carport"/>
         </form>

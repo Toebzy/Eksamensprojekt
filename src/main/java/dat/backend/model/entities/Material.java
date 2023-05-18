@@ -7,7 +7,7 @@ import java.sql.Connection;
 
 public class Material {
     int mvariant;
-    double length;
+    int length;
     double price;
     String unit;
     String description;
@@ -26,7 +26,7 @@ public class Material {
         return mvariant;
     }
 
-    public double getLength()
+    public int getLength()
     {
         return length;
     }

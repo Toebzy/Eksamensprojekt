@@ -48,7 +48,12 @@ public class Calculator {
     }
 
     public static int calculateRafterAmount(int length, int width) {
-        return (int) ((int) Math.ceil(length / 105)*(Math.ceil(width/600)));
+        int i;
+        if((Math.ceil(width/600))>0){
+            i= (int) Math.ceil(width/600);
+        }
+        else i=1;
+        return ((int) Math.ceil(length / 64.5)*i);
     }
 
     public static int calculatePoleAmount(int length, int width) {

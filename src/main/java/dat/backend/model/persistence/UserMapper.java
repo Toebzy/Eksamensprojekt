@@ -1,12 +1,16 @@
 package dat.backend.model.persistence;
 
+import dat.backend.model.entities.Calculator;
+import dat.backend.model.entities.Material;
 import dat.backend.model.entities.Order;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -151,8 +155,6 @@ class UserMapper {
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                System.out.println(balance);
-                System.out.println(userid);
                 ps.setString(1, balance);
                 ps.setString(2, userid);
                 ps.executeUpdate();
@@ -161,4 +163,52 @@ class UserMapper {
             throw new DatabaseException(e, "Error fetching data. Something went wrong with the database");
         }
     }
+
+    public static void createOrder(int length, int width, int userid, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "insert into carport.order (status, carportwidth, carportlength, price, iduser) values (?,?,?,?,?)";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, "processing");
+                ps.setInt(2, width);
+                ps.setInt(3, length);
+                ps.setInt(4, 0);
+                ps.setInt(5, userid);
+                ps.executeUpdate();
+
+                createOrderLine(length,width,userid,connectionPool);
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e, "Error occurred when creating the order. Something went wrong with the database");
+        }
+    }
+    public static void createOrderLine(int length, int width, int userid, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "SELECT idorder FROM carport.order WHERE iduser =? AND status LIKE 'processing'";
+        int idorder = 0;
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, userid);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    idorder = rs.getInt("idorder");
+                }
+            }
+                Calculator calc = new Calculator(length,width,connectionPool);
+                Map<Material,Integer> partsList = calc.getPartsList();
+                String sql2 ="insert into carport.orderline (idmvariant, description, length, amount, idorder) values (?,?,?,?,?)";
+                for (Map.Entry<Material, Integer> entry : partsList.entrySet()) {
+                        try (PreparedStatement ps = connection.prepareStatement(sql2)) {
+                            ps.setInt(1, entry.getKey().getMvariant());
+                            ps.setString(2, entry.getKey().getDescription());
+                            ps.setInt(3, entry.getKey().getLength());
+                            ps.setInt(4, entry.getValue());
+                            ps.setInt(5, idorder);
+                            ps.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e, "Error occurred when creating the order. Something went wrong with the database");
+        }
+    }
+
 }

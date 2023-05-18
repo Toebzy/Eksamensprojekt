@@ -32,4 +32,8 @@ public class UserFacade
     public static void balanceChange(String balance, String userid, ConnectionPool connectionPool) throws DatabaseException {
         UserMapper.balanceChange(balance, userid, connectionPool);
     }
+
+    public static void createOrder(int length, int width, int userid, ConnectionPool connectionPool) throws DatabaseException {
+        UserMapper.createOrder(length,width,userid,connectionPool);
+    }
 }
