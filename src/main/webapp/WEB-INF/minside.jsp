@@ -10,7 +10,7 @@
         Min Side
     </jsp:attribute>
     <jsp:body>
-    <div class="profile">
+    <div>
         <div class="userinfo">
             <p> <b>Navn: </b></p>
             <p class="userinfotext">${sessionScope.user.name}</p>

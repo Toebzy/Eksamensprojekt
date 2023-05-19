@@ -31,8 +31,10 @@ public class StyklisteServlet extends HttpServlet {
         int length =Integer.parseInt(request.getParameter("length"));
         try {
             Calculator calc = new Calculator(width,length,connectionPool);
-        } catch (DatabaseException e) {
-            e.printStackTrace();
+        } catch (DatabaseException e)
+        {
+            request.setAttribute("errormessage", e.getMessage());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
         request.setAttribute("stykliste", calc);
         request.getRequestDispatcher("WEB-INF/stykliste.jsp").forward(request,response);

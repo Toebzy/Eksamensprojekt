@@ -20,11 +20,13 @@
                     <table class="table">
                         <thead class="thead-dark">
                         <tr>
-                            <th>OrderID</th>
-                            <th >User ID</th>
+                            <th>Ordre ID</th>
+                            <th>Bruger ID</th>
                             <th>Status</th>
-                            <th>Carport Width</th>
-                            <th>Carport Length</th>
+                            <th>Carport Bredde</th>
+                            <th>Carport Længde</th>
+                            <th>Status</th>
+                            <th>Stykliste</th>
                         </tr>
                         </thead>
                         <c:forEach var="emne" items="${requestScope.orderList}" varStatus="varStatus">
@@ -34,8 +36,19 @@
                                 <td>${emne.status}</td>
                                 <td>${emne.carportwidth}cm</td>
                                 <td>${emne.carportlength}cm</td>
+                                <form action="orderstatusservlet" method="post">
+                                    <td><select class="status" id ="status" name ="status">
+                                        <option disabled selected>Status</option>
+                                        <option value="completed">Gennemført</option>
+                                        <option value="processing">Behandles</option>
+                                        <option value="cancelled">Annulleret</option>
+                                        </select>
+                                        <button type="submit" class="btn">Opdater</button>
+                                        <input type="hidden" id="idorder" name="idorder" value=${emne.idorder}>
+                                    </td>
+                                </form>
                                 <form action="stykliste" method="post">
-                                    <input hidden value ="${emne.iduser}" name ="userid">
+                                    <input hidden name="userid" value=${emne.iduser}>
                                     <th class="balance"><button class ="btn">Stykliste</button></th>
                                 </form>
                             </tr>

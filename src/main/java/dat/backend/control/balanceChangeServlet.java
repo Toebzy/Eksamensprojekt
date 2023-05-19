@@ -24,8 +24,10 @@ public class balanceChangeServlet extends HttpServlet {
         String userid = request.getParameter("userid");
         try {
             UserFacade.balanceChange(balance, userid, connectionPool);
-        } catch (DatabaseException e) {
-            e.printStackTrace();
+        } catch (DatabaseException e)
+        {
+            request.setAttribute("errormessage", e.getMessage());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
         request.getRequestDispatcher("adminservlet").forward(request,response);
     }

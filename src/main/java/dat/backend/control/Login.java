@@ -34,15 +34,6 @@ public class Login extends HttpServlet
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
-        try {
-            Calculator calculator= new Calculator(1400,700, connectionPool);
-            System.out.println(calculator);
-
-        } catch (DatabaseException e) {
-            e.printStackTrace();
-        }
-
-
         response.setContentType("text/html");
         HttpSession session = request.getSession();
         session.setAttribute("user", null); // invalidating user object in session scope

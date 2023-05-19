@@ -56,8 +56,9 @@ public class OpretBrugerServlet extends HttpServlet {
                 request.getRequestDispatcher("login.jsp").forward(request, response);
 
             }
-        } catch (DatabaseException e) {
-            e.printStackTrace();
+        } catch (DatabaseException e)
+        {
+            request.setAttribute("errormessage", e.getMessage());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }

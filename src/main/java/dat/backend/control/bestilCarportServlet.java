@@ -26,8 +26,10 @@ public class bestilCarportServlet extends HttpServlet {
         try {
             UserFacade.createOrder(length, width, userid, connectionPool);
 
-        } catch (DatabaseException e) {
-            e.printStackTrace();
+        } catch (DatabaseException e)
+        {
+            request.setAttribute("errormessage", e.getMessage());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
 
         request.getRequestDispatcher("WEB-INF/ordrebekræftelse.jsp").forward(request,response);

@@ -36,4 +36,8 @@ public class UserFacade
     public static void createOrder(int length, int width, int userid, ConnectionPool connectionPool) throws DatabaseException {
         UserMapper.createOrder(length,width,userid,connectionPool);
     }
+
+    public static void updateStatus(String status, String idorder, ConnectionPool connectionPool) throws DatabaseException {
+        UserMapper.updateStatus(status, idorder, connectionPool);
+    }
 }

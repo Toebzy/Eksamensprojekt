@@ -1,7 +1,5 @@
 package dat.backend.control;
 
-import dat.backend.model.config.ApplicationStart;
-import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.UserFacade;
@@ -10,28 +8,30 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet(name = "AdminServlet", value = "/adminservlet")
-public class AdminServlet extends HttpServlet {
-    private static ConnectionPool connectionPool = ApplicationStart.getConnectionPool();
+@WebServlet(name = "OrderStatusServlet", value = "/orderstatusservlet")
+public class OrderStatusServlet extends HttpServlet {
+    ConnectionPool connectionPool = new ConnectionPool();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    doPost(request,response);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try
-        {
-            List<User> userList = UserFacade.infoList(connectionPool);
-            request.setAttribute("userList", userList);
-            request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request,response);
+       String status = request.getParameter("status");
+       String idorder = request.getParameter("idorder");
 
+       if (status==null){
+           request.getRequestDispatcher("orderlist").forward(request,response);
+       }
+        try {
+            UserFacade.updateStatus(status, idorder, connectionPool);
         } catch (DatabaseException e)
         {
             request.setAttribute("errormessage", e.getMessage());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
+        request.getRequestDispatcher("orderlist").forward(request,response);
     }
 }

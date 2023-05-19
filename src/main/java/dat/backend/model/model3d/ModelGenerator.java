@@ -1,3 +1,4 @@
+/*
 package dat.backend.model.model3d;
 import org.abstractica.javacsg.Geometry3D;
 import org.abstractica.javacsg.JavaCSG;
@@ -14,3 +15,5 @@ public class ModelGenerator {
         csg.view(center);
     }
 }
+
+ */

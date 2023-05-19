@@ -211,4 +211,18 @@ class UserMapper {
         }
     }
 
+    static void updateStatus(String status, String idorder, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "UPDATE carport.order SET status = ? WHERE idorder = ?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, status);
+                ps.setString(2, idorder);
+                System.out.println(ps);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e, "Error updating order status. Something went wrong with the database");
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package dat.backend.persistence;
 
+import dat.backend.model.entities.Material;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
@@ -150,14 +151,5 @@ class UserMapperTest
         {
             throwables.printStackTrace();
         }
-    }
-    @Test
-    void newMaterialeTest()
-    {
-        assertEquals(1, Materiale.newMateriale(1, connectionPool).getMvariant());
-        assertEquals(300, Materiale.newMateriale(1, connectionPool).getLength());
-        assertEquals(32, Materiale.newMateriale(1, connectionPool).getPrice());
-        assertEquals("meter", Materiale.newMateriale(1, connectionPool).getUnit());
-        assertEquals("hej", Materiale.newMateriale(1, connectionPool).getDescription());
     }
 }

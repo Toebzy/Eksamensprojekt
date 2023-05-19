@@ -1,7 +1,7 @@
 /* CSS stylesheet  for application */
 
 table {
-    width: 60% !important;
+    width: 70% !important;
     margin: auto;
     text-align: center;
     border-collapse: collapse;
@@ -90,10 +90,7 @@ p{
     margin-bottom: 0;
     padding-left: 5px;
 }
-.profile{
-    width:76%;
-    height:430px;
-}
+
 .userinfo{
     float: left !important;
     border-collapse: collapse;
@@ -103,11 +100,10 @@ p{
     padding-left:5px;
     width:200px;
 }
-.userinfotext{
+.userinfotext {
     padding-bottom: 10px;
     padding-left: 10px;
 }
-
 .submitform{
     margin:auto;
     padding:5px;
@@ -117,6 +113,10 @@ p{
 .btn:hover{
     background-color: #0d324e;
     color: white;
+}
+.status{
+    margin-right:15px;
+    text-align: center;
 }
 .image img{
     border-radius: 8px;

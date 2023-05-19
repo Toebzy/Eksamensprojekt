@@ -28,8 +28,10 @@ public class OrderListServlet extends HttpServlet {
             orderList = UserFacade.orderList(connectionPool);
             request.setAttribute("orderList", orderList);
             request.getRequestDispatcher("WEB-INF/orderlist.jsp").forward(request,response);
-        } catch (DatabaseException e) {
-            e.printStackTrace();
+        } catch (DatabaseException e)
+        {
+            request.setAttribute("errormessage", e.getMessage());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 }
