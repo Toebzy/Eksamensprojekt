@@ -31,12 +31,12 @@
                         <thead class="thead-dark">
                         <tr>
                             <th>OrderID</th>
-                            <th>Status</th>
+                            <th>Ordrestatus</th>
                             <th>Carport Bredde</th>
                             <th>Carport Længde</th>
                             <th>Pris</th>
-                            <th>Se Stykliste</th>
-                            <th>Betal</th>
+                            <th>Status</th>
+                            <th>Stykliste</th>
                         </tr>
                         </thead>
                         <c:forEach var="emne" items="${requestScope.userOrderList}" varStatus="varStatus">
@@ -47,10 +47,6 @@
                                 <td>${emne.carportwidth}cm</td>
                                 <td>${emne.carportlength}cm</td>
                                 <td>${emne.price}kr</td>
-                                <form action="partslist" method="post">
-                                    <input hidden value ="${emne.idorder}" name ="idorder">
-                                    <th class="balance"><button class ="btn">Stykliste</button></th>
-                                </form>
                                 <c:if test="${emne.paid == true}">
                                     <td>Betalt</td>
                                 </c:if>
@@ -61,6 +57,12 @@
                                         <input hidden value ="${sessionScope.user.balance}" name ="balance">
                                         <input hidden value ="${sessionScope.user.userid}" name ="userid">
                                         <th> <button class="btn">Betal</button></th>
+                                    </form>
+                                </c:if>
+                                <c:if test="${emne.paid == true}">
+                                    <form action="partslist" method="post">
+                                        <input hidden value ="${emne.idorder}" name ="idorder">
+                                        <th class="balance"><button class ="btn">Stykliste</button></th>
                                     </form>
                                 </c:if>
                             </tr>

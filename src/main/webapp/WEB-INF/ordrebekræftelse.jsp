@@ -16,7 +16,7 @@
         <br>
         <h4>Du ville modtage en mail med ordrebekræftelsen, samt modtage en stykliste så snart din ordre er betalt og godkendt!</h4>
         <br>
-        <a href="${pageContext.request.contextPath}/WEB-INF/minside.jsp">Klik her</a> for at komme til "Min Side" og betale for din ordre.
+        <a href="${pageContext.request.contextPath}/minside">Klik her</a> for at komme til "Min Side" og betale for din ordre.
         <h4>Kontaktinformationer, adresse samt åbningstider kan du finde i bunden af siden.</h4>
         <br>
     </jsp:body>
