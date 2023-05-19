@@ -31,13 +31,11 @@ public class PayCarportServlet extends HttpServlet
         String idorder = request.getParameter("idorder");
         float newBalance = Float.parseFloat(currentBalance) - Float.parseFloat(price);
         String newBalanceString = Float.toString(newBalance);
-        System.out.println("line 31");
         if(newBalance >= 0)
         {
             try
             {
                 UserFacade.balanceChange(newBalanceString, userid, connectionPool);
-                System.out.println("line 37");
                 User user = (User) request.getSession().getAttribute("user");
                 user.setBalance(newBalanceString);
                 OrderFacade.updatePaid(idorder, true, connectionPool);
@@ -50,8 +48,7 @@ public class PayCarportServlet extends HttpServlet
         else if(newBalance < 0)
         {
             request.setAttribute("msg","Der er ikke nok penge på din konto");
-            System.out.println("line 47");
-            request.getRequestDispatcher("minsisde").forward(request,response);
+            request.getRequestDispatcher("minside").forward(request,response);
         }
     }
 }
