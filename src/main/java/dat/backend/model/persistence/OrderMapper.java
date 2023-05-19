@@ -106,11 +106,12 @@ public class OrderMapper {
             throw new DatabaseException(e, "Error occurred when creating the order. Something went wrong with the database");
         }
     }
-    static List<Partslist> createPartsList(ConnectionPool connectionpool) throws DatabaseException {
+    static List<Partslist> createPartsList(String idorder, ConnectionPool connectionpool) throws DatabaseException {
         List<Partslist> partsList = new ArrayList<>();
-        String sql = "SELECT idmvariant, description, length, amount FROM carport.orderline";
+        String sql = "SELECT idmvariant, description, length, amount FROM carport.orderline WHERE idorder =?";
         try (Connection connection = connectionpool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, idorder);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     String idmvariant = (rs.getString("idmvariant"));

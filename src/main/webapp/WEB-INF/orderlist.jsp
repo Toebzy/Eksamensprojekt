@@ -52,7 +52,7 @@
                                     </td>
                                 </form>
                                 <form action="partslist" method="post">
-                                    <input hidden name="userid" value=${emne.iduser}>
+                                    <input hidden value ="${emne.idorder}" name ="idorder">
                                     <th class="balance"><button class ="btn">Stykliste</button></th>
                                 </form>
                             </tr>
