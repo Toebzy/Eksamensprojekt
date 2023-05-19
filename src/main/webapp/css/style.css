@@ -1,127 +1,129 @@
 /* CSS stylesheet  for application */
 
 table {
-    width: 80% !important;
-    margin: auto;
-    text-align: center;
-    border-collapse: collapse;
-    border: 1px solid silver;
+    width:80% !important;
+    margin:auto;
+    text-align:center;
+    border-collapse:collapse;
+    border:1px solid silver;
 }
 th, td {
-    border: 1px solid silver;
+    border:1px solid silver;
 }
 .navbar-custom{
-    height: 60px;
-    padding: 0px;
+    height:60px;
+    padding:0px;
 }
 .navbar-brand{
-    padding: 0px;
+    padding:0px;
 }
 .navbar-custom a{
-    color: black !important;
-    font-size: 13px;
-    font-family: Arial, sans-serif;
+    color:black !important;
+    font-size:13px;
+    font-family:Arial, sans-serif;
 }
 .navbar-custom .nav-item{
-    padding-bottom: 15px;
-    padding-top: 18px;
+    padding-bottom:15px;
+    padding-top:18px;
 }
 .navbar-custom .nav-item:hover{
-    border-bottom: 2px solid black;
-    padding-bottom: 15px;
-    padding-top: 18px;
-    transform: translateY(1px);
+    border-bottom:2px solid black;
+    padding-bottom:15px;
+    padding-top:18px;
+    transform:translateY(1px);
 }
 .bluebar{
-    height: 30px;
-    width: 100%;
-    background-color: #003d76;
+    height:30px;
+    width:100%;
+    background-color:#003d76;
 }
 h1{
-    text-align: center;
+    text-align:center;
 }
 .error
 {
-    color: red;
+    color:red;
 }
 .col
 {
-    text-align: center;
+    text-align:center;
 }
 .btn{
     background-color: #003d76;
-    border: none;
-    color: white;
-    padding: 5px 13px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+    border:none;
+    color:white;
+    padding:5px 13px;
+    text-align:center;
+    text-decoration:none;
+    display:inline-block;
+    font-size:16px;
 }
 .adminbtn{
-    margin: auto;
-    text-align: center;
+    margin:auto;
+    text-align:center;
     width: 150px;
     padding-bottom:20px;
 }
 .balance{
-    text-align: center;
-    width: 80px;
+    text-align:center;
+    width:80px;
 }
 
 .inputbox{
     margin:3px;
-    text-align: center;
+    text-align:center;
 }
 .inputbox2{
-    text-align: center;
-    margin-left: 25%;
-    margin-bottom: 10px;
+    text-align:center;
+    margin-left:25%;
+    margin-bottom:10px;
 }
 .center{
-    text-align: center;
+    text-align:center;
 }
 .infotext{
     margin:auto;
-    padding-bottom: 5px;
-    text-align: center;
-    width:100%;
+    padding-bottom:5px;
+    text-align:center;
 }
 p{
-    margin-bottom: 0;
-    padding-left: 5px;
+    margin-bottom:0;
+    padding-left:5px;
 }
-
 .userinfo{
-    float: left !important;
-    border-collapse: collapse;
+    float:left !important;
+    border-collapse:collapse;
     border: 1px solid silver;
     margin-top:31px;
     padding-left:5px;
     width:200px;
 }
 .userinfotext {
-    padding-bottom: 10px;
-    padding-left: 10px;
+    padding-bottom:10px;
+    padding-left:10px;
 }
 .submitform{
     margin:auto;
     padding:5px;
-    width: 420px;
-    height: 155px;
+    width:420px;
+    height:155px;
 }
 .btn:hover{
-    background-color: #0d324e;
-    color: white;
+    background-color:#0d324e;
+    color:white;
 }
 .status{
     width:80px;
     margin-right:15px;
-    text-align: center;
+    text-align:center;
 }
 .image img{
-    border-radius: 8px;
-    width: 500px; height: 337px;
-    padding: 10px;
-    object-fit: cover;
+    border-radius:8px;
+    width:500px; height:337px;
+    padding:10px;
+    object-fit:cover;
+}
+.lb{
+    margin-left:5px;
+    width:80px;
 }
