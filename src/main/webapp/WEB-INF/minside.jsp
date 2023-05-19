@@ -27,6 +27,7 @@
         </div>
                 <div id ="tablesection" class="center">
                     <h5 class="center">Mine Ordre</h5>
+                    <p class="error">${requestScope.msg}</p>
                     <table class="table">
                         <thead class="thead-dark">
                         <tr>
