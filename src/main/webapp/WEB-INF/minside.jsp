@@ -47,15 +47,14 @@
                                 <td>${emne.carportwidth}cm</td>
                                 <td>${emne.carportlength}cm</td>
                                 <td>${emne.price}kr</td>
-                                <td>${emne.ispaid}</td>
                                 <form action="partslist" method="post">
                                     <input hidden value ="${emne.idorder}" name ="idorder">
                                     <th class="balance"><button class ="btn">Stykliste</button></th>
                                 </form>
-                                <c:if test="${emne.status == 'completed'}">
+                                <c:if test="${emne.paid == true}">
                                     <td>Betalt</td>
                                 </c:if>
-                                <c:if test="${emne.status == 'processing'}">
+                                <c:if test="${emne.paid == false}">
                                     <form action="paycarport" method="post">
                                         <input hidden value ="${emne.price}" name ="price">
                                         <input hidden value ="${sessionScope.user.balance}" name ="balance">
