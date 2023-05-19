@@ -25,28 +25,28 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <c:if test="${sessionScope.user == null }">
+                <c:if test="${sessionScope.user == null}">
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Bestil Carport</a>
                 </c:if>
-                <c:if test="${sessionScope.user != null }">
+                <c:if test="${sessionScope.user != null}">
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/bestilcarport.jsp">Bestil Carport</a>
                 </c:if>
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/carporteksempel.jsp">Carport eksempel</a>
             </div>
             <div class="navbar">
-                <c:if test="${sessionScope.user == null }">
+                <c:if test="${sessionScope.user == null}">
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
                 </c:if>
-                <c:if test="${sessionScope.user == null }">
+                <c:if test="${sessionScope.user == null}">
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/opretbruger.jsp">Opret bruger</a>
                 </c:if>
                 <c:if test="${sessionScope.user.role == 0}">
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/minside">Min Side</a>
                 </c:if>
-                <c:if test="${sessionScope.user.role == 1 }">
+                <c:if test="${sessionScope.user.role == 1}">
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/adminservlet">Admin</a>
                 </c:if>
-                <c:if test="${sessionScope.user != null }">
+                <c:if test="${sessionScope.user != null}">
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log out</a>
                 </c:if>
                 </div>
@@ -81,7 +81,6 @@
             Søndag: Lukket
         </div>
     </div>
-
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

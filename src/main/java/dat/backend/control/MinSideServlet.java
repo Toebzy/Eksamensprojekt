@@ -4,6 +4,7 @@ import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.entities.Order;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
+import dat.backend.model.persistence.OrderFacade;
 import dat.backend.model.persistence.UserFacade;
 
 import javax.servlet.*;
@@ -24,7 +25,7 @@ public class MinSideServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Order> orderList;
         try {
-            orderList = UserFacade.orderList(connectionPool);
+            orderList = OrderFacade.orderList(connectionPool);
             request.setAttribute("userOrderList", orderList);
             request.getRequestDispatcher("WEB-INF/minside.jsp").forward(request,response);
         } catch (DatabaseException e)

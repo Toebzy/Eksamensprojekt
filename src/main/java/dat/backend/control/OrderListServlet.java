@@ -5,6 +5,7 @@ import dat.backend.model.entities.Order;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
+import dat.backend.model.persistence.OrderFacade;
 import dat.backend.model.persistence.UserFacade;
 
 import javax.servlet.*;
@@ -25,7 +26,7 @@ public class OrderListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Order> orderList;
         try {
-            orderList = UserFacade.orderList(connectionPool);
+            orderList = OrderFacade.orderList(connectionPool);
             request.setAttribute("orderList", orderList);
             request.getRequestDispatcher("WEB-INF/orderlist.jsp").forward(request,response);
         } catch (DatabaseException e)

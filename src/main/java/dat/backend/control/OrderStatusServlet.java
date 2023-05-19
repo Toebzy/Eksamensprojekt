@@ -2,6 +2,7 @@ package dat.backend.control;
 
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
+import dat.backend.model.persistence.OrderFacade;
 import dat.backend.model.persistence.UserFacade;
 
 import javax.servlet.*;
@@ -26,7 +27,7 @@ public class OrderStatusServlet extends HttpServlet {
            request.getRequestDispatcher("orderlist").forward(request,response);
        }
         try {
-            UserFacade.updateStatus(status, idorder, connectionPool);
+            OrderFacade.updateStatus(status, idorder, connectionPool);
         } catch (DatabaseException e)
         {
             request.setAttribute("errormessage", e.getMessage());

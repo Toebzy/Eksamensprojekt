@@ -3,6 +3,7 @@ package dat.backend.control;
 import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
+import dat.backend.model.persistence.OrderFacade;
 import dat.backend.model.persistence.UserFacade;
 
 import javax.servlet.*;
@@ -23,7 +24,7 @@ public class bestilCarportServlet extends HttpServlet {
         int width = Integer.parseInt(request.getParameter("width"));
         int userid = Integer.parseInt(request.getParameter("userid"));
         try {
-            UserFacade.createOrder(length, width, userid, connectionPool);
+            OrderFacade.createOrder(length, width, userid, connectionPool);
 
         } catch (DatabaseException e)
         {

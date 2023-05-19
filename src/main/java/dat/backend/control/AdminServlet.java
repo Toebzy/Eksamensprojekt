@@ -4,6 +4,7 @@ import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
+import dat.backend.model.persistence.OrderFacade;
 import dat.backend.model.persistence.UserFacade;
 
 import javax.servlet.*;
@@ -24,7 +25,7 @@ public class AdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try
         {
-            List<User> userList = UserFacade.infoList(connectionPool);
+            List<User> userList = OrderFacade.infoList(connectionPool);
             request.setAttribute("userList", userList);
             request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request,response);
 

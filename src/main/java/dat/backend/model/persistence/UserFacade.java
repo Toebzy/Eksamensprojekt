@@ -23,21 +23,8 @@ public class UserFacade
     public static boolean checkZip(String zipcode, ConnectionPool connectionPool)  throws DatabaseException{
         return UserMapper.checkZip(zipcode,connectionPool);
     }
-    public static List<User> infoList(ConnectionPool connectionPool) throws DatabaseException {
-        return UserMapper.infoList(connectionPool);
-    }
-    public static List<Order> orderList(ConnectionPool connectionpool) throws DatabaseException{
-        return UserMapper.orderList(connectionpool);
-    }
+
     public static void balanceChange(String balance, String userid, ConnectionPool connectionPool) throws DatabaseException {
         UserMapper.balanceChange(balance, userid, connectionPool);
-    }
-
-    public static void createOrder(int length, int width, int userid, ConnectionPool connectionPool) throws DatabaseException {
-        UserMapper.createOrder(length,width,userid,connectionPool);
-    }
-
-    public static void updateStatus(String status, String idorder, ConnectionPool connectionPool) throws DatabaseException {
-        UserMapper.updateStatus(status, idorder, connectionPool);
     }
 }
