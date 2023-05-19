@@ -166,23 +166,24 @@ class UserMapper {
 
     public static void createOrder(int length, int width, int userid, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "insert into carport.order (status, carportwidth, carportlength, price, iduser) values (?,?,?,?,?)";
-
+        Calculator calc = new Calculator(length,width,connectionPool);
+        float price = calc.getTotalPrice();
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, "processing");
                 ps.setInt(2, width);
                 ps.setInt(3, length);
-                ps.setInt(4, 0);
+                ps.setFloat(4, price);
                 ps.setInt(5, userid);
                 ps.executeUpdate();
 
-                createOrderLine(length,width,userid,connectionPool);
+                createOrderLine(calc,userid,connectionPool);
             }
         } catch (SQLException e) {
             throw new DatabaseException(e, "Error occurred when creating the order. Something went wrong with the database");
         }
     }
-    public static void createOrderLine(int length, int width, int userid, ConnectionPool connectionPool) throws DatabaseException {
+    public static void createOrderLine(Calculator calc, int userid, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "SELECT idorder FROM carport.order WHERE iduser =? AND status LIKE 'processing'";
         int idorder = 0;
         try (Connection connection = connectionPool.getConnection()) {
@@ -193,7 +194,6 @@ class UserMapper {
                     idorder = rs.getInt("idorder");
                 }
             }
-                Calculator calc = new Calculator(length,width,connectionPool);
                 Map<Material,Integer> partsList = calc.getPartsList();
                 String sql2 ="insert into carport.orderline (idmvariant, description, length, amount, idorder) values (?,?,?,?,?)";
                 for (Map.Entry<Material, Integer> entry : partsList.entrySet()) {
