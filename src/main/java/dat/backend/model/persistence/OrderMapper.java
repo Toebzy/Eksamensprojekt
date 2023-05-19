@@ -141,5 +141,20 @@ public class OrderMapper {
     }
 
 
+    public static void updatePaid(String idorder, boolean b, ConnectionPool connectionPool) throws DatabaseException
+    {
+        String sql = "UPDATE carport.order SET paymentstatus = ? WHERE idorder = ?";
 
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setBoolean(1, b);
+                ps.setString(2, idorder);
+                System.out.println(ps);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e, "Error updating order status. Something went wrong with the database");
+        }
+
+    }
 }

@@ -20,4 +20,9 @@ public class OrderFacade {
     public static void updateStatus(String status, String idorder, ConnectionPool connectionPool) throws DatabaseException {
         OrderMapper.updateStatus(status, idorder, connectionPool);
     }
+
+    public static void updatePaid(String idorder, boolean b, ConnectionPool connectionPool) throws DatabaseException
+    {
+        OrderMapper.updatePaid(idorder, b, connectionPool);
+    }
 }

@@ -4,6 +4,7 @@ import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
+import dat.backend.model.persistence.OrderFacade;
 import dat.backend.model.persistence.UserFacade;
 
 import javax.servlet.*;
@@ -27,6 +28,7 @@ public class PayCarportServlet extends HttpServlet
         String currentBalance = request.getParameter("balance");
         String price = request.getParameter("price");
         String userid = request.getParameter("userid");
+        String idorder = request.getParameter("idorder");
         float newBalance = Float.parseFloat(currentBalance) - Float.parseFloat(price);
         String newBalanceString = Float.toString(newBalance);
         System.out.println("line 31");
@@ -38,7 +40,7 @@ public class PayCarportServlet extends HttpServlet
                 System.out.println("line 37");
                 User user = (User) request.getSession().getAttribute("user");
                 user.setBalance(newBalanceString);
-                
+                OrderFacade.updatePaid(idorder, true, connectionPool);
                 request.getRequestDispatcher("minside").forward(request,response);
             } catch (DatabaseException e)
             {
