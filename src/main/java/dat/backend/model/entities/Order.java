@@ -7,13 +7,15 @@ public class Order {
     String carportwidth;
     String carportlength;
     String iduser;
+    String price;
 
-    public Order(String idorder, String status, String carportwidth, String carportlength, String iduser){
+    public Order(String idorder, String status, String carportwidth, String carportlength, String iduser, String price){
     this.idorder=idorder;
     this.status=status;
     this.carportwidth=carportwidth;
     this.carportlength=carportlength;
     this.iduser=iduser;
+    this.price=price;
     }
 
     public String getIdorder() {
@@ -30,6 +32,14 @@ public class Order {
     }
     public String getIduser() {
         return iduser;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     @Override

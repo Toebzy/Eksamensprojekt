@@ -34,6 +34,7 @@
                             <th>Status</th>
                             <th>Carport Bredde</th>
                             <th>Carport Længde</th>
+                            <th>Pris</th>
                         </tr>
                         </thead>
                         <c:forEach var="emne" items="${requestScope.userOrderList}" varStatus="varStatus">
@@ -43,8 +44,9 @@
                                 <td>${emne.status}</td>
                                 <td>${emne.carportwidth}cm</td>
                                 <td>${emne.carportlength}cm</td>
+                                <td>${emne.price}kr</td>
                                 <form action="stykliste" method="post">
-                                    <input hidden value ="${emne.iduser}" name ="userid">
+                                    <input hidden value ="${emne.idorder}" name ="idorder">
                                     <th class="balance"><button class ="btn">Stykliste</button></th>
                                 </form>
                             </tr>

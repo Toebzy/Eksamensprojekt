@@ -22,20 +22,7 @@ public class StyklisteServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /*
-        List<Materiale> materialList;
-        materialList=beregner.carportBeregner(width,length);
 
-         */
-        int width =Integer.parseInt(request.getParameter("width"));
-        int length =Integer.parseInt(request.getParameter("length"));
-        try {
-            Calculator calc = new Calculator(width,length,connectionPool);
-        } catch (DatabaseException e)
-        {
-            request.setAttribute("errormessage", e.getMessage());
-            request.getRequestDispatcher("error.jsp").forward(request, response);
-        }
         request.setAttribute("stykliste", calc);
         request.getRequestDispatcher("WEB-INF/stykliste.jsp").forward(request,response);
     }
