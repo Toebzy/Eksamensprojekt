@@ -1,6 +1,7 @@
 package dat.backend.control;
 
 import dat.backend.model.config.ApplicationStart;
+import dat.backend.model.entities.Calculator;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.OrderFacade;
@@ -20,19 +21,37 @@ public class bestilCarportServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       String type = request.getParameter("button");
         int length = Integer.parseInt(request.getParameter("length"));
         int width = Integer.parseInt(request.getParameter("width"));
         int userid = Integer.parseInt(request.getParameter("userid"));
-        try {
-            OrderFacade.createOrder(length, width, userid, connectionPool);
+       if(type.equals("Bestil Carport"))
+       {
+           try
+           {
+               OrderFacade.createOrder(length, width, userid, connectionPool);
 
-        } catch (DatabaseException e)
-        {
-            request.setAttribute("errormessage", e.getMessage());
-            request.getRequestDispatcher("error.jsp").forward(request, response);
-        }
+           } catch (DatabaseException e)
+           {
+               request.setAttribute("errormessage", e.getMessage());
+               request.getRequestDispatcher("error.jsp").forward(request, response);
+           }
 
-        request.getRequestDispatcher("WEB-INF/ordrebekræftelse.jsp").forward(request,response);
+           request.getRequestDispatcher("WEB-INF/ordrebekræftelse.jsp").forward(request, response);
+       }
+       if(type.equals("Se pris"))
+       {
+           try
+           {
+               Calculator calc = new Calculator(length, width, connectionPool);
+               float price = calc.getTotalPrice();
+               request.setAttribute("msg", "Pris for carport med længde: " + length + "cm og bredde: " + width + "cm = "+ price + "kr");
+               request.getRequestDispatcher("bestilcarport.jsp").forward(request,response);
+           } catch (DatabaseException e)
+           {
+               e.printStackTrace();
+           }
 
+       }
     }
 }

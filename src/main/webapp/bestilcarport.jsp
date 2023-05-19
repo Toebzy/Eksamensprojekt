@@ -19,7 +19,10 @@
             <input type="number" id="width" name="width" placeholder="Bredde" min="1" max="600" required/>
             <input type="hidden" id="userid" name="userid" value="${sessionScope.user.userid}"/>
             <br>
-            <input type="submit" value="Bestil Carport"/>
+            <br>
+            <input type="submit" class="btn" value="Bestil Carport" name="button"/>
+            <input type="submit" class="btn" value="Se pris" name="button"/>
         </form>
+        <p class="col">${requestScope.msg}</p>
     </jsp:body>
 </t:pagetemplate>
