@@ -1,7 +1,7 @@
 /* CSS stylesheet  for application */
 
 table {
-    width: 70% !important;
+    width: 80% !important;
     margin: auto;
     text-align: center;
     border-collapse: collapse;
@@ -115,6 +115,7 @@ p{
     color: white;
 }
 .status{
+    width:80px;
     margin-right:15px;
     text-align: center;
 }

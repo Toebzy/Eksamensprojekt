@@ -25,6 +25,8 @@
                             <th>Status</th>
                             <th>Carport Bredde</th>
                             <th>Carport Længde</th>
+                            <th>Pris</th>
+                            <th>Betalt??</th>
                             <th>Status</th>
                             <th>Stykliste</th>
                         </tr>
@@ -36,6 +38,8 @@
                                 <td>${emne.status}</td>
                                 <td>${emne.carportwidth}cm</td>
                                 <td>${emne.carportlength}cm</td>
+                                <td>${emne.price}kr</td>
+                                <td>${emne.paid}</td>
                                 <form action="orderstatusservlet" method="post">
                                     <td><select class="status" id ="status" name ="status">
                                         <option disabled selected>Status</option>
@@ -47,7 +51,7 @@
                                         <input type="hidden" id="idorder" name="idorder" value=${emne.idorder}>
                                     </td>
                                 </form>
-                                <form action="stykliste" method="post">
+                                <form action="partslist" method="post">
                                     <input hidden name="userid" value=${emne.iduser}>
                                     <th class="balance"><button class ="btn">Stykliste</button></th>
                                 </form>

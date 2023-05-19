@@ -8,14 +8,16 @@ public class Order {
     String carportlength;
     String iduser;
     String price;
+    Boolean isPaid;
 
-    public Order(String idorder, String status, String carportwidth, String carportlength, String iduser, String price){
+    public Order(String idorder, String status, String carportwidth, String carportlength, String iduser, String price, boolean isPaid){
     this.idorder=idorder;
     this.status=status;
     this.carportwidth=carportwidth;
     this.carportlength=carportlength;
     this.iduser=iduser;
     this.price=price;
+    this.isPaid=isPaid;
     }
 
     public String getIdorder() {
@@ -40,6 +42,14 @@ public class Order {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public Boolean getPaid() {
+        return isPaid;
+    }
+
+    public void setPaid(Boolean paid) {
+        isPaid = paid;
     }
 
     @Override

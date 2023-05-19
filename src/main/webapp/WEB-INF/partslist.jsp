@@ -27,7 +27,7 @@
                             <th>Beskrivelse</th>
                         </tr>
                         </thead>
-                        <c:forEach var="emne" items="${requestScope.stykliste}" varStatus="varStatus">
+                        <c:forEach var="emne" items="${requestScope.partslist}" varStatus="varStatus">
                             <tr>
                                 <td>${emne.mvariant}</td>
                                 <td>${emne.length}</td>

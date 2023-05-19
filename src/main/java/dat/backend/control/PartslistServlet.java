@@ -11,8 +11,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "stykliste", value = "/stykliste")
-public class StyklisteServlet extends HttpServlet {
+@WebServlet(name = "Partslist", value = "/partslist")
+public class PartslistServlet extends HttpServlet {
     private static ConnectionPool connectionPool = ApplicationStart.getConnectionPool();
     Calculator calc;
     @Override
@@ -23,7 +23,7 @@ public class StyklisteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.setAttribute("stykliste", calc);
-        request.getRequestDispatcher("WEB-INF/stykliste.jsp").forward(request,response);
+        request.setAttribute("partslist", calc);
+        request.getRequestDispatcher("WEB-INF/partslist.jsp").forward(request,response);
     }
 }

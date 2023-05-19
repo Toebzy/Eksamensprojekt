@@ -131,7 +131,7 @@ class UserMapper {
 
     static List<Order> orderList(ConnectionPool connectionpool) throws DatabaseException {
         List<Order> orderList = new ArrayList<>();
-        String sql1 = "SELECT idorder, status, carportwidth, carportlength, iduser, price FROM carport.order";
+        String sql1 = "SELECT idorder, status, carportwidth, carportlength, iduser, price, paymentstatus FROM carport.order";
         try (Connection connection = connectionpool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql1)) {
                 ResultSet rs = ps.executeQuery();
@@ -142,7 +142,8 @@ class UserMapper {
                     String carportlength = (rs.getString("carportlength"));
                     String iduser = (rs.getString("iduser"));
                     String price = (rs.getString("price"));
-                    orderList.add(new Order(idorder, status, carportwidth, carportlength, iduser, price));
+                    boolean ispaid = (rs.getBoolean("paymentstatus"));
+                    orderList.add(new Order(idorder, status, carportwidth, carportlength, iduser, price, ispaid));
                 }
             }
         } catch (SQLException ex) {

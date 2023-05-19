@@ -25,7 +25,12 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/bestilcarport.jsp">Bestil Carport</a>
+                <c:if test="${sessionScope.user == null }">
+                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Bestil Carport</a>
+                </c:if>
+                <c:if test="${sessionScope.user != null }">
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/bestilcarport.jsp">Bestil Carport</a>
+                </c:if>
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/carporteksempel.jsp">Carport eksempel</a>
             </div>
             <div class="navbar">

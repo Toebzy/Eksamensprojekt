@@ -45,7 +45,8 @@
                                 <td>${emne.carportwidth}cm</td>
                                 <td>${emne.carportlength}cm</td>
                                 <td>${emne.price}kr</td>
-                                <form action="stykliste" method="post">
+                                <td>${emne.ispaid}</td>
+                                <form action="partslist" method="post">
                                     <input hidden value ="${emne.idorder}" name ="idorder">
                                     <th class="balance"><button class ="btn">Stykliste</button></th>
                                 </form>
