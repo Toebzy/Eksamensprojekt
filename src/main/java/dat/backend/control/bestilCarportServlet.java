@@ -3,6 +3,7 @@ package dat.backend.control;
 import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.entities.Calculator;
 import dat.backend.model.exceptions.DatabaseException;
+import dat.backend.model.model3d.ModelGenerator;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.OrderFacade;
 import dat.backend.model.persistence.UserFacade;
@@ -45,7 +46,8 @@ public class bestilCarportServlet extends HttpServlet {
            try
            {
                Calculator calc = new Calculator(length, width, height, connectionPool);
-
+               ModelGenerator model = new ModelGenerator(calc);
+               model.create3DModel();
                float price = calc.getTotalPrice();
                request.setAttribute("msg", "Pris for carport med længde: " + length + "cm. Bredde: " + width + "cm. Højde: "+height+"cm. Price ="+price + "kr");
                request.setAttribute("length", length);

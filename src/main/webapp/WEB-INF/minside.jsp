@@ -54,14 +54,13 @@
                                     <td>Betalt</td>
                                 </c:if>
                                 <c:if test="${emne.paid == false}">
-                                    <form action="paycarport" method="post" target="hidden-iframe">
+                                    <form action="paycarport" method="post" >
                                         <input hidden value ="${emne.price}" name ="price">
                                         <input hidden value ="${emne.idorder}" name ="idorder">
                                         <input hidden value ="${sessionScope.user.balance}" name ="balance">
                                         <input hidden value ="${sessionScope.user.userid}" name ="userid">
                                         <th> <button class="btn" >Betal</button></th>
                                     </form>
-                                    <iframe name="hidden-iframe" style="display: none"></iframe>
                                 </c:if>
                                 <c:if test="${emne.paid == true}">
                                     <form action="partslist" method="post">

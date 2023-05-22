@@ -14,12 +14,13 @@ public class ModelGenerator {
     }
 
 
-    private void create3DModel(int width, int length, int height){
+    public void create3DModel(){
         JavaCSG csg = JavaCSGFactory.createDefault();
         RafterGenerator Rafter = new RafterGenerator(csg,calculator);
         FasciaGenerator Fascia = new FasciaGenerator(csg,calculator);
         PoleGenerator Poles = new PoleGenerator(csg,calculator);
-
+        Geometry3D Model = csg.union3D(Rafter.getRafters(), Fascia.getFascia(), Poles.getPoles());
+        csg.view(Model);
     }
 
 
