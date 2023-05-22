@@ -1,6 +1,6 @@
 package dat.backend.control;
 
-import dat.backend.model.entities.User;
+
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.UserFacade;
@@ -10,8 +10,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "OpretBruger", value = "/opretbruger")
-public class OpretBrugerServlet extends HttpServlet {
+@WebServlet(name = "CreateUser", value = "/createuser")
+public class CreateUserServlet extends HttpServlet {
     ConnectionPool connectionPool = new ConnectionPool();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,27 +29,27 @@ public class OpretBrugerServlet extends HttpServlet {
             {
                 System.out.println("Email already exists");
                 request.setAttribute("msg", "Denne mail findes allerede i vores system");
-                request.getRequestDispatcher("opretbruger.jsp").forward(request,response);
+                request.getRequestDispatcher("createuser.jsp").forward(request,response);
             }
             else if(!email.contains("@") || !email.contains("."))
             {
                 System.out.println("Wrong email");
                 request.setAttribute("msg", "Ugyldig email");
-                request.getRequestDispatcher("opretbruger.jsp").forward(request,response);
+                request.getRequestDispatcher("createuser.jsp").forward(request,response);
             }
             else if(!password.equals(gentagkodeord))
             {
                 System.out.println("password doesnt match");
                 request.setAttribute("msg", "De to kodeord matcher ikke");
-                request.getRequestDispatcher("opretbruger.jsp").forward(request,response);
+                request.getRequestDispatcher("createuser.jsp").forward(request,response);
             }
             else if(zipcode.length()!=4 || !UserFacade.checkZip(zipcode, connectionPool)){
                 System.out.println("Zipcode doesnt exist");
                 request.setAttribute("msg", "Vi leverer desværre ikke til dette postnummer");
-                request.getRequestDispatcher("opretbruger.jsp").forward(request,response);
+                request.getRequestDispatcher("createuser.jsp").forward(request,response);
             }
 
-            else if(email.contains("@") && email.contains(".") && password.equals(gentagkodeord) && UserFacade.checkZip(zipcode, connectionPool))
+            else
             {
                 System.out.println("User created successfully");
                 UserFacade.createUser(request.getParameter("email"),request.getParameter("password"),request.getParameter("zipcode"),request.getParameter("address"),request.getParameter("name"),request.getParameter("phonenumber"), connectionPool);

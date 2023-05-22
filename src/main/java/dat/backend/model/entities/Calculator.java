@@ -12,6 +12,7 @@ public class Calculator {
     private final ConnectionPool connectionPool;
     private final int length; //Carport length
     private final int width; //Carport width
+    private final int height; //Carport height
     private Material pole; //Pole (stolpe) material
     private int amountOfPoles; //Pole amount
     private Material rafter; //Rafter (spær) material
@@ -24,11 +25,12 @@ public class Calculator {
     private final int[] roofAmount; //Roof amount
     private float totalPrice;
 
-    public Calculator(int length, int width, ConnectionPool connectionPool) throws DatabaseException {
+    public Calculator(int length, int width, int height, ConnectionPool connectionPool) throws DatabaseException {
         this.connectionPool = connectionPool;
 
         this.length = length;
         this.width = width;
+        this.height = height;
 
         this.pole = Material.newMaterial(22, connectionPool);
         this.amountOfPoles = calculatePoleAmount(length, width);

@@ -1,20 +1,14 @@
 package dat.backend.model.persistence;
 
-import dat.backend.model.entities.Calculator;
-import dat.backend.model.entities.Material;
-import dat.backend.model.entities.Order;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 class UserMapper {
+
     static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "login attempt from: "+email);
         User user;
@@ -24,6 +18,7 @@ class UserMapper {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, email);
                 ps.setString(2, password);
+                Logger.getLogger("web").log(Level.INFO, "SQL"+ps);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     String userid = rs.getString("iduser");
@@ -46,38 +41,39 @@ class UserMapper {
 
     static void createUser(String email, String password, String zipcode, String address, String name, String phonenumber, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
-        String sql = "insert into carport.user (email, password, zipcode, address, name, phonenumber) values (?,?,?,?,?,?)";
-        try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setString(1, email);
-                ps.setString(2, password);
-                ps.setString(3, zipcode);
-                ps.setString(4, address);
-                ps.setString(5, name);
-                ps.setString(6, phonenumber);
-                int rowsAffected = ps.executeUpdate();
-                if (rowsAffected != 1) {
-                    throw new DatabaseException("The user with email = " + email + " could not be inserted into the database");
-                }
-            }
-        } catch (SQLException ex) {
-            throw new DatabaseException(ex, "Could not insert user into database");
+        if(checkEmail(email,connectionPool)){
+            throw new DatabaseException("The user with email = " + email + " could not be inserted into the database");
+
         }
+        String sql = "insert into user (email, password, zipcode, address, name, phonenumber) values (?,?,?,?,?,?)";
+
+            try (Connection connection = connectionPool.getConnection()) {
+                try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                    ps.setString(1, email);
+                    ps.setString(2, password);
+                    ps.setString(3, zipcode);
+                    ps.setString(4, address);
+                    ps.setString(5, name);
+                    ps.setString(6, phonenumber);
+                    ps.executeUpdate();
+                }
+            } catch (SQLException ex) {
+                throw new DatabaseException(ex, "Could not insert user into database");
+            }
+
+
     }
 
-    static boolean checkEmail(String email, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "SELECT * FROM carport.user WHERE email = ?";
+     static boolean checkEmail(String email, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "SELECT * FROM user WHERE email = ?";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, email);
                 ResultSet rs = ps.executeQuery();
-                System.out.println(ps);
                 if (rs.next()) {
-                    System.out.println("true");
                     return true;
                 } else {
-                    System.out.println("false");
                     return false;
                 }
             }
@@ -86,8 +82,9 @@ class UserMapper {
         }
     }
 
+
     static boolean checkZip(String zipcode, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "SELECT * FROM carport.user WHERE zipcode = ?";
+        String sql = "SELECT * FROM city WHERE zipcode = ?";
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, zipcode);

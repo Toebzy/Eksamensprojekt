@@ -22,6 +22,6 @@
             <input type="submit" class="btn" value="Log in"/>
         </form>
         <p class="infotext">Har du ikke en bruger? <a
-                href="opretbruger.jsp">Tilmeld dig her</a></p>
+                href="createuser.jsp">Tilmeld dig her</a></p>
     </jsp:body>
 </t:pagetemplate>

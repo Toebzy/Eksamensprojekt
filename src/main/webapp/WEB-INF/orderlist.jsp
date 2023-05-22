@@ -25,6 +25,7 @@
                             <th>Status</th>
                             <th>Carport Bredde</th>
                             <th>Carport Længde</th>
+                            <th>Carport Højde</th>
                             <th>Pris</th>
                             <th>Betalt??</th>
                             <th>Status</th>
@@ -38,6 +39,7 @@
                                 <td>${emne.status}</td>
                                 <td>${emne.carportwidth}cm</td>
                                 <td>${emne.carportlength}cm</td>
+                                <td>${emne.carportheight}cm</td>
                                 <td>${emne.price}kr</td>
                                 <td>${emne.paid}</td>
                                 <form action="orderstatusservlet" method="post">

@@ -4,6 +4,7 @@ package dat.backend.persistence;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
+import dat.backend.model.persistence.MaterialFacade;
 import dat.backend.model.persistence.UserFacade;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,15 +16,15 @@ import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserMapperTest
+class MaterialMapperTest
 {
     // TODO: Change mysql login credentials if needed below
 
     private final static String USER = "dev";
     private final static String PASSWORD = "3r!DE32*/fDe";
     private final static String URL = "jdbc:mysql://64.226.113.12:3306/carport_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
+
     private static ConnectionPool connectionPool;
-    private static User testUser;
 
     @BeforeAll
     public static void setUpClass()
@@ -35,7 +36,7 @@ class UserMapperTest
             try (Statement stmt = testConnection.createStatement())
             {
                 // Create test database - if not exist
-                stmt.execute("CREATE DATABASE IF NOT EXISTS carport_test;");
+                stmt.execute("CREATE DATABASE  IF NOT EXISTS carport_test;");
 
                 // TODO: Create user table. Add your own tables here
                 stmt.execute("CREATE TABLE IF NOT EXISTS carport_test.user LIKE carport.user;");
@@ -59,12 +60,11 @@ class UserMapperTest
                 stmt.execute("delete from user");
 
                 // TODO: Insert a few users - insert rows into your own tables here
-                stmt.execute("insert into carport_test.user (iduser, email, password,  zipcode, address, name, phonenumber) " +
-                        "values ('1','testUser','1234','4200','Lyngby','Morten','112')");
-                testUser=UserFacade.login("testUser","1234",connectionPool);
+                stmt.execute("insert into user (iduser, email, password,  zipcode, address, name, phonenumber) " +
+                        "values ('1','user','1234','4200','Lyngby','Morten','112')");
             }
         }
-        catch (SQLException | DatabaseException throwables)
+        catch (SQLException throwables)
         {
             System.out.println(throwables.getMessage());
             fail("Database connection failed");
@@ -82,61 +82,45 @@ class UserMapperTest
         }
     }
 
-
     @Test
-    void testCreateUser() throws DatabaseException
+    void getpriceTest() throws DatabaseException
     {
-        UserFacade.createUser("userCreationTest", "1234", "4200","Lyngby","Morten","112",connectionPool);
-        assertDoesNotThrow(()->UserFacade.login("userCreationTest","1234",connectionPool));
+        try(Connection testConnection = connectionPool.getConnection())
+        {
+            assertEquals(32, MaterialFacade.getPrice(2, testConnection));
+        } catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
     }
     @Test
-    void testLogin() throws DatabaseException
+    void getLengthTest() throws DatabaseException
     {
-        User actualUser = UserFacade.login("testUser", "1234", connectionPool);
-        User expectedUser = new User("10", "testUser", "1234", "100","4200","Lyngby","Morten","112","0");
-        assertEquals(expectedUser, actualUser);
+        try(Connection testConnection = connectionPool.getConnection())
+        {
+            assertEquals(300, MaterialFacade.getLength(1, testConnection));
+        } catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
     }
-
-
-
     @Test
-    void invalidPasswordLogin()
+    void getUnitTest() throws DatabaseException, SQLException
     {
-        assertThrows(DatabaseException.class, () -> UserFacade.login("user", "123", connectionPool));
+        try(Connection testConnection = connectionPool.getConnection())
+        {
+            assertEquals("meter", MaterialFacade.getUnit(3, testConnection));
+        }
     }
-
     @Test
-    void invalidEmailLogin()
+    void getDescriptionTest() throws DatabaseException
     {
-        assertThrows(DatabaseException.class, () -> UserFacade.login("bob", "1234", connectionPool));
+        try(Connection testConnection = connectionPool.getConnection())
+        {
+            assertEquals("hej", MaterialFacade.getDescription(3, testConnection));
+        } catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
     }
-
-    @Test
-    void testExistingEmail()
-    {
-        assertThrows(DatabaseException.class, () -> UserFacade.createUser( "testUser", "1234", "4200","Lyngby","Morten","112",connectionPool));
-    }
-
-    @Test
-    void testCheckEmail() throws DatabaseException
-    {
-        assertTrue(UserFacade.checkEmail("testUser", connectionPool));
-        assertFalse(UserFacade.checkEmail("notauser", connectionPool));
-    }
-
-    @Test
-    void testCheckZip() throws DatabaseException
-    {
-        assertTrue(UserFacade.checkZip("4200", connectionPool));
-        assertTrue(UserFacade.checkZip("2700", connectionPool));
-        assertFalse(UserFacade.checkZip("3100", connectionPool));
-    }
-
-    @Test
-    void testBalanceChange() {
-        assertDoesNotThrow(()-> UserFacade.balanceChange("500","10",connectionPool));
-    }
-
-
-
 }

@@ -6,15 +6,18 @@ public class Order {
     String status;
     String carportwidth;
     String carportlength;
+    String carportheight;
     String iduser;
     String price;
     Boolean isPaid;
 
-    public Order(String idorder, String status, String carportwidth, String carportlength, String iduser, String price, boolean isPaid){
+    public Order(String idorder, String status, String carportwidth, String carportlength, String carportheight, String iduser, String price, boolean isPaid){
     this.idorder=idorder;
     this.status=status;
     this.carportwidth=carportwidth;
+    this.carportheight=carportheight;
     this.carportlength=carportlength;
+
     this.iduser=iduser;
     this.price=price;
     this.isPaid=isPaid;
@@ -32,6 +35,27 @@ public class Order {
     public String getCarportlength() {
         return carportlength;
     }
+
+    public void setIdorder(String idorder) {
+        this.idorder = idorder;
+    }
+
+    public void setCarportwidth(String carportwidth) {
+        this.carportwidth = carportwidth;
+    }
+
+    public void setCarportlength(String carportlength) {
+        this.carportlength = carportlength;
+    }
+
+    public String getCarportheight() {
+        return carportheight;
+    }
+
+    public void setCarportheight(String carportheight) {
+        this.carportheight = carportheight;
+    }
+
     public String getIduser() {
         return iduser;
     }

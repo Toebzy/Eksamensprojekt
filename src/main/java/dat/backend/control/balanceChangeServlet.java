@@ -22,6 +22,7 @@ public class balanceChangeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String balance = request.getParameter("balance");
         String userid = request.getParameter("userid");
+
         try {
             UserFacade.balanceChange(balance, userid, connectionPool);
         } catch (DatabaseException e)

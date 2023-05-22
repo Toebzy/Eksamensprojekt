@@ -14,8 +14,8 @@ public class OrderFacade {
     public static List<Order> orderList(ConnectionPool connectionpool) throws DatabaseException{
         return OrderMapper.orderList(connectionpool);
     }
-    public static void createOrder(int length, int width, int userid, ConnectionPool connectionPool) throws DatabaseException {
-        OrderMapper.createOrder(length,width,userid,connectionPool);
+    public static void createOrder(int length, int width,int height, int userid, ConnectionPool connectionPool) throws DatabaseException {
+        OrderMapper.createOrder(length,width,height,userid,connectionPool);
     }
     public static void updateStatus(String status, String idorder, ConnectionPool connectionPool) throws DatabaseException {
         OrderMapper.updateStatus(status, idorder, connectionPool);
