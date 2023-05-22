@@ -16,6 +16,7 @@ public class RafterGenerator {
     private Geometry3D createRafters(){
         int length = calculator.getLength();
         int width = calculator.getWidth();
+        int height = calculator.getHeight();
 
         int rafterAmount= (int) Math.ceil(length / 64.5);
         int spaceBetween=length/rafterAmount;
@@ -30,5 +31,9 @@ public class RafterGenerator {
         }
         Geometry3D Rafters = csg.translate3DZ(600-40).transform(allRafters);
         return Rafters;
+    }
+
+    public Geometry3D getRafters() {
+        return rafters;
     }
 }

@@ -32,4 +32,7 @@ public class FasciaGenerator {
         Geometry3D allFascia = csg.union3D(FasciaW,FasciaW2,fascia);
         return allFascia;
     }
+    public Geometry3D getFascia(){
+        return fascia;
+    }
 }

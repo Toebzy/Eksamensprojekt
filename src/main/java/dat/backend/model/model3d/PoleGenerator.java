@@ -46,4 +46,8 @@ public class PoleGenerator {
         }
         return allPoles;
     }
+
+    public Geometry3D getPoles() {
+        return poles;
+    }
 }
