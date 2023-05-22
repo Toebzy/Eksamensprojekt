@@ -38,7 +38,7 @@
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
                 </c:if>
                 <c:if test="${sessionScope.user == null}">
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/opretbruger.jsp">Opret bruger</a>
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/createuser.jsp">Opret bruger</a>
                 </c:if>
                 <c:if test="${sessionScope.user.role == 0}">
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/minside">Min Side</a>

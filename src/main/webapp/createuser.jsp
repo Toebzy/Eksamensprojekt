@@ -11,7 +11,7 @@
             Opret Bruger
     </jsp:attribute>
     <jsp:body>
-        <form class="submitform" action="opretbruger" method="post">
+        <form class="submitform" action="createuser" method="post">
             <input type="text" class="inputbox" id="email" name="email" placeholder="Email" required/>
             <input type="text" class="inputbox" id="name" name="name" placeholder="Navn" required/>
             <input type="password" class="inputbox" id="password" name="password" placeholder="Kodeord" required/>

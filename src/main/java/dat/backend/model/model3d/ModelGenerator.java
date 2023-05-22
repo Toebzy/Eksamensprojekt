@@ -13,13 +13,17 @@ public class ModelGenerator {
         csg=JavaCSGFactory.createDefault();
     }
 
-    private void create3DModel(){
+    public void create3DModel(){
         JavaCSG csg = JavaCSGFactory.createDefault();
         RafterGenerator Rafter = new RafterGenerator(csg,calculator);
         FasciaGenerator Fascia = new FasciaGenerator(csg,calculator);
         PoleGenerator Poles = new PoleGenerator(csg,calculator);
 
+
         csg.view(csg.union3D(Rafter.getRafters(), Fascia.getFascia(), Poles.getPoles()));
 
+
+        Geometry3D Model = csg.union3D(Rafter.getRafters(), Fascia.getFascia(), Poles.getPoles());
+        csg.view(Model);
     }
 }

@@ -13,13 +13,12 @@
     <jsp:body>
         <form class="infotext" action="bestilcarportservlet" method="post">
             <label for="length">Længde:</label>
-            <input class="lb" type="number" id="length" name="length" placeholder="Længde" min="100" max="2160" required/>
-            <br>
+            <input class="lb" type="number" id="length" value="${requestScope.length}" name="length" placeholder="Længde" min="100" max="2160" required/>
             <label for="width">Bredde:</label>
-            <input class="lb" type="number" id="width" name="width" placeholder="Bredde" min="100" max="600" required/>
+            <input class="lb" type="number" id="width" value="${requestScope.width}" name="width" placeholder="Bredde" min="100" max="600" required/>
+            <label for="width">Højde:</label>
+            <input class="lb" type="number" id="height" value="${requestScope.height}" name="height" placeholder="Højde" min="100" max="600" required/>
             <input type="hidden" id="userid" name="userid" value="${sessionScope.user.userid}"/>
-            <br>
-            <br>
             <input type="submit" class="btn" value="Bestil Carport" name="button"/>
             <input type="submit" class="btn" value="Se pris" name="button"/>
         </form>

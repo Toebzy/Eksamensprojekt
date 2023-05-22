@@ -3,6 +3,7 @@ package dat.backend.control;
 import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.entities.Calculator;
 import dat.backend.model.exceptions.DatabaseException;
+import dat.backend.model.model3d.ModelGenerator;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.OrderFacade;
 import dat.backend.model.persistence.UserFacade;
@@ -24,12 +25,13 @@ public class bestilCarportServlet extends HttpServlet {
        String type = request.getParameter("button");
         int length = Integer.parseInt(request.getParameter("length"));
         int width = Integer.parseInt(request.getParameter("width"));
+        int height = Integer.parseInt(request.getParameter("height"));
         int userid = Integer.parseInt(request.getParameter("userid"));
        if(type.equals("Bestil Carport"))
        {
            try
            {
-               OrderFacade.createOrder(length, width, userid, connectionPool);
+               OrderFacade.createOrder(length, width, height, userid, connectionPool);
 
            } catch (DatabaseException e)
            {
@@ -43,10 +45,14 @@ public class bestilCarportServlet extends HttpServlet {
        {
            try
            {
-               Calculator calc = new Calculator(length, width, connectionPool);
-               System.out.println(calc);
+               Calculator calc = new Calculator(length, width, height, connectionPool);
+               ModelGenerator model = new ModelGenerator(calc);
+               model.create3DModel();
                float price = calc.getTotalPrice();
-               request.setAttribute("msg", "Pris for carport med længde: " + length + "cm og bredde: " + width + "cm = "+ price + "kr");
+               request.setAttribute("msg", "Pris for carport med længde: " + length + "cm. Bredde: " + width + "cm. Højde: "+height+"cm. Price ="+price + "kr");
+               request.setAttribute("length", length);
+               request.setAttribute("width", width);
+               request.setAttribute("height",height);
                request.getRequestDispatcher("bestilcarport.jsp").forward(request,response);
            } catch (DatabaseException e)
            {

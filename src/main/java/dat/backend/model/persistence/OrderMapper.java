@@ -40,7 +40,7 @@ public class OrderMapper {
     }
     static List<Order> orderList(ConnectionPool connectionpool) throws DatabaseException {
         List<Order> orderList = new ArrayList<>();
-        String sql = "SELECT idorder, status, carportwidth, carportlength, iduser, price, paymentstatus FROM carport.order";
+        String sql = "SELECT idorder, status, carportwidth, carportlength,carportheight, iduser, price, paymentstatus FROM carport.order";
         try (Connection connection = connectionpool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ResultSet rs = ps.executeQuery();
@@ -49,10 +49,11 @@ public class OrderMapper {
                     String status = (rs.getString("status"));
                     String carportwidth = (rs.getString("carportwidth"));
                     String carportlength = (rs.getString("carportlength"));
+                    String carportheight = (rs.getString("carportheight"));
                     String iduser = (rs.getString("iduser"));
                     String price = (rs.getString("price"));
                     boolean ispaid = (rs.getBoolean("paymentstatus"));
-                    orderList.add(new Order(idorder, status, carportwidth, carportlength, iduser, price, ispaid));
+                    orderList.add(new Order(idorder, status, carportwidth, carportlength, carportheight, iduser, price, ispaid));
                 }
             }
         } catch (SQLException ex) {
@@ -60,17 +61,18 @@ public class OrderMapper {
         }
         return orderList;
     }
-    public static void createOrder(int length, int width, int userid, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "insert into carport.order (status, carportwidth, carportlength, price, iduser) values (?,?,?,?,?)";
-        Calculator calc = new Calculator(length,width,connectionPool);
+    public static void createOrder(int length, int width,int height, int userid, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "insert into carport.order (status, carportwidth, carportlength, carportheight, price, iduser) values (?,?,?,?,?,?)";
+        Calculator calc = new Calculator(length,width,height,connectionPool);
         float price = calc.getTotalPrice();
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, "processing");
                 ps.setInt(2, width);
                 ps.setInt(3, length);
-                ps.setFloat(4, price);
-                ps.setInt(5, userid);
+                ps.setInt(4, height);
+                ps.setFloat(5, price);
+                ps.setInt(6, userid);
                 ps.executeUpdate();
 
                 createOrderLine(calc,userid,connectionPool);

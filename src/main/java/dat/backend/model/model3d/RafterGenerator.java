@@ -32,7 +32,6 @@ public class RafterGenerator {
         Geometry3D Rafters = csg.translate3DZ(600-40).transform(allRafters);
         return Rafters;
     }
-
     public Geometry3D getRafters() {
         return rafters;
     }
