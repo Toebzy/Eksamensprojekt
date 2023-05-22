@@ -57,7 +57,7 @@ public class Calculator {
         return (int) Math.ceil(length / 64.5) * Math.max(i, 1);
     }
     public static int calculatePoleAmount(int length, int width) {
-        int maxDistance = 310;
+        double maxDistance = 310.0;
         double poleAmount = (Math.ceil(length / maxDistance)) * 2 + (Math.ceil(width / maxDistance) * 2);
         if(poleAmount<4){
             poleAmount=4.0;
@@ -143,8 +143,8 @@ public class Calculator {
     public static int[] calculateRoofAmount(int length, int width, ConnectionPool connectionPool)throws DatabaseException {
         int[] optimalTileCounts = calculateAmount(8 ,length,  connectionPool);
 
-        optimalTileCounts[0]= (int) (optimalTileCounts[0]*Math.ceil(width/100));
-        optimalTileCounts[1]= (int) (optimalTileCounts[1]*Math.ceil(width/100));
+        optimalTileCounts[0]= (int) (optimalTileCounts[0]*Math.ceil(width/100.0));
+        optimalTileCounts[1]= (int) (optimalTileCounts[1]*Math.ceil(width/100.0));
         return optimalTileCounts;
     }
 
@@ -181,6 +181,16 @@ public class Calculator {
         }
         return map;
     }
+    public int getWidth(){
+        return width;
+    }
+    public int getLength(){
+        return length;
+    }
+    public int getHeight(){
+        return height;
+    }
+
     @Override
     public String toString() {
         Map<Material, Integer> partsList = getPartsList();

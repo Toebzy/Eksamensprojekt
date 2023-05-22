@@ -1,19 +1,26 @@
-/*
 package dat.backend.model.model3d;
+import dat.backend.model.entities.Calculator;
 import org.abstractica.javacsg.Geometry3D;
 import org.abstractica.javacsg.JavaCSG;
 import org.abstractica.javacsg.JavaCSGFactory;
 
 public class ModelGenerator {
-    int width;
-    int length;
+    private final Calculator calculator;
+    private static JavaCSG csg;
 
-
-    private void create3DModel(){
-        JavaCSG csg = JavaCSGFactory.createDefault();
-        Geometry3D center = csg.cylinder3D(17, 200, 162, true);
-        csg.view(center);
+    public ModelGenerator(Calculator calculator) {
+        this.calculator = calculator;
+        csg=JavaCSGFactory.createDefault();
     }
-}
 
- */
+
+    private void create3DModel(int width, int length, int height){
+        JavaCSG csg = JavaCSGFactory.createDefault();
+        RafterGenerator Rafter = new RafterGenerator(csg,calculator);
+        FasciaGenerator Fascia = new FasciaGenerator(csg,calculator);
+        PoleGenerator Poles = new PoleGenerator(csg,calculator);
+
+    }
+
+
+}

@@ -44,6 +44,7 @@ public class bestilCarportServlet extends HttpServlet {
            try
            {
                Calculator calc = new Calculator(length, width, connectionPool);
+               System.out.println(calc);
                float price = calc.getTotalPrice();
                request.setAttribute("msg", "Pris for carport med længde: " + length + "cm og bredde: " + width + "cm = "+ price + "kr");
                request.getRequestDispatcher("bestilcarport.jsp").forward(request,response);
