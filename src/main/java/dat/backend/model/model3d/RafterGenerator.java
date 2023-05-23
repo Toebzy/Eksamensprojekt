@@ -29,7 +29,7 @@ public class RafterGenerator {
             j+=spaceBetween;
             allRafters=csg.union3D(allRafters,newRafter);
         }
-        Geometry3D Rafters = csg.translate3DZ(600-40).transform(allRafters);
+        Geometry3D Rafters = csg.translate3DZ(height-40).transform(allRafters);
         return Rafters;
     }
     public Geometry3D getRafters() {

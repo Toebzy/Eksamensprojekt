@@ -5,12 +5,13 @@
 <t:pagetemplate>
     <jsp:attribute name="header">
              Bestil Carport
-        <h6 class="center">Nedenfor kan du bestille din egen carport ud fra dine given mål</h6>
+
     </jsp:attribute>
     <jsp:attribute name="footer">
             Bestil Carport
     </jsp:attribute>
     <jsp:body>
+        <h6 class="center">Nedenfor kan du bestille din egen carport ud fra dine given mål</h6>
         <form class="infotext" action="bestilcarportservlet" method="post">
             <label for="length">Længde:</label>
             <input class="lb" type="number" id="length" value="${requestScope.length}" name="length" placeholder="Længde" min="100" max="2160" required/>
