@@ -1,14 +1,30 @@
 /* CSS stylesheet  for application */
 
-table {
-    width:80% !important;
-    margin:auto;
+.admintable {
+    width:90% !important;
     text-align:center;
+    margin:auto;
     border-collapse:collapse;
     border:1px solid silver;
 }
+.mypagetable{
+    width:70% !important;
+    text-align:center;
+    margin-left: 240px;
+    border-collapse:collapse;
+    border:1px solid silver;
+}
+
+.ispaidtrue{
+    background-color: darkseagreen;
+}
+.ispaidfalse{
+    background-color: indianred;
+}
 th, td {
     border:1px solid silver;
+    margin: auto;
+    padding: 5px;
 }
 .navbar-custom{
     height:60px;
@@ -94,7 +110,6 @@ p{
     float:left !important;
     border-collapse:collapse;
     border: 1px solid silver;
-    margin-top:31px;
     padding-left:5px;
     width:200px;
 }

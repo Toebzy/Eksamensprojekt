@@ -17,7 +17,7 @@
         <div id ="tablesection" class="container">
             <div class="row">
                 <div class="col">
-                    <table class="table">
+                    <table class="admintable">
                         <thead class="thead-dark">
                         <tr>
                             <th>ID</th>

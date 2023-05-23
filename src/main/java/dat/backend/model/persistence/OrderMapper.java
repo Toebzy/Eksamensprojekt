@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class OrderMapper {
 
@@ -61,7 +63,8 @@ public class OrderMapper {
         }
         return orderList;
     }
-    public static void createOrder(int length, int width,int height, int userid, ConnectionPool connectionPool) throws DatabaseException {
+    public static void createOrder(int length, int width,int height, int userid, ConnectionPool connectionPool) throws DatabaseException, SQLException {
+        Logger.getLogger("web").log(Level.INFO, "Creating new order for: "+userid);
         String sql = "insert into carport.order (status, carportwidth, carportlength, carportheight, price, iduser) values (?,?,?,?,?,?)";
         Calculator calc = new Calculator(length,width,height,connectionPool);
         float price = calc.getTotalPrice();

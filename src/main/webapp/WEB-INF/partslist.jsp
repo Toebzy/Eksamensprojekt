@@ -20,16 +20,16 @@
                 </c:if>
     </jsp:attribute>
     <jsp:body>
-        <p class="center">Order List</p>
         <c:if test="${sessionScope.user.role==1}">
-            <form class="adminbtn" action="adminservlet" method="post">
-                <button class="btn">Se brugerliste</button>
+            <p class="center">Order List</p>
+            <form class="adminbtn" action="orderlist" method="post">
+                <button class="btn">Se ordreliste</button>
             </form>
         </c:if>
         <div id ="tablesection" class="container">
             <div class="row">
                 <div class="col">
-                    <table class="table">
+                    <table class="admintable">
                         <thead class="thead-dark">
                         <tr>
                             <th>Variant</th>
@@ -42,8 +42,8 @@
                             <tr>
                                 <td>${emne.mvariant}</td>
                                 <td>${emne.description}</td>
-                                <td>${emne.length}</td>
-                                <td>${emne.amount}</td>
+                                <td>${emne.length}cm</td>
+                                <td>${emne.amount}stk</td>
                             </tr>
                         </c:forEach>
                     </table>

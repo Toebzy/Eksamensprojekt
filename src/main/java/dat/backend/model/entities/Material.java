@@ -3,7 +3,6 @@ package dat.backend.model.entities;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.MaterialFacade;
 
-import java.sql.Connection;
 
 public class Material {
     int mvariant;
@@ -49,15 +48,15 @@ public class Material {
     public static Material newMaterial(int mvariant, ConnectionPool connectionPool)
     {
         Material material;
-        try (Connection connection = connectionPool.getConnection())
+    try
         {
-            int length = MaterialFacade.getLength(mvariant, connection);
-            double price = MaterialFacade.getPrice(mvariant, connection);
-            String unit = MaterialFacade.getUnit(mvariant, connection);
-            String description = MaterialFacade.getDescription(mvariant, connection);
+            int length = MaterialFacade.getLength(mvariant, connectionPool);
+            double price = MaterialFacade.getPrice(mvariant, connectionPool);
+            String unit = MaterialFacade.getUnit(mvariant, connectionPool);
+            String description = MaterialFacade.getDescription(mvariant, connectionPool);
             material = new Material(mvariant, length, price, unit, description);
             return material;
-        }
+ }
         catch(Exception e)
         {
             e.printStackTrace();

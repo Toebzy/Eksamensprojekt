@@ -39,8 +39,7 @@ public class Login extends HttpServlet
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        try
-        {
+        try {
             User user = UserFacade.login(username, password, connectionPool);
             session = request.getSession();
             session.setAttribute("user", user); // adding user object to session scope

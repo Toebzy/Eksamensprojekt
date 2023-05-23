@@ -40,7 +40,7 @@ public class ConnectionPool
         config.setJdbcUrl(URL);
         config.setUsername(USER);
         config.setPassword(PASSWORD);
-        config.setMaximumPoolSize(5);
+        config.setMaximumPoolSize(20);
         config.addDataSourceProperty("cachePrepStmts", "true");
         config.addDataSourceProperty("prepStmtCacheSize", "250");
         config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");

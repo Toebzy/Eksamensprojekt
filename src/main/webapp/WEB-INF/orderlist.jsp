@@ -17,7 +17,7 @@
         <div id ="tablesection" class="container">
             <div class="row">
                 <div class="col">
-                    <table class="table">
+                    <table class="admintable">
                         <thead class="thead-dark">
                         <tr>
                             <th>Ordre ID</th>
@@ -41,7 +41,7 @@
                                 <td>${emne.carportlength}cm</td>
                                 <td>${emne.carportheight}cm</td>
                                 <td>${emne.price}kr</td>
-                                <td>${emne.paid}</td>
+                                <td class="ispaid${emne.paid}"></td>
                                 <form action="orderstatusservlet" method="post">
                                     <td><select class="status" id ="status" name ="status">
                                         <option disabled selected>Status</option>

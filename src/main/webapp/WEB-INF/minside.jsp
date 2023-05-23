@@ -11,6 +11,7 @@
     </jsp:attribute>
     <jsp:body>
     <div>
+        <h5 class="center">Mine Ordre</h5>
         <div class="userinfo">
             <p> <b>Navn: </b></p>
             <p class="userinfotext">${sessionScope.user.name}</p>
@@ -26,9 +27,8 @@
             <p class="userinfotext">${sessionScope.user.balance}kr</p>
         </div>
                 <div id ="tablesection" class="center">
-                    <h5 class="center">Mine Ordre</h5>
                     <p class="error">${requestScope.msg}</p>
-                    <table class="table">
+                    <table class="mypagetable">
                         <thead class="thead-dark">
                         <tr>
                             <th>OrderID</th>
@@ -52,6 +52,10 @@
                                 <td>${emne.price}kr</td>
                                 <c:if test="${emne.paid == true}">
                                     <td>Betalt</td>
+                                    <form action="partslist" method="post">
+                                        <input hidden value ="${emne.idorder}" name ="idorder">
+                                        <th class="balance"><button class ="btn">Stykliste</button></th>
+                                    </form>
                                 </c:if>
                                 <c:if test="${emne.paid == false}">
                                     <form action="paycarport" method="post" >
@@ -59,13 +63,8 @@
                                         <input hidden value ="${emne.idorder}" name ="idorder">
                                         <input hidden value ="${sessionScope.user.balance}" name ="balance">
                                         <input hidden value ="${sessionScope.user.userid}" name ="userid">
-                                        <th> <button class="btn" >Betal</button></th>
-                                    </form>
-                                </c:if>
-                                <c:if test="${emne.paid == true}">
-                                    <form action="partslist" method="post">
-                                        <input hidden value ="${emne.idorder}" name ="idorder">
-                                        <th class="balance"><button class ="btn">Stykliste</button></th>
+                                        <td>Ikke betalt</td>
+                                        <td> <button class="btn" >Betal</button></td>
                                     </form>
                                 </c:if>
                             </tr>

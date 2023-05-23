@@ -18,7 +18,7 @@
             <label for="width">Bredde:</label>
             <input class="lb" type="number" id="width" value="${requestScope.width}" name="width" placeholder="Bredde" min="100" max="600" required/>
             <label for="width">Højde:</label>
-            <input class="lb" type="number" id="height" value="${requestScope.height}" name="height" placeholder="Højde" min="100" max="600" required/>
+            <input class="lb" type="number" id="height" value="${requestScope.height}" name="height" placeholder="Højde" min="100" max="210" required/>
             <input type="hidden" id="userid" name="userid" value="${sessionScope.user.userid}"/>
             <input type="submit" class="btn" value="Bestil Carport" name="button"/>
             <input type="submit" class="btn" value="Se pris" name="button"/>
