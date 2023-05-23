@@ -22,12 +22,12 @@
                         <tr>
                             <th>Ordre ID</th>
                             <th>Bruger ID</th>
-                            <th>Status</th>
                             <th>Carport Bredde</th>
                             <th>Carport Længde</th>
                             <th>Carport Højde</th>
                             <th>Pris</th>
-                            <th>Betalt??</th>
+                            <th>Betalt</th>
+                            <th>Status</th>
                             <th>Status</th>
                             <th>Stykliste</th>
                         </tr>
@@ -36,14 +36,14 @@
                             <tr>
                                 <td>${emne.idorder}</td>
                                 <td>${emne.iduser}</td>
-                                <td>${emne.status}</td>
                                 <td>${emne.carportwidth}cm</td>
                                 <td>${emne.carportlength}cm</td>
                                 <td>${emne.carportheight}cm</td>
                                 <td>${emne.price}kr</td>
                                 <td class="ispaid${emne.paid}"></td>
+                                <td class="order${emne.status}">${emne.status}</td>
                                 <form action="orderstatusservlet" method="post">
-                                    <td><select class="status" id ="status" name ="status">
+                                    <td><select id ="status" name ="status">
                                         <option disabled selected>Status</option>
                                         <option value="completed">Gennemført</option>
                                         <option value="processing">Behandles</option>

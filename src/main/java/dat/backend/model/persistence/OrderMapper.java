@@ -17,7 +17,7 @@ public class OrderMapper {
 
     static List<User> infoList(ConnectionPool connectionpool) throws DatabaseException {
         List<User> userList = new ArrayList<>();
-        String sql1 = "SELECT iduser, email, password, balance, zipcode, address, name, phonenumber, role FROM carport.user";
+        String sql1 = "SELECT iduser, email, password, balance, zipcode, address, name, phonenumber, role FROM `user`";
         try (Connection connection = connectionpool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql1)) {
                 ResultSet rs = ps.executeQuery();
@@ -42,7 +42,7 @@ public class OrderMapper {
     }
     static List<Order> orderList(ConnectionPool connectionpool) throws DatabaseException {
         List<Order> orderList = new ArrayList<>();
-        String sql = "SELECT idorder, status, carportwidth, carportlength,carportheight, iduser, price, paymentstatus FROM carport.order";
+        String sql = "SELECT idorder, status, carportwidth, carportlength,carportheight, iduser, price, paymentstatus FROM `order`";
         try (Connection connection = connectionpool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ResultSet rs = ps.executeQuery();
@@ -65,7 +65,7 @@ public class OrderMapper {
     }
     public static void createOrder(int length, int width,int height, int userid, ConnectionPool connectionPool) throws DatabaseException, SQLException {
         Logger.getLogger("web").log(Level.INFO, "Creating new order for: "+userid);
-        String sql = "insert into carport.order (status, carportwidth, carportlength, carportheight, price, iduser) values (?,?,?,?,?,?)";
+        String sql = "insert into `order` (status, carportwidth, carportlength, carportheight, price, iduser) values (?,?,?,?,?,?)";
         Calculator calc = new Calculator(length,width,height,connectionPool);
         float price = calc.getTotalPrice();
         try (Connection connection = connectionPool.getConnection()) {
@@ -85,7 +85,7 @@ public class OrderMapper {
         }
     }
     public static void createOrderLine(Calculator calc, int userid, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "SELECT idorder FROM carport.order WHERE iduser =? AND status LIKE 'processing'";
+        String sql = "SELECT idorder FROM `order` WHERE iduser =? AND status LIKE 'processing'";
         int idorder = 0;
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -96,7 +96,7 @@ public class OrderMapper {
                 }
             }
             Map<Material,Integer> partsList = calc.getPartsList();
-            String sql2 ="insert into carport.orderline (idmvariant, description, length, amount, idorder) values (?,?,?,?,?)";
+            String sql2 ="insert into orderline (idmvariant, description, length, amount, idorder) values (?,?,?,?,?)";
             for (Map.Entry<Material, Integer> entry : partsList.entrySet()) {
                 try (PreparedStatement ps = connection.prepareStatement(sql2)) {
                     ps.setInt(1, entry.getKey().getMvariant());
@@ -113,7 +113,8 @@ public class OrderMapper {
     }
     static List<Partslist> createPartsList(String idorder, ConnectionPool connectionpool) throws DatabaseException {
         List<Partslist> partsList = new ArrayList<>();
-        String sql = "SELECT idmvariant, description, length, amount FROM carport.orderline WHERE idorder =?";
+        String sql = "SELECT idmvariant, description, length, amount FROM orderline WHERE idorder =?";
+
         try (Connection connection = connectionpool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, idorder);
@@ -132,7 +133,7 @@ public class OrderMapper {
         return partsList;
     }
     static void updateStatus(String status, String idorder, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "UPDATE carport.order SET status = ? WHERE idorder = ?";
+        String sql = "UPDATE `order` SET status = ? WHERE idorder = ?"; //backticks(``) are needed, since "order" is and SQL Keyword
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -149,7 +150,7 @@ public class OrderMapper {
 
     public static void updatePaid(String idorder, boolean b, ConnectionPool connectionPool) throws DatabaseException
     {
-        String sql = "UPDATE carport.order SET paymentstatus = ? WHERE idorder = ?";
+        String sql = "UPDATE `order` SET paymentstatus = ? WHERE idorder = ?";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {

@@ -105,9 +105,6 @@ public class User
         return role;
     }
 
-
-
-
     @Override
     public boolean equals(Object o)
     {

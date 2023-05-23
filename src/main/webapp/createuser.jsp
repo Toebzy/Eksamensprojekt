@@ -5,12 +5,12 @@
 <t:pagetemplate>
     <jsp:attribute name="header">
              Opret Bruger
-        <h6 class="center"> Udfyld venligst din information her, for at lave en bruger </h6>
     </jsp:attribute>
     <jsp:attribute name="footer">
             Opret Bruger
     </jsp:attribute>
     <jsp:body>
+        <h6 class="center"> Udfyld venligst din information her, for at lave en bruger </h6>
         <form class="submitform" action="createuser" method="post">
             <input type="text" class="inputbox" id="email" name="email" placeholder="Email" required/>
             <input type="text" class="inputbox" id="name" name="name" placeholder="Navn" required/>

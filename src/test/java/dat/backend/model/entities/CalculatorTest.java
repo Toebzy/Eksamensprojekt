@@ -1,9 +1,7 @@
-package dat.backend.persistence;
+package dat.backend.model.entities;
 
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
-import dat.backend.model.entities.User;
-import dat.backend.model.persistence.OrderFacade;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,14 +12,14 @@ import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class OrderMapperTest {
-    // TODO: Change mysql login credentials if needed below
+class CalculatorTest {
 
     private final static String USER = "dev";
     private final static String PASSWORD = "3r!DE32*/fDe";
     private final static String URL = "jdbc:mysql://64.226.113.12:3306/carport_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
     private static ConnectionPool connectionPool;
-    private static User testUser;
+    private Calculator calc;
+
 
     @BeforeAll
     public static void setUpClass() {
@@ -34,7 +32,7 @@ class OrderMapperTest {
 
                 // TODO: Create user table. Add your own tables here
                 stmt.execute("CREATE TABLE IF NOT EXISTS carport_test.user LIKE carport.user;");
-                stmt.execute("CREATE TABLE IF NOT EXISTS carport_test.order LIKE carport.order;");
+
             }
         } catch (SQLException throwables) {
             System.out.println(throwables.getMessage());
@@ -71,15 +69,72 @@ class OrderMapperTest {
         }
     }
 
-
     @Test
-    void testCreateOrder() throws DatabaseException, SQLException {
-        OrderFacade.createOrder(1200,600,500,1,connectionPool);
+    void calculateRafterAmount() {
+        assertEquals(10,Calculator.calculateRafterAmount(600,600));
+        assertEquals(2,Calculator.calculateRafterAmount(100,100));
+        assertEquals(19,Calculator.calculateRafterAmount(1200,588));
+        assertEquals(0,Calculator.calculateRafterAmount(0,0));
     }
 
     @Test
-    void testInfoList(){
+    void calculatePoleAmount() {
+        assertEquals(8,Calculator.calculatePoleAmount(600,600));
+        assertEquals(4,Calculator.calculatePoleAmount(100,100));
+        assertEquals(12,Calculator.calculatePoleAmount(1200,588));
+        assertEquals(4,Calculator.calculatePoleAmount(0,0));
+                            //min is set at 4
+    }
 
+    @Test
+    void calculateBeamAmount() {
+        assertEquals(2,Calculator.calculateBeamAmount(600));
+        assertEquals(2,Calculator.calculateBeamAmount(100));
+        assertEquals(4,Calculator.calculateBeamAmount(1200));
+        assertEquals(0,Calculator.calculateBeamAmount(0));
+    }
+
+    @Test
+    void calculateAmount() throws DatabaseException {
+        assertEquals(2,Calculator.calculateAmount(600,600,connectionPool));
+        assertEquals(2,Calculator.calculateAmount(100,100,connectionPool));
+        assertEquals(4,Calculator.calculateAmount(1200,588,connectionPool));
+        assertEquals(0,Calculator.calculateAmount(0,0,connectionPool));
+    }
+
+    @Test
+    void calculateFasciaAmount() {
+    }
+
+    @Test
+    void fasciaMaterial() {
+    }
+
+    @Test
+    void roofMaterial() {
+    }
+
+    @Test
+    void calculateRoofAmount() {
+    }
+
+    @Test
+    void getTotalPrice() {
+    }
+
+    @Test
+    void getPartsList() {
+    }
+
+    @Test
+    void getWidth() {
+    }
+
+    @Test
+    void getLength() {
+    }
+
+    @Test
+    void getHeight() {
     }
 }
-

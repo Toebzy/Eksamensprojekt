@@ -17,7 +17,7 @@ import java.util.List;
 @WebServlet(name = "Partslist", value = "/partslist")
 public class PartslistServlet extends HttpServlet {
     private static ConnectionPool connectionPool = ApplicationStart.getConnectionPool();
-    Calculator calc;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);

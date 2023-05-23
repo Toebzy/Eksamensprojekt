@@ -16,7 +16,7 @@ class MaterialMapper
 
 static List<Material> getMaterialById(int id, ConnectionPool connectionPool) throws DatabaseException {
         List<Material> materialList = new ArrayList<>();
-        String sql = "SELECT mvariant.idmvariant,  mvariant.length, materials.unit, materials.priceprunit, materials.description FROM carport.mvariant INNER JOIN materials ON mvariant.idmaterial =materials.idmaterials WHERE idmaterial = ?";
+        String sql = "SELECT mvariant.idmvariant,  mvariant.length, materials.unit, materials.priceprunit, materials.description FROM mvariant INNER JOIN materials ON mvariant.idmaterial =materials.idmaterials WHERE idmaterial = ?";
     try(Connection connection = connectionPool.getConnection()) {
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
@@ -40,7 +40,7 @@ static List<Material> getMaterialById(int id, ConnectionPool connectionPool) thr
 
     public static Double getPrice(int mvariant, ConnectionPool connectionPool) throws DatabaseException
     {
-        String sql = "SELECT mvariant.idmvariant, materials.unit, materials.priceprunit, materials.description  FROM carport.mvariant INNER JOIN materials ON mvariant.idmaterial =materials.idmaterials WHERE idmvariant = ?";
+        String sql = "SELECT mvariant.idmvariant, materials.unit, materials.priceprunit, materials.description  FROM mvariant INNER JOIN materials ON mvariant.idmaterial =materials.idmaterials WHERE idmvariant = ?";
         try(Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, mvariant);

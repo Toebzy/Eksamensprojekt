@@ -14,7 +14,7 @@
     </jsp:attribute>
 
     <jsp:body>
-
+        <div class="center">
         <p>An error has occured. This is the best message we can come up
             with right now: </p>
 
@@ -38,6 +38,6 @@
 
         <p>Jump back to the <a href="index.jsp">Frontpage</a>,
             or try <a href="login.jsp">logging</a> in again.</p>
-
+        </div>
     </jsp:body>
 </t:pagetemplate>

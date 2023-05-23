@@ -13,8 +13,8 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "bestilCarportServlet", value = "/bestilcarportservlet")
-public class bestilCarportServlet extends HttpServlet {
+@WebServlet(name = "ordercarportservlet", value = "/ordercarportservlet")
+public class OrderCarportServlet extends HttpServlet {
 
 
     private static ConnectionPool connectionPool = ApplicationStart.getConnectionPool();
@@ -42,7 +42,7 @@ public class bestilCarportServlet extends HttpServlet {
                request.getRequestDispatcher("error.jsp").forward(request, response);
            }
 
-           request.getRequestDispatcher("WEB-INF/ordrebekræftelse.jsp").forward(request, response);
+           request.getRequestDispatcher("WEB-INF/orderconfirmation.jsp").forward(request, response);
        }
        if(type.equals("Se pris"))
        {
@@ -59,7 +59,7 @@ public class bestilCarportServlet extends HttpServlet {
                request.setAttribute("length", length);
                request.setAttribute("width", width);
                request.setAttribute("height",height);
-               request.getRequestDispatcher("bestilcarport.jsp").forward(request,response);
+               request.getRequestDispatcher("ordercarport.jsp").forward(request,response);
            } catch (DatabaseException | SQLException e)
            {
                e.printStackTrace();

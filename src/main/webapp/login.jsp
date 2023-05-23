@@ -21,6 +21,7 @@
             <input type="password" id="password" name="password"/>
             <input type="submit" class="btn" value="Log in"/>
         </form>
+        <p class="error"> ${requestScope.errormessage}</p>
         <p class="infotext">Har du ikke en bruger? <a
                 href="createuser.jsp">Tilmeld dig her</a></p>
     </jsp:body>

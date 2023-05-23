@@ -13,8 +13,8 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "MinSideServlet", value = "/minside")
-public class MinSideServlet extends HttpServlet {
+@WebServlet(name = "MyPageServlet", value = "/mypage")
+public class MyPageServlet extends HttpServlet {
     private static ConnectionPool connectionPool = ApplicationStart.getConnectionPool();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,7 +27,7 @@ public class MinSideServlet extends HttpServlet {
         try {
             orderList = OrderFacade.orderList(connectionPool);
             request.setAttribute("userOrderList", orderList);
-            request.getRequestDispatcher("WEB-INF/minside.jsp").forward(request,response);
+            request.getRequestDispatcher("WEB-INF/mypage.jsp").forward(request,response);
         } catch (DatabaseException e)
         {
             request.setAttribute("errormessage", e.getMessage());

@@ -35,45 +35,20 @@ public class Order {
     public String getCarportlength() {
         return carportlength;
     }
-
-    public void setIdorder(String idorder) {
-        this.idorder = idorder;
-    }
-
-    public void setCarportwidth(String carportwidth) {
-        this.carportwidth = carportwidth;
-    }
-
-    public void setCarportlength(String carportlength) {
-        this.carportlength = carportlength;
-    }
-
     public String getCarportheight() {
         return carportheight;
     }
-
-    public void setCarportheight(String carportheight) {
-        this.carportheight = carportheight;
-    }
-
     public String getIduser() {
         return iduser;
     }
-
     public String getPrice() {
         return price;
     }
-
     public void setPrice(String price) {
         this.price = price;
     }
-
     public Boolean getPaid() {
         return isPaid;
-    }
-
-    public void setPaid(Boolean paid) {
-        isPaid = paid;
     }
 
     @Override

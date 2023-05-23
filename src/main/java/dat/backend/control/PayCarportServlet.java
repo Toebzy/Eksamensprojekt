@@ -12,7 +12,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "PayCarportServlet", value = "/paycarport")
+@WebServlet(name = "paycarport", value = "/paycarport")
 public class PayCarportServlet extends HttpServlet
 {
     private static ConnectionPool connectionPool = ApplicationStart.getConnectionPool();
@@ -39,7 +39,7 @@ public class PayCarportServlet extends HttpServlet
                 User user = (User) request.getSession().getAttribute("user");
                 user.setBalance(newBalanceString);
                 OrderFacade.updatePaid(idorder, true, connectionPool);
-                request.getRequestDispatcher("minside").forward(request,response);
+                request.getRequestDispatcher("mypage").forward(request,response);
             } catch (DatabaseException e)
             {
                 e.printStackTrace();
@@ -48,7 +48,7 @@ public class PayCarportServlet extends HttpServlet
         else if(newBalance < 0)
         {
             request.setAttribute("msg","Der er ikke nok penge på din konto");
-            request.getRequestDispatcher("minside").forward(request,response);
+            request.getRequestDispatcher("mypage").forward(request,response);
         }
     }
 }

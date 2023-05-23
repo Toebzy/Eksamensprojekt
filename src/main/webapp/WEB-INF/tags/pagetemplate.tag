@@ -29,7 +29,7 @@
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Bestil Carport</a>
                 </c:if>
                 <c:if test="${sessionScope.user != null}">
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/bestilcarport.jsp">Bestil Carport</a>
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/ordercarport.jsp">Bestil Carport</a>
                 </c:if>
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/carporteksempel.jsp">Carport eksempel</a>
             </div>
@@ -41,7 +41,7 @@
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/createuser.jsp">Opret bruger</a>
                 </c:if>
                 <c:if test="${sessionScope.user.role == 0}">
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/minside">Min Side</a>
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/mypage">Min Side</a>
                 </c:if>
                 <c:if test="${sessionScope.user.role == 1}">
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/adminservlet">Admin</a>

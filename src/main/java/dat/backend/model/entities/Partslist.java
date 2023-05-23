@@ -16,34 +16,19 @@ public class Partslist {
     public String getMvariant() {
         return Mvariant;
     }
-
-    public void setMvariant(String mvariant) {
-        this.Mvariant = mvariant;
-    }
-
     public String getDescription() {
         return description;
     }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getLength() {
         return length;
     }
-
     public void setLength(String length) {
         this.length = length;
     }
-
     public String getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
 
     @Override
     public String toString() {

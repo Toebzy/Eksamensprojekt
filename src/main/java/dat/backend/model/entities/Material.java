@@ -35,11 +35,6 @@ public class Material {
         return price;
     }
 
-    public String getUnit()
-    {
-        return unit;
-    }
-
     public String getDescription()
     {
         return description;
