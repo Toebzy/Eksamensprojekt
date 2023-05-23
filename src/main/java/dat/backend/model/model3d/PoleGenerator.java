@@ -44,7 +44,8 @@ public class PoleGenerator {
                 b+=width/(Math.ceil((width/310.0)));
             }
         }
-        return allPoles;
+        Geometry3D FinalPoles=csg.translate3DX(-width/2).transform(allPoles);
+        return FinalPoles;
     }
     public Geometry3D getPoles() {
         return poles;
