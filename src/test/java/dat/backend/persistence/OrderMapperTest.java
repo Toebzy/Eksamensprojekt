@@ -71,7 +71,7 @@ class OrderMapperTest {
 
 
     @Test
-    void testCreateOrder() throws DatabaseException {
+    void testCreateOrder() throws DatabaseException, SQLException {
         OrderFacade.createOrder(1200,600,500,1,connectionPool);
     }
 

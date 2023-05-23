@@ -4,6 +4,7 @@ import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.MaterialFacade;
 
+import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.*;
@@ -25,7 +26,7 @@ public class Calculator {
     private final int[] roofAmount; //Roof amount
     private float totalPrice;
 
-    public Calculator(int length, int width, int height, ConnectionPool connectionPool) throws DatabaseException {
+    public Calculator(int length, int width, int height, ConnectionPool connectionPool) throws DatabaseException, SQLException {
         this.connectionPool = connectionPool;
 
         this.length = length;
@@ -151,7 +152,34 @@ public class Calculator {
     }
 
     public float getTotalPrice(){
-        return (float) ((pole.getPrice()*amountOfPoles)+(rafter.getPrice()*amountOfRafters));
+        float price =  (float) (((pole.getPrice()*amountOfPoles) * 3)+((rafter.getPrice()*amountOfRafters) * 6) +((beam.getPrice() * amountOfBeams) * 6));
+        float price1 = (float) ((pole.getPrice()*amountOfPoles) * 3);
+        System.out.println(price1 + "1");
+        float price2 = (float) ((rafter.getPrice()*amountOfRafters) * 6);
+        System.out.println(price2 + "2");
+        float price3 =(float) ((beam.getPrice() * amountOfBeams) * 6);
+        System.out.println(price3 + "3");
+        System.out.println(price);
+        for(Material m: fascia)
+        {
+            int l = 0;
+            float price4 = (float) (m.getPrice() * (m.getLength()/100)) * fasciaAmount[l];
+            System.out.println(price4 + "4");
+            price += (m.getPrice() * (m.getLength()/100)) * fasciaAmount[l];
+            l++;
+
+        }
+        System.out.println(price);
+        for(Material m: roof)
+        {
+            int i = 0;
+            float price5 = (float) (m.getPrice() * (m.getLength()/100)) * roofAmount[i];
+            System.out.println(price5 + "5");
+            price += (m.getPrice() * (m.getLength()/100)) * roofAmount[i];
+            i++;
+        }
+        System.out.println(price);
+        return price;
     }
 
     public Map<Material, Integer> getPartsList(){

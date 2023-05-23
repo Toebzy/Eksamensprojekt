@@ -9,9 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -133,10 +131,21 @@ class UserMapperTest
     }
 
     @Test
-    void testBalanceChange() {
-        assertDoesNotThrow(()-> UserFacade.balanceChange("500","10",connectionPool));
+    void testBalanceChange() throws DatabaseException {
+        assertDoesNotThrow(()-> UserFacade.balanceChange("500","1",connectionPool));
+        String sql = "SELECT balance FROM carport_test.user where iduser=1;";
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    String balance = rs.getString("balance");
+                    assertEquals("500",balance);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e, "Error fetching balance. Something went wrong with the database");
+        }
     }
-
 
 
 }

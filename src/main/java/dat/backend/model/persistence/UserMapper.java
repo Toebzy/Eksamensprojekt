@@ -13,12 +13,10 @@ class UserMapper {
         Logger.getLogger("web").log(Level.INFO, "login attempt from: "+email);
         User user;
         String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
-
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, email);
                 ps.setString(2, password);
-                Logger.getLogger("web").log(Level.INFO, "SQL"+ps);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     String userid = rs.getString("iduser");
@@ -40,10 +38,9 @@ class UserMapper {
     }
 
     static void createUser(String email, String password, String zipcode, String address, String name, String phonenumber, ConnectionPool connectionPool) throws DatabaseException {
-        Logger.getLogger("web").log(Level.INFO, "");
+        Logger.getLogger("web").log(Level.INFO, "Creating new user for: "+email);
         if(checkEmail(email,connectionPool)){
             throw new DatabaseException("The user with email = " + email + " could not be inserted into the database");
-
         }
         String sql = "insert into user (email, password, zipcode, address, name, phonenumber) values (?,?,?,?,?,?)";
 
@@ -78,7 +75,7 @@ class UserMapper {
                 }
             }
         } catch (SQLException ex) {
-            throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
+            throw new DatabaseException(ex, "Error checking for email. Something went wrong with the database");
         }
     }
 
@@ -96,13 +93,12 @@ class UserMapper {
                 }
             }
         } catch (SQLException ex) {
-            throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
+            throw new DatabaseException(ex, "Error checking zipcode. Something went wrong with the database");
         }
     }
 
     static void balanceChange(String balance, String userid, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "UPDATE user SET balance = ? WHERE iduser = ?";
-
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, balance);
@@ -110,7 +106,7 @@ class UserMapper {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new DatabaseException(e, "Error fetching data. Something went wrong with the database");
+            throw new DatabaseException(e, "Error changing balance. Something went wrong with the database");
         }
     }
 

@@ -1,15 +1,13 @@
 package dat.backend.persistence;
 
 
-import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.MaterialFacade;
-import dat.backend.model.persistence.UserFacade;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,9 +24,10 @@ class MaterialMapperTest
 
     private static ConnectionPool connectionPool;
 
+
+
     @BeforeAll
-    public static void setUpClass()
-    {
+    public static void setUpClass() throws SQLException {
         connectionPool = new ConnectionPool(USER, PASSWORD, URL);
 
         try (Connection testConnection = connectionPool.getConnection())
@@ -85,42 +84,22 @@ class MaterialMapperTest
     @Test
     void getpriceTest() throws DatabaseException
     {
-        try(Connection testConnection = connectionPool.getConnection())
-        {
-            assertEquals(32, MaterialFacade.getPrice(2, testConnection));
-        } catch (SQLException throwables)
-        {
-            throwables.printStackTrace();
-        }
+            assertEquals(32, MaterialFacade.getPrice(2, connectionPool));
     }
     @Test
     void getLengthTest() throws DatabaseException
     {
-        try(Connection testConnection = connectionPool.getConnection())
-        {
-            assertEquals(300, MaterialFacade.getLength(1, testConnection));
-        } catch (SQLException throwables)
-        {
-            throwables.printStackTrace();
-        }
+        assertEquals(300, MaterialFacade.getLength(1, connectionPool));
     }
     @Test
-    void getUnitTest() throws DatabaseException, SQLException
+    void getUnitTest() throws DatabaseException
     {
-        try(Connection testConnection = connectionPool.getConnection())
-        {
-            assertEquals("meter", MaterialFacade.getUnit(3, testConnection));
-        }
+        assertEquals("meter", MaterialFacade.getUnit(3, connectionPool));
+
     }
     @Test
     void getDescriptionTest() throws DatabaseException
     {
-        try(Connection testConnection = connectionPool.getConnection())
-        {
-            assertEquals("hej", MaterialFacade.getDescription(3, testConnection));
-        } catch (SQLException throwables)
-        {
-            throwables.printStackTrace();
-        }
+        assertEquals("hej", MaterialFacade.getDescription(3, connectionPool));
     }
 }

@@ -5,6 +5,7 @@ import dat.backend.model.entities.Partslist;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class OrderFacade {
@@ -14,7 +15,7 @@ public class OrderFacade {
     public static List<Order> orderList(ConnectionPool connectionpool) throws DatabaseException{
         return OrderMapper.orderList(connectionpool);
     }
-    public static void createOrder(int length, int width,int height, int userid, ConnectionPool connectionPool) throws DatabaseException {
+    public static void createOrder(int length, int width,int height, int userid, ConnectionPool connectionPool) throws DatabaseException, SQLException {
         OrderMapper.createOrder(length,width,height,userid,connectionPool);
     }
     public static void updateStatus(String status, String idorder, ConnectionPool connectionPool) throws DatabaseException {
