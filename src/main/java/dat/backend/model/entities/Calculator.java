@@ -1,5 +1,4 @@
 package dat.backend.model.entities;
-
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.MaterialFacade;
@@ -11,106 +10,108 @@ import java.util.*;
 
 public class Calculator {
     private final ConnectionPool connectionPool;
-    private final int length; //Carport length
-    private final int width; //Carport width
-    private final int height; //Carport height
-    private Material pole; //Pole (stolpe) material
-    private int amountOfPoles; //Pole amount
-    private Material rafter; //Rafter (spær) material
-    private int amountOfRafters; //Rafter amount
-    private Material beam; //Beam (rem) material
-    private int amountOfBeams;//Beam amount
-    private List<Material> fascia; //Fascia (stern) material
-    private final int[] fasciaAmount; //Fascia amount
-    private List<Material> roof; //Roof (tagplade) material
-    private final int[] roofAmount; //Roof amount
-    private float totalPrice;
+
+    private final int length;//CARPORT DIMENSIONS
+    private final int width;
+    private final int height;
+
+    private final Material pole;//POLES/STOLPE
+    private final int amountOfPoles;
+
+    private final Material rafter;//RAFTER/SPÆR
+    private final int amountOfRafters;
+
+    private final Material beam;//BEAM/REM
+    private final int amountOfBeams;
+
+    private final List<Material> fascia;//FASCIA/STERN
+    private final int[] fasciaAmount;
+
+    private final List<Material> roof;//ROOF/TAG
+    private final int[] roofAmount;
+
+    private final float totalPrice;
+    private final Map<Material, Integer> partsList; //Map of material and amount of material
 
     public Calculator(int length, int width, int height, ConnectionPool connectionPool) throws DatabaseException, SQLException {
         this.connectionPool = connectionPool;
-
         this.length = length;
         this.width = width;
         this.height = height;
-
         this.pole = Material.newMaterial(22, connectionPool);
         this.amountOfPoles = calculatePoleAmount(length, width);
-
         this.rafter = Material.newMaterial(20, connectionPool);
         this.amountOfRafters = calculateRafterAmount(length,width);
-
         this.beam = Material.newMaterial(20, connectionPool);
         this.amountOfBeams = calculateBeamAmount(length);
-
-        this.fasciaAmount = calculateFasciaAmount(length, width, connectionPool);
-        this.fascia = fasciaMaterial(fasciaAmount, connectionPool);
-
-        this.roofAmount = calculateRoofAmount(length, width, connectionPool);
-        this.roof = roofMaterial(roofAmount, connectionPool);
-
-        this.totalPrice = getTotalPrice();
+        this.fasciaAmount = calculateFasciaAmount(length, width);
+        this.fascia = fasciaMaterial(fasciaAmount);
+        this.roofAmount = calculateRoofAmount(length, width);
+        this.roof = roofMaterial(roofAmount);
+        this.totalPrice = calculateTotalPrice();
+        this.partsList = createPartsList();
     }
-    public static int calculateRafterAmount(int length, int width) {
+
+    private int calculateRafterAmount(int length, int width) {
         // Checking how many 600 cm long rafters are needed for the width of the carport
         int i = (int) Math.ceil(width / 600.0);
 
         //Checking how many rafters are needed for the length of the carport, by dividing it by the max amount of space between
-        //rafters (60), and the width of a rafter (4.5). Then multiplying it with the amount needed for the width, using Math.max to ensure
-        //that the result cannot be 0
-        return (int) Math.ceil(length / 64.5) * Math.max(i, 1);
+        //rafters (60), and the width of a rafter (4.5). Then multiplying it with the amount needed for the width
+        return (int) Math.ceil(length / 64.5) * i;
     }
-    public static int calculatePoleAmount(int length, int width) {
-        double maxDistance = 310.0;
-        double poleAmount = (Math.ceil(length / maxDistance)) * 2 + (Math.ceil(width / maxDistance) * 2);
-        if(poleAmount<4){
-            poleAmount=4.0;
-        }
+    private int calculatePoleAmount(int length, int width) {
+        double maxDistance = 310.0; //Max distance between poles
+        double poleAmount = Math.ceil(length / maxDistance) * 2 + Math.ceil(width / maxDistance) * 2;
         return (int) poleAmount;
     }
-    public static int calculateBeamAmount(int length){
-
-        return (int) Math.ceil(length / 600.0) * 2;
+    private int calculateBeamAmount(int length){
+        double beamLength=beam.getLength();
+        return (int) Math.ceil(length / beamLength) * 2;
     }
-    public static int[] calculateAmount(int id, int width, ConnectionPool connectionPool) throws DatabaseException {
+    private int[] calculateAmount(int id, int width, ConnectionPool connectionPool) throws DatabaseException {
+        //Getting different lengths of materials from the database
         List<Material> material= MaterialFacade.getMaterialById(id, connectionPool);
-        int length1 = (int) material.get(0).getLength();
-        int length2 = (int) material.get(1).getLength();
-
+        int length1 = material.get(0).getLength();
+        int length2 = material.get(1).getLength();
         int[] optimalCounts = new int[2];
         int minWastage = Integer.MAX_VALUE;
 
-        for (int count1 = 0; count1 <= width / length1; count1++) {
-            for (int count2 = 0; count2 <= width / length2; count2++) {
+        //Finding the optimal amount of each material of the different lengths, that is equal to or greater than
+        //the width/length of the carport with as little wasted material as possible.
+        //Using a nested loop to get every combination of the two materials, where 3 is the max amount of each material
+        //Then checking how much material is wasted for each combination and returning the one with the least waste
+        for (int count1 = 0; count1 <= 3; count1++) {
+            for (int count2 = 0; count2 <= 3; count2++) {
                 int widthCovered = count1 * length1 + count2 * length2;
-                int wastage = width - widthCovered;
+                int wastage = widthCovered-width;
 
-                if (wastage >= 0 && wastage < minWastage) {
+                if (wastage >= 0 && wastage <= minWastage && widthCovered>=width) {
                     minWastage = wastage;
                     optimalCounts[0] = count1;
                     optimalCounts[1] = count2;
-
-                    if (wastage > 0) {
-                        optimalCounts[0]++;
-                    }
                 }
             }
         }
         return optimalCounts;
     }
-    public static int[] calculateFasciaAmount(int length, int width, ConnectionPool connectionPool) throws DatabaseException{
+    private int[] calculateFasciaAmount(int length, int width) throws DatabaseException{
+
+        int[] optimalFasciaCounts = new int[2];
 
         int[] optimalFasciaLengthCounts = calculateAmount(1 ,length,  connectionPool);
         int[] optimalFasciaWidthCounts = calculateAmount(1 ,width,  connectionPool);
-        int[] optimalFasciaCounts = new int[2];
 
+        //Amount of fascia with length 360
         optimalFasciaCounts[0]=(optimalFasciaWidthCounts[0]+optimalFasciaLengthCounts[0])*2;
+        //Amount of fascia with length 540
         optimalFasciaCounts[1]=(optimalFasciaWidthCounts[1]+optimalFasciaLengthCounts[1])*2;
         return optimalFasciaCounts;
     }
 
-    public static List<Material> fasciaMaterial(int[] fasciaAmount, ConnectionPool connectionPool) {
+    private List<Material> fasciaMaterial(int[] fasciaAmount) {
 
-        List<Material> fasciaMaterials = new ArrayList<Material>();
+        List<Material> fasciaMaterials = new ArrayList<>();
         if (fasciaAmount[0] > 0 && fasciaAmount[1] > 0) {
             fasciaMaterials.add(Material.newMaterial(1, connectionPool));
             fasciaMaterials.add(Material.newMaterial(2, connectionPool));
@@ -128,22 +129,22 @@ public class Calculator {
         return fasciaMaterials;
     }
 
-    public static List<Material> roofMaterial(int[] roofAmount, ConnectionPool connectionPool) {
-        List<Material> RoofMaterials = new ArrayList<Material>();
+    private List<Material> roofMaterial(int[] roofAmount) {
+        List<Material> roofMaterials = new ArrayList<>();
         if (roofAmount[0] > 0 && roofAmount[1] > 0) {
-            RoofMaterials.add(Material.newMaterial(29, connectionPool));
-            RoofMaterials.add(Material.newMaterial(30, connectionPool));
+            roofMaterials.add(Material.newMaterial(29, connectionPool));
+            roofMaterials.add(Material.newMaterial(30, connectionPool));
         } else if (roofAmount[0] > 0) {
-            RoofMaterials.add(Material.newMaterial(29, connectionPool));
+            roofMaterials.add(Material.newMaterial(29, connectionPool));
         } else if (roofAmount[1] > 0) {
-            RoofMaterials.add(Material.newMaterial(30, connectionPool));
+            roofMaterials.add(Material.newMaterial(30, connectionPool));
         } else {
             throw new IllegalArgumentException("Invalid roof tile combination.");
         }
-        return RoofMaterials;
+        return roofMaterials;
     }
 
-    public static int[] calculateRoofAmount(int length, int width, ConnectionPool connectionPool)throws DatabaseException {
+    private int[] calculateRoofAmount(int length, int width)throws DatabaseException {
         int[] optimalTileCounts = calculateAmount(8 ,length,  connectionPool);
 
         optimalTileCounts[0]= (int) (optimalTileCounts[0]*Math.ceil(width/100.0));
@@ -151,38 +152,50 @@ public class Calculator {
         return optimalTileCounts;
     }
 
-    public float getTotalPrice(){
-        float price =  (float) (((pole.getPrice()*amountOfPoles) * 3)+((rafter.getPrice()*amountOfRafters) * 6) +((beam.getPrice() * amountOfBeams) * 6));
-        float price1 = (float) ((pole.getPrice()*amountOfPoles) * 3);
-        System.out.println(price1 + "1");
-        float price2 = (float) ((rafter.getPrice()*amountOfRafters) * 6);
-        System.out.println(price2 + "2");
-        float price3 =(float) ((beam.getPrice() * amountOfBeams) * 6);
-        System.out.println(price3 + "3");
-        System.out.println(price);
-        for(Material m: fascia)
-        {
-            int l = 0;
-            float price4 = (float) (m.getPrice() * (m.getLength()/100)) * fasciaAmount[l];
-            System.out.println(price4 + "4");
-            price += (m.getPrice() * (m.getLength()/100)) * fasciaAmount[l];
-            l++;
+    private float calculateTotalPrice(){
+        float totalPrice;
 
-        }
-        System.out.println(price);
-        for(Material m: roof)
-        {
-            int i = 0;
-            float price5 = (float) (m.getPrice() * (m.getLength()/100)) * roofAmount[i];
-            System.out.println(price5 + "5");
-            price += (m.getPrice() * (m.getLength()/100)) * roofAmount[i];
+        float polePrice= (float) (amountOfPoles*((pole.getLength()/100)*pole.getPrice()));
+        float rafterPrice= (float) (amountOfRafters*((rafter.getLength()/100)*rafter.getPrice()));
+        float beamPrice = (float) (amountOfBeams*((beam.getLength()/100)*beam.getPrice()));
+        float fasciaPrice = priceCalculator(fasciaAmount,fascia);
+        float roofPrice = priceCalculator(roofAmount,roof);
+
+        // roof
+        System.out.println("Pole price:" +polePrice);
+        System.out.println("Rafter price:" +rafterPrice);
+        System.out.println("Beam price:" +beamPrice);
+        System.out.println("Fascia price:" +fasciaPrice);
+        System.out.println("Roof price:" +roofPrice);
+
+
+        totalPrice=polePrice+rafterPrice+beamPrice+fasciaPrice+roofPrice;
+        return totalPrice;
+    }
+    private float priceCalculator(int[] amount,List<Material> material){
+        float price = 0;
+        int i = 0;
+        for(Material m: material) {
+            //Since materials only get added if there is less than 0 of them, we want to skip any empty amounts
+            if(amount[i]==0&&i<1){
+                i++;
+            }
+            if(amount[i]==0&&i>0){
+                i--;
+            }
+            price += amount[i]*(m.getPrice()*(m.getLength()/100.0));
             i++;
+
+            //Avoiding ArrayIndexOutOfBoundsException in case of more than 2 materials, this is specifically for getting the price of fascia
+            //where it is possible to get 4 materials, since over and under-fascia uses different materials which both come in the two same lengths.
+            //Since there is the same amount of over and under-fascia, amount[0] would represent the amount of each fascia material with same length
+            if(i==2){
+                i=0;
+            }
         }
-        System.out.println(price);
         return price;
     }
-
-    public Map<Material, Integer> getPartsList(){
+    private Map<Material, Integer> createPartsList(){
         Map<Material, Integer> map = new LinkedHashMap<>();
         map.put(pole, amountOfPoles);
         map.put(rafter, amountOfRafters);
@@ -211,6 +224,9 @@ public class Calculator {
         }
         return map;
     }
+    public Map<Material, Integer> getPartsList(){
+        return partsList;
+    }
     public int getWidth(){
         return width;
     }
@@ -220,12 +236,15 @@ public class Calculator {
     public int getHeight(){
         return height;
     }
+    public float getTotalPrice(){
+        return totalPrice;
+    }
 
     @Override
     public String toString() {
         Map<Material, Integer> partsList = getPartsList();
         StringBuilder sb = new StringBuilder();
-        sb.append("Stykliste for carport med længden: "+length+" og bredden: "+width+"\n");
+        sb.append("Stykliste for carport med længden: ").append(length).append(" og bredden: ").append(width).append("\n");
         for (Map.Entry<Material, Integer> entry : partsList.entrySet()) {
             sb.append(entry.getKey().getDescription()).append("| Længde: ").append(entry.getKey().getLength()).append("| Mængde: ").append(entry.getValue()).append("\n");
         }

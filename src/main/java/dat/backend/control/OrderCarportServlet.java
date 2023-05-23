@@ -52,6 +52,8 @@ public class OrderCarportServlet extends HttpServlet {
                ModelGenerator model = new ModelGenerator(calc);
                model.create3DModel();
 
+               System.out.println(calc);
+
 
                float price = calc.getTotalPrice();
 
