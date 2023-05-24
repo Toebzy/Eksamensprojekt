@@ -21,7 +21,6 @@ class UserMapperTest
     private final static String PASSWORD = "3r!DE32*/fDe";
     private final static String URL = "jdbc:mysql://64.226.113.12:3306/carport_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
     private static ConnectionPool connectionPool;
-    private static User testUser;
 
     @BeforeAll
     public static void setUpClass()
@@ -59,10 +58,9 @@ class UserMapperTest
                 // TODO: Insert a few users - insert rows into your own tables here
                 stmt.execute("insert into carport_test.user (iduser, email, password,  zipcode, address, name, phonenumber) " +
                         "values ('1','testUser','1234','4200','Lyngby','Morten','112')");
-                testUser=UserFacade.login("testUser","1234",connectionPool);
             }
         }
-        catch (SQLException | DatabaseException throwables)
+        catch (SQLException throwables)
         {
             System.out.println(throwables.getMessage());
             fail("Database connection failed");

@@ -52,11 +52,7 @@ public class OrderCarportServlet extends HttpServlet {
                Calculator calc = new Calculator(length, width, height, connectionPool);
                ModelGenerator model = new ModelGenerator(calc);
                model.create3DModel();
-
-
                float price = calc.getTotalPrice();
-
-
                request.setAttribute("msg", "Pris for carport med længde: " + length + "cm. Bredde: " + width + "cm. Højde: "+height+"cm. Price ="+price + "kr");
                request.setAttribute("length", length);
                request.setAttribute("width", width);
