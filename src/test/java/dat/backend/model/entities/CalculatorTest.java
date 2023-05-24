@@ -34,8 +34,10 @@ class CalculatorTest {
     @BeforeEach
     void setUp() throws SQLException, DatabaseException {
         this.calc = new Calculator(200,600,200,connectionPool);
+
         //MAX possible length, width, height
         this.calc_max = new Calculator(2700,2700,210,connectionPool);
+
         //MIN possible length, width, height
         this.calc_min = new Calculator(100,100,100,connectionPool);
     }
@@ -44,20 +46,32 @@ class CalculatorTest {
     void calculateRafterAmount() throws SQLException, DatabaseException {
 
         assertEquals(4,calc.getAmountOfRafters());
+
+        //MAX possible length, width, height
         assertEquals(210,calc_max.getAmountOfRafters());
+
+        //MIN possible length, width, height
         assertEquals(2,calc_min.getAmountOfRafters());
     }
     @Test
     void calculatePoleAmount() throws SQLException, DatabaseException {
         assertEquals(6,calc.getAmountOfPoles());
+
+        //MAX possible length, width, height
         assertEquals(36,calc_max.getAmountOfPoles());
+
+        //MIN possible length, width, height
         assertEquals(4,calc_min.getAmountOfPoles());
     }
 
     @Test
     void calculateBeamAmount() throws SQLException, DatabaseException {
         assertEquals(2,calc.getAmountOfBeams());
+
+        //MAX possible length, width, height
         assertEquals(10,calc_max.getAmountOfBeams());
+
+        //MIN possible length, width, height
         assertEquals(2,calc_min.getAmountOfBeams());
     }
     @Test
@@ -66,10 +80,12 @@ class CalculatorTest {
         int[] test1={6,0};
         assertArrayEquals(test1,result1);
 
+        //MAX possible length, width, height
         int[] result2=calc_max.getFasciaAmount();
         int[] test2={12,12};
         assertArrayEquals(test2,result2);
 
+        //MIN possible length, width, height
         int[] result3=calc_min.getFasciaAmount();
         int[] test3={4,0};
         assertArrayEquals(test3,result3);
@@ -81,10 +97,12 @@ class CalculatorTest {
         int[] test1={6,0};
         assertArrayEquals(test1,result1);
 
+        //MAX possible length, width, height
         int[] result2=calc_max.getRoofAmount();
         int[] test2={81,81};
         assertArrayEquals(test2,result2);
 
+        //MIN possible length, width, height
         int[] result3=calc_min.getRoofAmount();
         int[] test3={1,0};
         assertArrayEquals(test3,result3);
@@ -101,7 +119,11 @@ class CalculatorTest {
     void getTotalPrice() throws SQLException, DatabaseException {
 
         assertEquals(3837.996,calc.getTotalPrice(),0.05);
+
+        //MAX possible length, width, height
         assertEquals(87176.734,calc_max.getTotalPrice(),0.05);
+
+        //MIN possible length, width, height
         assertEquals(2060.676,calc_min.getTotalPrice(),0.05);
     }
 

@@ -82,7 +82,13 @@ h1{
 }
 .col
 {
-    text-align:center;
+    text-align: center;
+    justify-content: center;
+}
+.colleft
+{
+    text-align: left;
+    display: inline-block;
 }
 .btn{
     background-color: #003d76;
@@ -156,4 +162,14 @@ p{
 .lb{
     margin-left:5px;
     width:80px;
+}
+.footer{
+    font-size: 12px;
+    max-width: 1520px;
+}
+.bold{
+    font-weight: bold;
+}
+.size{
+    font-size: 16px;
 }

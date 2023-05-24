@@ -247,15 +247,4 @@ public class Calculator {
     public int[] getRoofAmount() {
         return roofAmount;
     }
-
-    @Override
-    public String toString() {
-        Map<Material, Integer> partsList = getPartsList();
-        StringBuilder sb = new StringBuilder();
-        sb.append("Stykliste for carport med længden: ").append(length).append(" og bredden: ").append(width).append("\n");
-        for (Map.Entry<Material, Integer> entry : partsList.entrySet()) {
-            sb.append(entry.getKey().getDescription()).append("| Længde: ").append(entry.getKey().getLength()).append("| Mængde: ").append(entry.getValue()).append("\n");
-        }
-        return sb.toString();
-    }
 }

@@ -54,32 +54,40 @@
     </nav>
 </header>
 <div class="bluebar"></div>
-<div id="body" class="container mt-4" style="min-height: 400px;">
+<div id="body" class="container mt-4" style="min-height: 60vh;">
     <h1><jsp:invoke fragment="header"/></h1>
     <jsp:doBody/>
 </div>
-<div class="container mt-3">
+<div class="container mt-3 footer">
     <hr/>
     <div class="row mt-4">
         <div class="col">
-            <img src="${pageContext.request.contextPath}/images/fog.png" width="60px;" class="img-fluid"/><br/>
-            Johannes Fog A/S<br/>
-            Firskovvej 20<br/>
-            2800 Lyngby<br/>
-            CVR-nr. 12345678
+            <div class="colleft">
+                <br>
+                <span class="bold">Åbningstider:<br/></span>
+                Mandag-Fredag: 10-17:30<br/>
+                Lørdag: 10-14:00<br/>
+                Søndag: Lukket
+                <br>
+                <br/> Mail: kontakt@fog.dk<br/>
+                Telefon: 12 34 56 78
+            </div>
         </div>
         <div class="col">
-            <jsp:invoke fragment="footer"/><br/>
+            <span class="bold size"><jsp:invoke fragment="footer"/><br/></span>
             <p>&copy; 2023 Johannes Fog A/S</p>
-            <br/> Mail: kontakt@fog.dk<br/>
-            Telefon: 12 34 56 78</p>
         </div>
         <div class="col">
-            Åbningstider:<br/>
-            Mandag-Fredag: 10-17:30<br/>
-            Lørdag: 10-14:00<br/>
-            Søndag: Lukket
-        </div>
+            <div class="colleft">
+                <img src="${pageContext.request.contextPath}/images/fog.png" width="55px;" class="img-fluid"/><br>
+                <br>
+                <span class="bold">Johannes Fog A/S<br/></span>
+                Firskovvej 20<br/>
+                2800 Lyngby<br/>
+                CVR-nr. 12345678
+            </div>
+    </div>
+
     </div>
 </div>
 </div>
