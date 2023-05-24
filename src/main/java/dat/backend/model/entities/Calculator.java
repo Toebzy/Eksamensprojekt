@@ -39,11 +39,11 @@ public class Calculator {
         this.length = length;
         this.width = width;
         this.height = height;
-        this.pole = Material.newMaterial(22, connectionPool);
+        this.pole = Material.newMaterial(6, connectionPool);
         this.amountOfPoles = calculatePoleAmount(length, width);
-        this.rafter = Material.newMaterial(20, connectionPool);
+        this.rafter = Material.newMaterial(5, connectionPool);
         this.amountOfRafters = calculateRafterAmount(length,width);
-        this.beam = Material.newMaterial(20, connectionPool);
+        this.beam = Material.newMaterial(5, connectionPool);
         this.amountOfBeams = calculateBeamAmount(length);
         this.fasciaAmount = calculateFasciaAmount(length, width);
         this.fascia = fasciaMaterial(fasciaAmount);
@@ -116,14 +116,14 @@ public class Calculator {
         if (fasciaAmount[0] > 0 && fasciaAmount[1] > 0) {
             fasciaMaterials.add(Material.newMaterial(1, connectionPool));
             fasciaMaterials.add(Material.newMaterial(2, connectionPool));
+            fasciaMaterials.add(Material.newMaterial(3, connectionPool));
             fasciaMaterials.add(Material.newMaterial(4, connectionPool));
-            fasciaMaterials.add(Material.newMaterial(7, connectionPool));
         } else if (fasciaAmount[0] > 0) {
             fasciaMaterials.add(Material.newMaterial(1, connectionPool));
-            fasciaMaterials.add(Material.newMaterial(4, connectionPool));
+            fasciaMaterials.add(Material.newMaterial(3, connectionPool));
         } else if (fasciaAmount[1] > 0) {
             fasciaMaterials.add(Material.newMaterial(2, connectionPool));
-            fasciaMaterials.add(Material.newMaterial(7, connectionPool));
+            fasciaMaterials.add(Material.newMaterial(4, connectionPool));
         } else {
             throw new IllegalArgumentException("Invalid fascia combination.");
         }
@@ -133,12 +133,12 @@ public class Calculator {
     private List<Material> roofMaterial(int[] roofAmount) {
         List<Material> roofMaterials = new ArrayList<>();
         if (roofAmount[0] > 0 && roofAmount[1] > 0) {
-            roofMaterials.add(Material.newMaterial(29, connectionPool));
-            roofMaterials.add(Material.newMaterial(30, connectionPool));
+            roofMaterials.add(Material.newMaterial(7, connectionPool));
+            roofMaterials.add(Material.newMaterial(8, connectionPool));
         } else if (roofAmount[0] > 0) {
-            roofMaterials.add(Material.newMaterial(29, connectionPool));
+            roofMaterials.add(Material.newMaterial(7, connectionPool));
         } else if (roofAmount[1] > 0) {
-            roofMaterials.add(Material.newMaterial(30, connectionPool));
+            roofMaterials.add(Material.newMaterial(8, connectionPool));
         } else {
             throw new IllegalArgumentException("Invalid roof tile combination.");
         }
@@ -146,7 +146,7 @@ public class Calculator {
     }
 
     private int[] calculateRoofAmount(int length, int width)throws DatabaseException {
-        int[] optimalTileCounts = calculateAmount(8 ,length,  connectionPool);
+        int[] optimalTileCounts = calculateAmount(5 ,length,  connectionPool);
 
         optimalTileCounts[0]= (int) (optimalTileCounts[0]*Math.ceil(width/100.0));
         optimalTileCounts[1]= (int) (optimalTileCounts[1]*Math.ceil(width/100.0));
