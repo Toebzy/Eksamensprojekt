@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class OrderMapper {
+class OrderMapper {
 
     static List<User> infoList(ConnectionPool connectionpool) throws DatabaseException {
         List<User> userList = new ArrayList<>();
