@@ -63,8 +63,8 @@ class OrderMapper {
         }
         return orderList;
     }
-    public static void createOrder(int length, int width,int height, int userid, ConnectionPool connectionPool) throws DatabaseException, SQLException {
-        Logger.getLogger("web").log(Level.INFO, "Creating new order for: "+userid);
+     static void createOrder(int length, int width,int height, int userid, ConnectionPool connectionPool) throws DatabaseException, SQLException {
+        Logger.getLogger("web").log(Level.INFO, "Creating new order for userid: "+userid);
         String sql = "insert into `order` (status, carportwidth, carportlength, carportheight, price, iduser) values (?,?,?,?,?,?)";
         Calculator calc = new Calculator(length,width,height,connectionPool);
         float price = calc.getTotalPrice();
@@ -84,7 +84,7 @@ class OrderMapper {
             throw new DatabaseException(e, "Error occurred when creating the order. Something went wrong with the database");
         }
     }
-    public static void createOrderLine(Calculator calc, int userid, ConnectionPool connectionPool) throws DatabaseException {
+     static void createOrderLine(Calculator calc, int userid, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "SELECT idorder FROM `order` WHERE iduser =? AND status LIKE 'processing'";
         int idorder = 0;
         try (Connection connection = connectionPool.getConnection()) {
@@ -148,7 +148,7 @@ class OrderMapper {
     }
 
 
-    public static void updatePaid(String idorder, boolean b, ConnectionPool connectionPool) throws DatabaseException
+    static void updatePaid(String idorder, boolean b, ConnectionPool connectionPool) throws DatabaseException
     {
         String sql = "UPDATE `order` SET paymentstatus = ? WHERE idorder = ?";
 

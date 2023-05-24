@@ -95,8 +95,6 @@ class UserMapperTest
         assertEquals(expectedUser, actualUser);
     }
 
-
-
     @Test
     void invalidPasswordLogin()
     {
@@ -110,7 +108,7 @@ class UserMapperTest
     }
 
     @Test
-    void testExistingEmail()
+    void testExistingEmailLogin()
     {
         assertThrows(DatabaseException.class, () -> UserFacade.createUser( "testUser", "1234", "4200","Lyngby","Morten","112",connectionPool));
     }
@@ -138,8 +136,7 @@ class UserMapperTest
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                    String balance = rs.getString("balance");
-                    assertEquals("500",balance);
+                    assertEquals("500",rs.getString("balance"));
                 }
             }
         } catch (SQLException e) {

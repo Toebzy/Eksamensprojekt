@@ -43,12 +43,10 @@ public class Order {
     public String getPrice() {
         return price;
     }
-    public void setPrice(String price) {
-        this.price = price;
-    }
     public Boolean getPaid() {
         return isPaid;
     }
+
 
     @Override
     public String toString() {
@@ -57,7 +55,10 @@ public class Order {
                 ", status='" + status + '\'' +
                 ", carportwidth='" + carportwidth + '\'' +
                 ", carportlength='" + carportlength + '\'' +
+                ", carportheight='" + carportheight + '\'' +
                 ", iduser='" + iduser + '\'' +
+                ", price='" + price + '\'' +
+                ", isPaid=" + isPaid +
                 '}';
     }
 }
