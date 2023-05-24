@@ -5,7 +5,7 @@
 <%@page errorPage="error.jsp" isErrorPage="false" %>
 <t:pagetemplate>
     <jsp:attribute name="header">
-             Login
+             Log ind
     </jsp:attribute>
 
     <jsp:attribute name="footer">
@@ -13,16 +13,21 @@
     </jsp:attribute>
     <jsp:body>
         <br>
-        <h3 class="infotext">Du kan logge ind her</h3>
-        <form class="infotext" action="login" method="post">
-            <label for="username">Email: </label>
-            <input type="text" id="username" name="username"/>
-            <label for="password">Kodeord:</label>
-            <input type="password" id="password" name="password"/>
-            <input type="submit" class="btn" value="Log in"/>
+        <form class="infotext loginwidth" action="login" method="post">
+            <div class="colleft login">
+                <div><label class="login" for="username">Email:</label></div>
+                <div><input class="login" type="text" id="username" name="username"/></div>
+            </div>
+            <div><br></div>
+            <div class="colleft login">
+                <div><label class="login" for="password">Kodeord:</label></div>
+                <div><input class="login" type="password" id="password" name="password"/></div>
+            </div>
+            <div><br></div>
+            <div><input class="login btn" type="submit" value="Log ind"/></div>
         </form>
         <p class="error"> ${requestScope.errormessage}</p>
-        <p class="infotext">Har du ikke en bruger? <a
+        <p class="infotext center">Har du ikke en bruger? <a
                 href="createuser.jsp">Tilmeld dig her</a></p>
     </jsp:body>
 </t:pagetemplate>

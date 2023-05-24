@@ -55,6 +55,7 @@
 </header>
 <div class="bluebar"></div>
 <div id="body" class="container mt-4" style="min-height: 60vh;">
+    <div><br></div>
     <h1><jsp:invoke fragment="header"/></h1>
     <jsp:doBody/>
 </div>

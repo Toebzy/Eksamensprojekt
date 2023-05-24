@@ -126,7 +126,7 @@ h1{
 .infotext{
     margin:auto;
     padding-bottom:5px;
-    text-align:center;
+    text-align: center;
 }
 p{
     margin-bottom:0;
@@ -172,4 +172,10 @@ p{
 }
 .size{
     font-size: 16px;
+}
+.login{
+    width: 100%;
+}
+.loginwidth{
+    width: 30%;
 }
