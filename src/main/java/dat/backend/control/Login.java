@@ -20,7 +20,7 @@ public class Login extends HttpServlet
     private ConnectionPool connectionPool;
 
     @Override
-    public void init() throws ServletException
+    public void init()
     {
         this.connectionPool = ApplicationStart.getConnectionPool();
     }

@@ -3,7 +3,6 @@ package dat.backend.model.entities;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.MaterialFacade;
 
-
 public class Material {
     int mvariant;
     int length;

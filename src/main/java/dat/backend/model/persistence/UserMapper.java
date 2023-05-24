@@ -68,11 +68,7 @@ class UserMapper {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, email);
                 ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return rs.next();
             }
         } catch (SQLException ex) {
             throw new DatabaseException(ex, "Error checking for email. Something went wrong with the database");
@@ -86,11 +82,7 @@ class UserMapper {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, zipcode);
                 ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return rs.next();
             }
         } catch (SQLException ex) {
             throw new DatabaseException(ex, "Error checking zipcode. Something went wrong with the database");

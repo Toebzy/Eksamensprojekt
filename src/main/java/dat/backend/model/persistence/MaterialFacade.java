@@ -3,7 +3,6 @@ package dat.backend.model.persistence;
 import dat.backend.model.entities.Material;
 import dat.backend.model.exceptions.DatabaseException;
 
-import java.sql.Connection;
 import java.util.List;
 
 public class MaterialFacade{

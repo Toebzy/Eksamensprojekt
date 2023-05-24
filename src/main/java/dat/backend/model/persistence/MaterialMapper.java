@@ -47,8 +47,7 @@ static List<Material> getMaterialById(int id, ConnectionPool connectionPool) thr
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     String price = rs.getString("materials.priceprunit");
-                    double doubleprice = Double.parseDouble(price);
-                    return doubleprice;
+                    return Double.parseDouble(price);
                 } else {
                     return null;
                 }
@@ -67,8 +66,7 @@ static List<Material> getMaterialById(int id, ConnectionPool connectionPool) thr
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     String length = rs.getString("mvariant.length");
-                    int intlength = Integer.parseInt(length);
-                    return intlength;
+                    return Integer.parseInt(length);
                 } else {
                     return null;
                 }
@@ -88,8 +86,7 @@ static List<Material> getMaterialById(int id, ConnectionPool connectionPool) thr
                 ps.setInt(1, mvariant);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                    String unit = rs.getString("materials.unit");
-                    return unit;
+                    return rs.getString("materials.unit");
                 } else {
                     return null;
                 }
@@ -108,8 +105,7 @@ static List<Material> getMaterialById(int id, ConnectionPool connectionPool) thr
                 ps.setInt(1, mvariant);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                    String description = rs.getString("materials.description");
-                    return description;
+                    return rs.getString("materials.description");
                 } else {
                     return null;
                 }

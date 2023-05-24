@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @WebServlet(name = "balanceChangeServlet", value = "/balanceChange")
 public class balanceChangeServlet extends HttpServlet {
-    private static ConnectionPool connectionPool = ApplicationStart.getConnectionPool();
+    private final ConnectionPool connectionPool = ApplicationStart.getConnectionPool();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

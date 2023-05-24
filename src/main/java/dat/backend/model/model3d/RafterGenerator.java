@@ -6,7 +6,7 @@ import org.abstractica.javacsg.JavaCSG;
 public class RafterGenerator {
     private final Calculator calculator;
     private final JavaCSG csg;
-    private Geometry3D rafters;
+    private final Geometry3D rafters;
 
     public RafterGenerator(JavaCSG csg, Calculator calculator){
         this.csg=csg;
@@ -29,8 +29,7 @@ public class RafterGenerator {
             j+=spaceBetween;
             allRafters=csg.union3D(allRafters,newRafter);
         }
-        Geometry3D Rafters = csg.translate3DZ(height-40).transform(allRafters);
-        return Rafters;
+        return csg.translate3DZ(height-40).transform(allRafters);
     }
     public Geometry3D getRafters() {
         return rafters;

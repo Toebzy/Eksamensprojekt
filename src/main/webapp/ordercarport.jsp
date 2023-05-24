@@ -13,9 +13,9 @@
         <h6 class="center">Nedenfor kan du bestille din egen carport ud fra dine given mål</h6>
         <form class="infotext" action="ordercarportservlet" method="post">
             <label for="length">Længde:</label>
-            <input class="lb" type="number" id="length" value="${requestScope.length}" name="length" placeholder="Længde" min="100" max="2160" required/>
+            <input class="lb" type="number" id="length" value="${requestScope.length}" name="length" placeholder="Længde" min="100" max="2700" required/>
             <label for="width">Bredde:</label>
-            <input class="lb" type="number" id="width" value="${requestScope.width}" name="width" placeholder="Bredde" min="100" max="600" required/>
+            <input class="lb" type="number" id="width" value="${requestScope.width}" name="width" placeholder="Bredde" min="100" max="2700" required/>
             <label for="width">Højde:</label>
             <input class="lb" type="number" id="height" value="${requestScope.height}" name="height" placeholder="Højde" min="100" max="210" required/>
             <input type="hidden" id="userid" name="userid" value="${sessionScope.user.userid}"/>

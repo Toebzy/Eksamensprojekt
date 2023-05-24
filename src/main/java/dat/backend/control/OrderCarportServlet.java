@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class OrderCarportServlet extends HttpServlet {
 
 
-    private static ConnectionPool connectionPool = ApplicationStart.getConnectionPool();
+    private final ConnectionPool connectionPool = ApplicationStart.getConnectionPool();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,6 +30,7 @@ public class OrderCarportServlet extends HttpServlet {
         int width = Integer.parseInt(request.getParameter("width"));
         int height = Integer.parseInt(request.getParameter("height"));
         int userid = Integer.parseInt(request.getParameter("userid"));
+
        if(type.equals("Bestil Carport"))
        {
            try
@@ -52,8 +53,6 @@ public class OrderCarportServlet extends HttpServlet {
                ModelGenerator model = new ModelGenerator(calc);
                model.create3DModel();
 
-               System.out.println(calc);
-
 
                float price = calc.getTotalPrice();
 
@@ -70,4 +69,5 @@ public class OrderCarportServlet extends HttpServlet {
 
        }
     }
+
 }

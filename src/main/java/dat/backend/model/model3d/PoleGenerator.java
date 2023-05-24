@@ -2,12 +2,11 @@ package dat.backend.model.model3d;
 import dat.backend.model.entities.Calculator;
 import org.abstractica.javacsg.Geometry3D;
 import org.abstractica.javacsg.JavaCSG;
-import org.abstractica.javacsg.JavaCSGFactory;
 
 public class PoleGenerator {
     private final Calculator calculator;
     private final JavaCSG csg;
-    private Geometry3D poles;
+    private final Geometry3D poles;
 
     public PoleGenerator(JavaCSG csg, Calculator calculator){
         this.csg=csg;
@@ -44,8 +43,7 @@ public class PoleGenerator {
                 b+=width/(Math.ceil((width/310.0)));
             }
         }
-        Geometry3D FinalPoles=csg.translate3DX(-width/2).transform(allPoles);
-        return FinalPoles;
+        return csg.translate3DX(-width/2.0).transform(allPoles);
     }
     public Geometry3D getPoles() {
         return poles;

@@ -35,6 +35,7 @@ public class Calculator {
 
     public Calculator(int length, int width, int height, ConnectionPool connectionPool) throws DatabaseException, SQLException {
         this.connectionPool = connectionPool;
+
         this.length = length;
         this.width = width;
         this.height = height;
@@ -154,20 +155,11 @@ public class Calculator {
 
     private float calculateTotalPrice(){
         float totalPrice;
-
         float polePrice= (float) (amountOfPoles*((pole.getLength()/100)*pole.getPrice()));
         float rafterPrice= (float) (amountOfRafters*((rafter.getLength()/100)*rafter.getPrice()));
         float beamPrice = (float) (amountOfBeams*((beam.getLength()/100)*beam.getPrice()));
         float fasciaPrice = priceCalculator(fasciaAmount,fascia);
         float roofPrice = priceCalculator(roofAmount,roof);
-
-        // roof
-        System.out.println("Pole price:" +polePrice);
-        System.out.println("Rafter price:" +rafterPrice);
-        System.out.println("Beam price:" +beamPrice);
-        System.out.println("Fascia price:" +fasciaPrice);
-        System.out.println("Roof price:" +roofPrice);
-
 
         totalPrice=polePrice+rafterPrice+beamPrice+fasciaPrice+roofPrice;
         return totalPrice;
@@ -238,6 +230,22 @@ public class Calculator {
     }
     public float getTotalPrice(){
         return totalPrice;
+    }
+    public int getAmountOfPoles() {
+        return amountOfPoles;
+    }
+    public int getAmountOfRafters() {
+        return amountOfRafters;
+    }
+    public int getAmountOfBeams() {
+        return amountOfBeams;
+    }
+    public int[] getFasciaAmount() {
+        return fasciaAmount;
+    }
+
+    public int[] getRoofAmount() {
+        return roofAmount;
     }
 
     @Override

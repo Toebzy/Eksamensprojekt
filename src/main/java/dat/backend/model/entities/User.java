@@ -13,7 +13,7 @@ public class User
     private String address;
     private String name;
     private String phonenumber;
-    private String role;
+    private final String role;
 
 
     public User(String userid, String email, String password, String balance, String zipcode, String address, String name, String phonenumber, String role)

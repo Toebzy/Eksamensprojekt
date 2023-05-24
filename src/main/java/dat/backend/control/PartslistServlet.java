@@ -1,8 +1,5 @@
 package dat.backend.control;
-
 import dat.backend.model.config.ApplicationStart;
-import dat.backend.model.entities.Calculator;
-
 import dat.backend.model.entities.Partslist;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
@@ -16,7 +13,7 @@ import java.util.List;
 
 @WebServlet(name = "Partslist", value = "/partslist")
 public class PartslistServlet extends HttpServlet {
-    private static ConnectionPool connectionPool = ApplicationStart.getConnectionPool();
+    private final ConnectionPool connectionPool = ApplicationStart.getConnectionPool();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
