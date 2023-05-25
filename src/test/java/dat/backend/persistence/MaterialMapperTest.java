@@ -1,6 +1,8 @@
 package dat.backend.persistence;
 
 
+import dat.backend.model.entities.Material;
+import dat.backend.model.entities.Partslist;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.MaterialFacade;
@@ -10,6 +12,9 @@ import org.junit.jupiter.api.Test;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.MatchResult;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -81,24 +86,37 @@ class MaterialMapperTest
     }
 
     @Test
+    void getMaterialByIdTest() throws DatabaseException {
+        List<Material> materialList = MaterialFacade.getMaterialById(1,connectionPool);
+        List<Material> expectedList = new ArrayList<>();
+        expectedList.add(new Material(1,360,34.95,"meter","25x200 mm. trykimp.Brædt"));
+        expectedList.add(new Material(2,540,34.95,"meter","25x200 mm. trykimp.Brædt"));
+        assertEquals(expectedList.toString(),materialList.toString());
+    }
+
+    @Test
     void getpriceTest() throws DatabaseException
     {
         assertEquals(34.95, MaterialFacade.getPrice(2, connectionPool));
+        assertNull(MaterialFacade.getPrice(20, connectionPool));
     }
     @Test
     void getLengthTest() throws DatabaseException
     {
         assertEquals(360, MaterialFacade.getLength(1, connectionPool));
+        assertEquals(0,MaterialFacade.getLength(20, connectionPool));
     }
     @Test
     void getUnitTest() throws DatabaseException
     {
         assertEquals("meter", MaterialFacade.getUnit(4, connectionPool));
+        assertNull(MaterialFacade.getUnit(20, connectionPool));
 
     }
     @Test
     void getDescriptionTest() throws DatabaseException
     {
         assertEquals("25x125mm. trykimp.Brædt", MaterialFacade.getDescription(4, connectionPool));
+        assertNull(MaterialFacade.getDescription(20, connectionPool));
     }
 }

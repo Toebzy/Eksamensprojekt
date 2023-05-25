@@ -141,16 +141,17 @@ class OrderMapperTest {
         OrderFacade.createOrder(1100,600,200,1,connectionPool);
         List<Partslist> partsList = OrderFacade.createPartsList("3", connectionPool);
         List<Partslist> expectedList = new ArrayList<>();
-        expectedList.add(new Partslist("22","97x97 mm.\ttrykimp. Stolpe","300","12"));
-        expectedList.add(new Partslist("20","45x195 mm.\tspærtræ ubh","600","18"));
-        expectedList.add(new Partslist("20","45x195 mm.\tspærtræ ubh","600","4"));
+
         expectedList.add(new Partslist("1","25x200 mm. trykimp.Brædt","360","8"));
         expectedList.add(new Partslist("2","25x200 mm. trykimp.Brædt","540","2"));
-        expectedList.add(new Partslist("4","25x125mm. trykimp.Brædt","360","8"));
-        expectedList.add(new Partslist("7","25x125mm. trykimp.Brædt","540","2"));
-        expectedList.add(new Partslist("30","Plastmo Ecolite blåtonet","600","12"));
+        expectedList.add(new Partslist("3","25x125mm. trykimp.Brædt","360","8"));
+        expectedList.add(new Partslist("4","25x125mm. trykimp.Brædt","540","2"));
+        expectedList.add(new Partslist("5","45x195 mm.\tspærtræ ubh","600","18"));
+        expectedList.add(new Partslist("5","45x195 mm.\tspærtræ ubh","600","4"));
+        expectedList.add(new Partslist("6","97x97 mm.\ttrykimp. Stolpe","300","12"));
+        expectedList.add(new Partslist("8","Plastmo Ecolite blåtonet","600","12"));
 
-        //assertEquals(expectedList.toString(),partsList.toString());
+        assertEquals(expectedList.toString(),partsList.toString());
     }
 
     @Test

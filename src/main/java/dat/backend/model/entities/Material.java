@@ -57,4 +57,15 @@ public class Material {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "Material{" +
+                "mvariant=" + mvariant +
+                ", length=" + length +
+                ", price=" + price +
+                ", unit='" + unit + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

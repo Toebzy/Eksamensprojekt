@@ -56,7 +56,7 @@ static List<Material> getMaterialById(int id, ConnectionPool connectionPool) thr
       }
     }
 
-    public static Integer getLength(int mvariant, ConnectionPool connectionPool) throws DatabaseException
+    public static int getLength(int mvariant, ConnectionPool connectionPool) throws DatabaseException
     {
         String sql = "SELECT mvariant.idmvariant, materials.unit, mvariant.length, materials.priceprunit, materials.description  FROM mvariant INNER JOIN materials ON mvariant.idmaterial =materials.idmaterials WHERE idmvariant = ?;";
         try(Connection connection = connectionPool.getConnection()) {
@@ -67,7 +67,7 @@ static List<Material> getMaterialById(int id, ConnectionPool connectionPool) thr
                     String length = rs.getString("mvariant.length");
                     return Integer.parseInt(length);
                 } else {
-                    return null;
+                    return 0;
                 }
             }
         }

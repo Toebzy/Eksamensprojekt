@@ -31,7 +31,6 @@ class OrderMapper {
                     String address = (rs.getString("name"));
                     String phonenumber = (rs.getString("phonenumber"));
                     String role = (rs.getString("role"));
-
                     userList.add(new User(userid, email, password, name, balance, zipcode, address, phonenumber, role));
                 }
             }
@@ -40,6 +39,7 @@ class OrderMapper {
         }
         return userList;
     }
+
     static List<Order> orderList(ConnectionPool connectionpool) throws DatabaseException {
         List<Order> orderList = new ArrayList<>();
         String sql = "SELECT idorder, status, carportwidth, carportlength,carportheight, iduser, price, paymentstatus FROM `order`";
@@ -63,6 +63,7 @@ class OrderMapper {
         }
         return orderList;
     }
+
      static void createOrder(int length, int width,int height, int userid, ConnectionPool connectionPool) throws DatabaseException, SQLException {
         Logger.getLogger("web").log(Level.INFO, "Creating new order for userid: "+userid);
         String sql = "insert into `order` (status, carportwidth, carportlength, carportheight, price, iduser) values (?,?,?,?,?,?)";
@@ -77,13 +78,13 @@ class OrderMapper {
                 ps.setFloat(5, price);
                 ps.setInt(6, userid);
                 ps.executeUpdate();
-
                 createOrderLine(calc,userid,connectionPool);
             }
         } catch (SQLException e) {
             throw new DatabaseException(e, "Error occurred when creating the order. Something went wrong with the database");
         }
     }
+
      static void createOrderLine(Calculator calc, int userid, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "SELECT idorder FROM `order` WHERE iduser =? AND status LIKE 'processing'";
         int idorder = 0;
@@ -110,10 +111,10 @@ class OrderMapper {
             throw new DatabaseException(e, "Error occurred when creating the order. Something went wrong with the database");
         }
     }
+
     static List<Partslist> createPartsList(String idorder, ConnectionPool connectionpool) throws DatabaseException {
         List<Partslist> partsList = new ArrayList<>();
         String sql = "SELECT orderline.idorder, orderline.idmvariant, orderline.description, mvariant.length, orderline.amount FROM orderline INNER JOIN mvariant ON orderline.idmvariant = mvariant.idmvariant WHERE idorder =?";
-
         try (Connection connection = connectionpool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, idorder);
@@ -131,9 +132,9 @@ class OrderMapper {
         }
         return partsList;
     }
+
     static void updateStatus(String status, String idorder, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "UPDATE `order` SET status = ? WHERE idorder = ?"; //backticks(``) are needed, since "order" is and SQL Keyword
-
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, status);
@@ -144,6 +145,7 @@ class OrderMapper {
             throw new DatabaseException(e, "Error updating order status. Something went wrong with the database");
         }
     }
+
     static int[] getDimensions( String idorder, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "SELECT carportwidth, carportlength, carportheight FROM `order` WHERE idorder = ?";
         int[] dimensions = new int[3];
@@ -160,7 +162,6 @@ class OrderMapper {
                     dimensions[2]= carportheight;
                 }
             }
-
         } catch (SQLException e) {
             throw new DatabaseException(e, "Error updating order status. Something went wrong with the database");
         }
@@ -170,7 +171,6 @@ class OrderMapper {
     static void updatePaid(String idorder, boolean b, ConnectionPool connectionPool) throws DatabaseException
     {
         String sql = "UPDATE `order` SET paymentstatus = ? WHERE idorder = ?";
-
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setBoolean(1, b);
@@ -180,6 +180,5 @@ class OrderMapper {
         } catch (SQLException e) {
             throw new DatabaseException(e, "Error updating order status. Something went wrong with the database");
         }
-
     }
 }
