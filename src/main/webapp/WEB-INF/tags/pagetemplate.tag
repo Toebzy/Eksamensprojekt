@@ -31,14 +31,14 @@
                 <c:if test="${sessionScope.user.role == 0}">
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/ordercarport.jsp">Bestil Carport</a>
                 </c:if>
-                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/carporteksempel.jsp">Carport eksempel</a>
+                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/carporteksempel.jsp">Carport Eksempel</a>
             </div>
             <div class="navbar">
                 <c:if test="${sessionScope.user == null}">
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
                 </c:if>
                 <c:if test="${sessionScope.user == null}">
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/createuser.jsp">Opret bruger</a>
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/createuser.jsp">Opret Bruger</a>
                 </c:if>
                 <c:if test="${sessionScope.user.role == 0}">
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/mypage">Min Side</a>
@@ -47,7 +47,7 @@
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/adminservlet">Admin</a>
                 </c:if>
                 <c:if test="${sessionScope.user != null}">
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log out</a>
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log Out</a>
                 </c:if>
                 </div>
         </div>
