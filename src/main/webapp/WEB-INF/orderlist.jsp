@@ -43,7 +43,7 @@
                                 <td class="ispaid${emne.paid}"></td>
                                 <td class="order${emne.status}">${emne.status}</td>
                                 <form action="orderstatusservlet" method="post">
-                                    <td><select id ="status" name ="status">
+                                    <td><select id ="status" class="status" name ="status">
                                         <option disabled selected>Status</option>
                                         <option value="completed">Gennemført</option>
                                         <option value="processing">Behandles</option>

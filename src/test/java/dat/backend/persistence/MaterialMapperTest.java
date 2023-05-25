@@ -4,7 +4,6 @@ package dat.backend.persistence;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.MaterialFacade;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -84,22 +83,22 @@ class MaterialMapperTest
     @Test
     void getpriceTest() throws DatabaseException
     {
-            assertEquals(32, MaterialFacade.getPrice(2, connectionPool));
+        assertEquals(34.95, MaterialFacade.getPrice(2, connectionPool));
     }
     @Test
     void getLengthTest() throws DatabaseException
     {
-        assertEquals(300, MaterialFacade.getLength(1, connectionPool));
+        assertEquals(360, MaterialFacade.getLength(1, connectionPool));
     }
     @Test
     void getUnitTest() throws DatabaseException
     {
-        assertEquals("meter", MaterialFacade.getUnit(3, connectionPool));
+        assertEquals("meter", MaterialFacade.getUnit(4, connectionPool));
 
     }
     @Test
     void getDescriptionTest() throws DatabaseException
     {
-        assertEquals("hej", MaterialFacade.getDescription(3, connectionPool));
+        assertEquals("25x125mm. trykimp.Brædt", MaterialFacade.getDescription(4, connectionPool));
     }
 }

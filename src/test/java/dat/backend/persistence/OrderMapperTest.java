@@ -173,6 +173,14 @@ class OrderMapperTest {
     }
 
     @Test
+    void getDimensions() throws DatabaseException{
+        int[] dimensions = OrderFacade.getDimensions("1",connectionPool);
+        assertEquals(1200,dimensions[0]);
+        assertEquals(600,dimensions[1]);
+        assertEquals(210,dimensions[2]);
+    }
+
+    @Test
     void updatePaid() throws DatabaseException {
         OrderFacade.updatePaid("1",true,connectionPool);
         String sql = "SELECT paymentstatus FROM carport_test.order where idorder=1;";

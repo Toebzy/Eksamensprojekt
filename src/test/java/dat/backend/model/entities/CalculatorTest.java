@@ -109,13 +109,6 @@ class CalculatorTest {
     }
 
     @Test
-    void fasciaMaterial() {
-    }
-
-    @Test
-    void roofMaterial() {
-    }
-    @Test
     void getTotalPrice() throws SQLException, DatabaseException {
 
         assertEquals(3837.996,calc.getTotalPrice(),0.05);
@@ -125,10 +118,6 @@ class CalculatorTest {
 
         //MIN possible length, width, height
         assertEquals(2060.676,calc_min.getTotalPrice(),0.05);
-    }
-
-    @Test
-    void getPartsList() {
     }
 
 }

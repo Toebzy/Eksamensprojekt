@@ -139,14 +139,34 @@ class OrderMapper {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, status);
                 ps.setString(2, idorder);
-                System.out.println(ps);
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
             throw new DatabaseException(e, "Error updating order status. Something went wrong with the database");
         }
     }
+    static int[] getDimensions( String idorder, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "SELECT carportwidth, carportlength, carportheight FROM `order` WHERE idorder = ?";
+        int[] dimensions = new int[3];
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, idorder);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    int carportwidth = (rs.getInt("carportwidth"));
+                    int carportlength = (rs.getInt("carportlength"));
+                    int carportheight = (rs.getInt("carportheight"));
+                    dimensions[0]= carportwidth;
+                    dimensions[1]= carportlength;
+                    dimensions[2]= carportheight;
+                }
+            }
 
+        } catch (SQLException e) {
+            throw new DatabaseException(e, "Error updating order status. Something went wrong with the database");
+        }
+        return dimensions;
+    }
 
     static void updatePaid(String idorder, boolean b, ConnectionPool connectionPool) throws DatabaseException
     {
@@ -156,7 +176,6 @@ class OrderMapper {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setBoolean(1, b);
                 ps.setString(2, idorder);
-                System.out.println(ps);
                 ps.executeUpdate();
             }
         } catch (SQLException e) {

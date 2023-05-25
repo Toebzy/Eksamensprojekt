@@ -100,6 +100,9 @@ h1{
     display:inline-block;
     font-size:16px;
 }
+.generatemodelbtn{
+    margin-top: 20px;
+}
 .adminbtn{
     margin:auto;
     text-align:center;
@@ -148,6 +151,9 @@ p{
     padding:5px;
     width:420px;
     height:155px;
+}
+.status{
+    margin-right:10px;
 }
 .btn:hover{
     background-color:#0d324e;

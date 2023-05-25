@@ -47,7 +47,12 @@
                             </tr>
                         </c:forEach>
                     </table>
-                    <p></p>
+                    <c:if test="${sessionScope.user.role==1}">
+                        <form class="generatemodelbtn" action="GenerateModelServlet" method="post">
+                            <button class="btn">Generer 3D Model</button>
+                            <input hidden value ="${requestScope.idorder}" name ="idorder">
+                        </form>
+                    </c:if>
                 </div>
             </div>
         </div>

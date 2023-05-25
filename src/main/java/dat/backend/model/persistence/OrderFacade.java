@@ -24,6 +24,9 @@ public class OrderFacade {
     public static void updatePaid(String idorder, boolean b, ConnectionPool connectionPool) throws DatabaseException {
         OrderMapper.updatePaid(idorder, b, connectionPool);
     }
+    public static int[] getDimensions( String idorder, ConnectionPool connectionPool) throws DatabaseException {
+        return OrderMapper.getDimensions(idorder,connectionPool);
+    }
     public static List<Partslist> createPartsList(String idorder, ConnectionPool connectionpool) throws DatabaseException {
         return OrderMapper.createPartsList(idorder,connectionpool);
 
