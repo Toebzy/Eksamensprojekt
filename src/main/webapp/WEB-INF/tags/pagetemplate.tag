@@ -28,7 +28,7 @@
                 <c:if test="${sessionScope.user == null}">
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Bestil Carport</a>
                 </c:if>
-                <c:if test="${sessionScope.user != null}">
+                <c:if test="${sessionScope.user.role == 0}">
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/ordercarport.jsp">Bestil Carport</a>
                 </c:if>
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/carporteksempel.jsp">Carport eksempel</a>
