@@ -27,7 +27,6 @@ static List<Material> getMaterialById(int id, ConnectionPool connectionPool) thr
                 double priceprunit = resultSet.getDouble("priceprunit");
                 String unit = resultSet.getString("unit");
                 String description = resultSet.getString("description");
-
                 materialList.add(new Material(mvariant, length, priceprunit, unit, description));
             }
         }
