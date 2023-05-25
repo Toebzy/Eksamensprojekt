@@ -103,7 +103,6 @@ class OrderMapperTest {
                 if (rs2.next()) {
                     assertEquals("6",rs2.getString("idmvariant"));
                     assertEquals("97x97 mm.\ttrykimp. Stolpe",rs2.getString("description"));
-                    assertEquals("300",rs2.getString("length"));
                     assertEquals("12",rs2.getString("amount"));
                     assertEquals("3",rs2.getString("idorder"));
                 }

@@ -96,14 +96,13 @@ class OrderMapper {
                 }
             }
             Map<Material,Integer> partsList = calc.getPartsList();
-            String sql2 ="insert into orderline (idmvariant, description, length, amount, idorder) values (?,?,?,?,?)";
+            String sql2 ="insert into orderline (idmvariant, description, amount, idorder) values (?,?,?,?)";
             for (Map.Entry<Material, Integer> entry : partsList.entrySet()) {
                 try (PreparedStatement ps = connection.prepareStatement(sql2)) {
                     ps.setInt(1, entry.getKey().getMvariant());
                     ps.setString(2, entry.getKey().getDescription());
-                    ps.setInt(3, entry.getKey().getLength());
-                    ps.setInt(4, entry.getValue());
-                    ps.setInt(5, idorder);
+                    ps.setInt(3, entry.getValue());
+                    ps.setInt(4, idorder);
                     ps.executeUpdate();
                 }
             }
@@ -113,17 +112,17 @@ class OrderMapper {
     }
     static List<Partslist> createPartsList(String idorder, ConnectionPool connectionpool) throws DatabaseException {
         List<Partslist> partsList = new ArrayList<>();
-        String sql = "SELECT idmvariant, description, length, amount FROM orderline WHERE idorder =?";
+        String sql = "SELECT orderline.idorder, orderline.idmvariant, orderline.description, mvariant.length, orderline.amount FROM orderline INNER JOIN mvariant ON orderline.idmvariant = mvariant.idmvariant WHERE idorder =?";
 
         try (Connection connection = connectionpool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, idorder);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    String idmvariant = (rs.getString("idmvariant"));
-                    String description = (rs.getString("description"));
-                    String length = (rs.getString("length"));
-                    String amount = (rs.getString("amount"));
+                    String idmvariant = (rs.getString("orderline.idmvariant"));
+                    String description = (rs.getString("orderline.description"));
+                    String length = (rs.getString("mvariant.length"));
+                    String amount = (rs.getString("orderline.amount"));
                     partsList.add(new Partslist(idmvariant, description, length, amount));
                 }
             }
