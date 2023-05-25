@@ -11,7 +11,9 @@
     </jsp:attribute>
     <jsp:body>
         <div class="center">
-        <img src="images/carportfrontpage.png" width="450" class="img-fluid">
+            <div class="col image">
+                <img src="images/carporteksempel1.webp">
+            </div>
         </div>
         <c:if test="${sessionScope.user != null}">
             <p class ="center">Hej ${sessionScope.user.name}, velkommen til Fog.</p>
