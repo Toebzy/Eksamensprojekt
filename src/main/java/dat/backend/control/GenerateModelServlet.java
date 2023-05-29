@@ -20,13 +20,13 @@ public class GenerateModelServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idorder = request.getParameter("idorder");
         try {
+            String idorder = request.getParameter("idorder");
             int[] dimensions = OrderFacade.getDimensions(idorder, connectionPool);
             int width = dimensions[0];
             int length = dimensions[1];
@@ -34,10 +34,10 @@ public class GenerateModelServlet extends HttpServlet {
             Calculator calc = new Calculator(length, width, height, connectionPool);
             ModelGenerator model = new ModelGenerator(calc);
             model.create3DModel();
+            request.getRequestDispatcher("partslist").forward(request,response);
         } catch (DatabaseException | SQLException e) {
             request.setAttribute("errormessage", e.getMessage());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("partslist").forward(request,response);
     }
 }
