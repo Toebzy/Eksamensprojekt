@@ -26,7 +26,6 @@ public class CreateUserServlet extends HttpServlet {
         try {
             if(UserFacade.checkEmail(email, connectionPool))
             {
-                System.out.println("Email already exists");
                 request.setAttribute("msg", "Denne mail findes allerede i vores system");
                 request.getRequestDispatcher("createuser.jsp").forward(request,response);
             }
@@ -44,7 +43,6 @@ public class CreateUserServlet extends HttpServlet {
                 request.setAttribute("msg", "Vi leverer desværre ikke til dette postnummer");
                 request.getRequestDispatcher("createuser.jsp").forward(request,response);
             }
-
             else
             {
                 UserFacade.createUser(request.getParameter("email"),request.getParameter("password"),request.getParameter("zipcode"),request.getParameter("address"),request.getParameter("name"),request.getParameter("phonenumber"), connectionPool);
